@@ -50,6 +50,7 @@ In the =leetcode-scripts= direction, run
 |----------------------------+----------------------------------------------------------------------------|
 | =vy-learn-leetcode=        | initializing the leetcode project by generating necessary directories      |
 | =vy-add=                   | add a problem to solve from =problem-lists.txt=                            |
+| =vy-start=                 | select a problem to start coding with =Neovide=                            |
 | =vy-start -i {problem_id}= | same as =vy-add= but with provided =problem_id=                            |
 | =vy-end=                   | complete a problem with result (if successfully or not in solving problem) |
 | =vy-cancel=                | cancel solving a problem                                                   |
