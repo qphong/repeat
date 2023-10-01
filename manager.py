@@ -133,6 +133,12 @@ class Manager:
         self.item_tracker_data[identifier] = {"item": item, "tracker": tracker}
         self.add_tags(identifier, tags)
 
+    def get_content_by_identifier(self, identifier):
+        if identifier in self.item_tracker_data:
+            item = self.item_tracker_data[identifier]["item"]
+            return item.content
+        return None
+
     def get_identifiers_by_states(self, states=[], within_identifiers=set()):
         # len(states) == 0 means all all states
         # len(within_identifiers) == 0 means considering all identifiers

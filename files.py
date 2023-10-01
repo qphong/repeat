@@ -21,16 +21,16 @@ def get_study_file_prefix(subject, identifier, text, maxlen):
     text = text[:maxlen]
     study_dir = get_study_directory(get_subject_root(subject))
     if len(text):
-        return f"{study_dir}/{identifier}_{text}_"
-    return f"{study_dir}/{identifier}_"
+        return f"{study_dir}/{identifier}__{text}__"
+    return f"{study_dir}/{identifier}__"
 
 
-def get_study_file(subject, identifier, postfix, text="", maxlen=15):
+def get_study_file(subject, identifier, postfix, text="", maxlen=60):
     text = re.sub(r"\W", "-", text)
     return f"{get_study_file_prefix(subject, identifier, text, maxlen)}{postfix}"
 
 
-def list_all_study_files(subject, identifier, text="", maxlen=15):
+def list_all_study_files(subject, identifier, text="", maxlen=60):
     return glob.glob(f"{get_study_file_prefix(subject, identifier, text, maxlen)}*")
 
 

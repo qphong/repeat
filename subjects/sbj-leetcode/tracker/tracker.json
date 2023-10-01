@@ -3,20 +3,20 @@
     "identifier": "3",
     "time_aware_tracker_data": {
       "0": {
-        "n_pass": 4,
+        "n_pass": 7,
         "n_fail": 0,
-        "n_study": 4,
-        "study_duration": 653.5530531406403,
-        "box": 4
+        "n_study": 7,
+        "study_duration": 1049.5904400348663,
+        "box": 7
       }
     },
     "interval": 300.0,
     "oldest_epoch": 2592000.0,
     "max_tracker_data_key": 8640,
-    "start_study_time": 1696139815.549495,
+    "start_study_time": 1696140277.99137,
     "end_study_time": 1e+16,
-    "prev_start_study_time": 1696139549.691449,
-    "prev_end_study_time": 1696139812.0787,
+    "prev_start_study_time": 1696140214.756731,
+    "prev_end_study_time": 1696140275.503088,
     "state": "studying"
   }
 }

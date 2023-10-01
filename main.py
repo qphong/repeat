@@ -152,7 +152,14 @@ elif command == "get_file":
     subject, identifier, postfix = util.parse_args(
         config, ["subject", "identifier", "postfix"], [True, True, True]
     )
-    print(files.get_study_file(subject, identifier, postfix))
+    manager = Manager(subject)
+    manager.load()
+    content = manager.get_content_by_identifier(identifier)
+    name = "unnamed"
+    if content:
+        name = content["name"]
+
+    print(files.get_study_file(subject, identifier, postfix, name))
 
 elif command == "list_file":
     # list all postfix # subject, identifier
