@@ -1,6 +1,6 @@
 #!/bin/sh
 
-tag="$(echo -e "$(python ../main.py --subject leetcode -c list_tag --states studied)" | fzf | awk -F ':' '{print $1}')"
+tag="$(echo -e "$(python ../main.py --subject leetcode -c list_tag --states studied)" | fzf --ansi | awk -F ':' '{print $1}')"
 if [[ "$tag" == "" ]]
 then
 	echo "Haven't completed any study"

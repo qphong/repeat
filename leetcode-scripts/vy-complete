@@ -5,7 +5,7 @@ item="$(echo -e "$(python ../main.py --subject leetcode -c list --states studyin
 identifier="$(echo "$item" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
 name="$(echo "$item" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
 
-passfail="$(echo -e "pass\nfail" | fzf)"
+passfail="$(echo -e "pass\nfail" | fzf --ansi)"
 
 if [[ "$item" != "" && "$passfail" != "" ]]
 then

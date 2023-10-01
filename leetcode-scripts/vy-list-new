@@ -18,5 +18,5 @@ while getopts ":t:b:d:" opt; do
   esac
 done
 
-echo -e "$(python ../main.py --subject leetcode -c list --states new --tags $TAGS --by $BY --direction $DIRECTION)" | fzf
+echo -e "$(python ../main.py --subject leetcode -c list --states new --tags $TAGS --by $BY --direction $DIRECTION)" | fzf --ansi
 

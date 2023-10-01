@@ -22,7 +22,7 @@ then
 		exit 1
 	fi
 
-	yesno="$(echo -e "yes\nno" | fzf --prompt "Add notes to $identifier($name)? ")"
+	yesno="$(echo -e "yes\nno" | fzf --ansi --prompt "Add notes to $identifier($name)? ")"
 
 	if [[ "$yesno" == "yes" ]]
 	then

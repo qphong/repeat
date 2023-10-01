@@ -22,7 +22,7 @@ then
 		exit 1
 	fi
 
-	yesno="$(echo -e "yes\nno" | fzf --prompt "Start to study $identifier($name)? ")"
+	yesno="$(echo -e "yes\nno" | fzf --ansi --prompt "Start to study $identifier($name)? ")"
 
 	if [[ "$yesno" == "yes" ]]
 	then
@@ -37,14 +37,14 @@ then
 fi
 
 
-tag="$(echo -e "$(python ../main.py --subject leetcode -c list_state_by_tag --states new,studied)" | fzf | awk -F ':' '{print $1}')"
+tag="$(echo -e "$(python ../main.py --subject leetcode -c list_state_by_tag --states new,studied,studying)" | fzf --ansi | awk -F ':' '{print $1}')"
 # if [[ "$tag" == "" ]]
 # then
 # 	echo "Nothing to start learning"
 # 	exit 0
 # fi
 
-item="$(echo -e "$(python ../main.py --subject leetcode -c list --tags "$tag" --states new,studied)" | fzf --ansi)"
+item="$(echo -e "$(python ../main.py --subject leetcode -c list --tags "$tag" --states new,studied,studying)" | fzf --ansi)"
 
 identifier="$(echo "$item" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
 name="$(echo "$item" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
