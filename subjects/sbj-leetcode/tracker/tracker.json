@@ -33,11 +33,11 @@
     "interval": 300.0,
     "oldest_epoch": 2592000.0,
     "max_tracker_data_key": 8640,
-    "start_study_time": 1696173444.99718,
-    "end_study_time": 1696173450.180749,
-    "prev_start_study_time": -1e+16,
-    "prev_end_study_time": 1e+16,
-    "state": "studied"
+    "start_study_time": 1696175279.920817,
+    "end_study_time": 1e+16,
+    "prev_start_study_time": 1696173444.99718,
+    "prev_end_study_time": 1696173450.180749,
+    "state": "studying"
   },
   "1932": {
     "identifier": "1932",

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+subject="leetcode"
+
+# create leetcode subject in case it does not exist
+python ../main.py --subject $subject -c add_subject
+
