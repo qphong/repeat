@@ -52,7 +52,7 @@ parser.add_argument(
     "-t", "--tags", type=str, help="tags separated by comma", default=None
 )  # comma separated
 parser.add_argument(
-    "-s",
+    "-a",
     "--states",
     type=str,
     # choices=constants.STATES,
@@ -215,10 +215,10 @@ elif command == "cancel":
 
 elif command == "list_tag":
     # subject
-    subject = util.parse_args(config, ["subject"], [True])
+    subject, states = util.parse_args(config, ["subject", "states"], [True, False])
     manager = Manager(subject)
     manager.load()
-    tag_count = manager.list_tags()
+    tag_count = manager.list_tags(states)
     for tag, count in tag_count:
         print(f"{tag}: {count}")
 

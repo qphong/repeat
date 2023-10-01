@@ -1,0 +1,22 @@
+{
+  "3": {
+    "identifier": "3",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 224.27552008628845,
+        "box": 1
+      }
+    },
+    "interval": 300.0,
+    "oldest_epoch": 2592000.0,
+    "max_tracker_data_key": 8640,
+    "start_study_time": 1696137833.50202,
+    "end_study_time": 1696138057.77754,
+    "prev_start_study_time": 1696137833.50202,
+    "prev_end_study_time": 1696138057.77754,
+    "state": "studied"
+  }
+}

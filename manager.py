@@ -82,8 +82,22 @@ class Manager:
             self.tags.add(tag)
             self.identifier_by_tag[tag].add(identifier)
 
-    def list_tags(self):
-        return [(tag, len(ids)) for tag, ids in self.identifier_by_tag.items()]
+    def list_tags(self, states):
+        if len(states) == 0:
+            return [(tag, len(ids)) for tag, ids in self.identifier_by_tag.items()]
+
+        identifiers = self.get_identifiers_by_states(states)
+        tag_count = defaultdict(int)
+
+        for identifier in identifiers:
+            item_tracker = self.item_tracker_data[identifier]
+            item = item_tracker["item"]
+            tracker = item_tracker["tracker"]
+
+            if tracker.get_state() in states:
+                for tag in item.tags:
+                    tag_count[tag] += 1
+        return list(tag_count.items())
 
     def list_states(self, tags):
         identifiers = self.get_identifiers_by_tags(tags)
@@ -169,9 +183,7 @@ class Manager:
         if len(identifiers) == 0:
             return set()
 
-        return self.get_identifiers_by_tags(
-            tags, identifiers
-        )
+        return self.get_identifiers_by_tags(tags, identifiers)
 
     def get_item_by_identifiers(self, identifiers):
         item_list = []

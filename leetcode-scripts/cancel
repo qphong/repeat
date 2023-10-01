@@ -1,0 +1,28 @@
+#!/bin/sh
+
+tag="$(echo -e "$(python ../main.py --subject leetcode -c list_tag --states studying)" | fzf | awk -F ':' '{print $1}')"
+if [[ "$tag" == "" ]]
+then
+	echo "Nothing to cancel"
+	exit 0
+fi
+
+item="$(echo -e "$(python ../main.py --subject leetcode -c list --tags "$tag" --states studying)" | fzf --ansi)"
+
+if [[ "$item" == "" ]]
+then
+	echo "Nothing to cancel"
+	exit 0
+fi
+
+identifier="$(echo "$item" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
+name="$(echo "$item" | awk -F ']' '{print $2}' | awk '{print $1}' | sed 's/[^[:alnum:]-]//g')"
+
+yesno="$(echo -e "yes\nno" | fzf --prompt "Cancel? ")"
+
+if [[ "$item" != "" && "$yesno" == "yes" ]]
+then
+	echo "Cancel studying $identifier."
+ 	python ../main.py --subject leetcode -c cancel -i "$identifier"
+fi
+

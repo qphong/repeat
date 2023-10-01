@@ -34,10 +34,16 @@ def parse_args(config, arguments, required):
             results.append(config[argument])
 
         elif argument in ["tags", "states"]:
-            if config[argument]:
-                results.append([elem.strip() for elem in config[argument].split(",")])
-            else:
+            if config[argument] is None or config[argument] == "all":
                 results.append([])
+            else:
+                results.append(
+                    [
+                        elem.strip()
+                        for elem in config[argument].split(",")
+                        if len(elem.strip()) > 0
+                    ]
+                )
 
         else:
             raise Exception(f"Unknown argument: {argument}")
@@ -118,9 +124,7 @@ def get_readable_info(
             "since_last_end_study" in info_dict
             and info_dict["since_last_end_study"] < constants.INF
         ):
-            string += (
-                f" {get_readable_duration(info_dict['since_last_end_study'])} ago"
-            )
+            string += f" {get_readable_duration(info_dict['since_last_end_study'])} ago"
 
     if constants.LABEL_PASS_PCT in extra_info:
         if info_dict["n_study"] > 0:

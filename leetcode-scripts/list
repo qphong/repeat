@@ -1,0 +1,25 @@
+#!/bin/bash
+# states, tags, by, direction
+STATES="all"
+TAGS="all"
+BY="view"
+DIRECTION="inc"
+
+while getopts ":s:t:b:d" opt; do
+  case $opt in
+    s) STATES="$OPTARG"
+    ;;
+    t) TAGS="$OPTARG"
+    ;;
+    b) BY="$OPTARG"
+    ;;
+    d) DIRECTION="$OPTARG"
+    ;;
+    \?) echo "Invalid option -$OPTARG" >&2
+    exit 1
+    ;;
+  esac
+done
+
+echo -e "$(python ../main.py --subject leetcode -c list --states $STATES --tags $TAGS --by $BY --direction $DIRECTION)" | fzf
+

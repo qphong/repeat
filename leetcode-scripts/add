@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# create leetcode subject in case it does not exist
+python ../main.py --subject leetcode -c add_subject
+
+probleminfo="$(cat "problem-lists.txt" | fzf)"
+
+ID="$(echo -e "$probleminfo" | awk '{print $1}')"
+PROBLEM="$(echo -e "$probleminfo" | awk '{print $2}')"
+TAGS="$(echo -e "$probleminfo" | awk '{print $3}')"
+
+if [ "$PROBLEM" != "" ]
+then
+	python ../main.py --subject leetcode -c add --identifier $ID --name $PROBLEM --tags $TAGS
+fi
+
