@@ -18,7 +18,7 @@ then
 
 	python ../main.py --subject leetcode -c start -i "$identifier" \
 		&& echo "# $identifier. $name" >> $PATHTOCODE \
-		&& echo "Start $identifier. $name" \
+		&& echo "Start coding $identifier. $name at $PATHTOCODE" \
 		&& neovide "$PATHTOCODE"
 fi
 
