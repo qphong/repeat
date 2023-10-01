@@ -98,41 +98,45 @@ def get_readable_info(
     # info_dict is returned from get_info function
     string = f"[{info_dict['identifier']:6s}]"
 
-    if constants.LABEL_COMPETENCY in extra_info:
-        string += f" B:{int(info_dict['competency'])}"
-
-    if constants.LABEL_TAG in extra_info:
-        string += " "
-        for i, tag in enumerate(info_dict["tags"]):
-            string += f"{tag}" + ("|" if i < len(info_dict["tags"]) - 1 else "")
-
     for field in content_fields:
         string += f" \"{info_dict['content'][field]}\""
 
-    if constants.LABEL_STATE in extra_info and info_dict['state'] != constants.STATE_STUDIED:
-        string += f" <{info_dict['state'].upper()}>"
+    if (
+        constants.LABEL_STATE in extra_info
+    ):
+        if info_dict["state"] != constants.STATE_STUDIED:
+            string += f" <{info_dict['state'].upper()}>"
 
         if (
             "since_last_start_study" in info_dict
             and info_dict["since_last_start_study"] < constants.INF
         ):
             string += (
-                f" {get_readable_duration(info_dict['since_last_start_study'])} ago"
+                f"  {get_readable_duration(info_dict['since_last_start_study'])} ago"
             )
 
         elif (
             "since_last_end_study" in info_dict
             and info_dict["since_last_end_study"] < constants.INF
         ):
-            string += f" {get_readable_duration(info_dict['since_last_end_study'])} ago"
+            string += f"  {get_readable_duration(info_dict['since_last_end_study'])} ago"
 
     if constants.LABEL_PASS_PCT in extra_info:
         if info_dict["n_study"] > 0:
-            string += f" ({info_dict['n_pass']}:{info_dict['n_pass'] / info_dict['n_study'] * 100:.0f}%P)"
+            string += f"  ({info_dict['n_pass']}:{info_dict['n_pass'] / info_dict['n_study'] * 100:.0f}%P)"
 
     if constants.LABEL_DURATION in extra_info:
         if info_dict["duration"] > 0:
-            string += f" (T:{get_readable_duration(info_dict['duration'])})"
+            string += f"  (T:{get_readable_duration(info_dict['duration'])})"
+
+    if constants.LABEL_TAG in extra_info:
+        string += "  :"
+        for i, tag in enumerate(info_dict["tags"]):
+            string += f"{tag}" + (":" if i < len(info_dict["tags"]) - 1 else "")
+        string += ":"
+
+    if constants.LABEL_COMPETENCY in extra_info:
+        string += f"  B:{int(info_dict['competency'])}"
 
     return string
 

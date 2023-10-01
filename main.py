@@ -8,7 +8,7 @@ import argparse
 
 parser = argparse.ArgumentParser(
     prog="Repeat",
-    description="Implementing spaced-repetition",
+    description="Vy learns a subject with spaced-repetition",
     formatter_class=argparse.ArgumentDefaultsHelpFormatter,
 )
 
