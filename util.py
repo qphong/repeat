@@ -107,11 +107,11 @@ def get_readable_state(state, style=False):
 
     if state == constants.STATE_NEW:
         return (
-            f"{constants.STYLE_OKGREEN}{constants.STYLE_BOLD}{state}{constants.STYLE_ENDC}"
+            f"{constants.STYLE_WARNING}{constants.STYLE_UNDERLINE}{state}{constants.STYLE_ENDC}"
         )
     elif state == constants.STATE_STUDYING:
         return (
-            f"{constants.STYLE_FAIL}{constants.STYLE_BOLD}{state}{constants.STYLE_ENDC}"
+            f"{constants.STYLE_FAIL}{constants.STYLE_UNDERLINE}{state}{constants.STYLE_ENDC}"
         )
 
     return state
@@ -136,7 +136,7 @@ def get_readable_info(
 
     if constants.LABEL_STATE in extra_info:
         if info_dict["state"] != constants.STATE_STUDIED:
-            string += f" <{get_readable_state(info_dict['state'], style=True)}>"
+            string += f" {get_readable_state(info_dict['state'], style=True)}"
 
         if (
             "since_last_start_study" in info_dict
