@@ -29,7 +29,7 @@
 * Vy Learns with Spaced-Repetition
 Vy has recently familiarized herself with the computer keyboard and is now tackling some Leetcode problems. However, she frequently struggles to recall the problems she has solved before. Consequently, she requires assistance from a management system.
 
-This approach involves keeping track of several parameters related the learning and a basic version of the Leitner system, enhanced by incorporating time-awareness. In other words, it utilizes distinct Leitner systems tailored for various time intervals.
+This approach involves keeping track of several parameters related the learning and a basic version of the Leitner system, enhanced by incorporating time-awareness. In other words, it utilizes distinct Leitner systems tailored for various time intervals. To reduce it the classic Leitner system, set the constant (in =constants.py=) =TRACKER_DEFAULT_INTERVAL= to a large value such as =SECS_DAY(1000000)=.
 
 The project is implemented in Python which is easily hackable by Leetcode users. It can be used for studying other subjects than solving Leetcode problems.
 
