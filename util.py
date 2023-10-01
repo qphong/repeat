@@ -99,7 +99,7 @@ def get_readable_info(
     string = f"[{info_dict['identifier']:6s}]"
 
     if constants.LABEL_COMPETENCY in extra_info:
-        string += f" BOX:{int(info_dict['competency'])}"
+        string += f" B:{int(info_dict['competency'])}"
 
     if constants.LABEL_TAG in extra_info:
         string += " "
@@ -128,11 +128,11 @@ def get_readable_info(
 
     if constants.LABEL_PASS_PCT in extra_info:
         if info_dict["n_study"] > 0:
-            string += f" ({info_dict['n_pass'] / info_dict['n_study'] * 100:.0f}% PASS)"
+            string += f" ({info_dict['n_pass']}:{info_dict['n_pass'] / info_dict['n_study'] * 100:.0f}%P)"
 
     if constants.LABEL_DURATION in extra_info:
         if info_dict["duration"] > 0:
-            string += f" (study time {get_readable_duration(info_dict['duration'])})"
+            string += f" (T:{get_readable_duration(info_dict['duration'])})"
 
     return string
 

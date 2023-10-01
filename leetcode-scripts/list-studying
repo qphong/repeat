@@ -1,15 +1,11 @@
 #!/bin/bash
 # states, tags, by, direction
-# default: list by number of studies, newest first
-STATES="all"
 TAGS="all"
 BY="view"
 DIRECTION="inc"
 
 while getopts ":s:t:b:d:" opt; do
   case $opt in
-    s) STATES="$OPTARG"
-    ;;
     t) TAGS="$OPTARG"
     ;;
     b) BY="$OPTARG"
@@ -22,5 +18,5 @@ while getopts ":s:t:b:d:" opt; do
   esac
 done
 
-echo -e "$(python ../main.py --subject leetcode -c list --states $STATES --tags $TAGS --by $BY --direction $DIRECTION)" | fzf
+echo -e "$(python ../main.py --subject leetcode -c list --states studying --tags $TAGS --by $BY --direction $DIRECTION)" | fzf
 

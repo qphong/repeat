@@ -16,13 +16,13 @@ then
 fi
 
 identifier="$(echo "$item" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
-name="$(echo "$item" | awk -F ']' '{print $2}' | awk '{print $1}' | sed 's/[^[:alnum:]-]//g')"
+name="$(echo "$item" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
 
 yesno="$(echo -e "yes\nno" | fzf --prompt "Cancel? ")"
 
 if [[ "$item" != "" && "$yesno" == "yes" ]]
 then
-	echo "Cancel studying $identifier."
+	echo "Cancel studying $identifier. $name"
  	python ../main.py --subject leetcode -c cancel -i "$identifier"
 fi
 

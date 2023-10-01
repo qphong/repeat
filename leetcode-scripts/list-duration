@@ -1,18 +1,14 @@
 #!/bin/bash
 # states, tags, by, direction
 # default: list by number of studies, newest first
-STATES="all"
+STATES="studied,studying"
 TAGS="all"
-BY="view"
+BY="duration"
 DIRECTION="inc"
 
 while getopts ":s:t:b:d:" opt; do
   case $opt in
-    s) STATES="$OPTARG"
-    ;;
     t) TAGS="$OPTARG"
-    ;;
-    b) BY="$OPTARG"
     ;;
     d) DIRECTION="$OPTARG"
     ;;
