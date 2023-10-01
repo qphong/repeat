@@ -6,7 +6,7 @@ then
 	exit
 fi
 
-item="$(echo -e "$(python ../main.py --subject leetcode -c list --by recent --direction inc)" | fzf --ansi)"
+item="$(echo -e "$(python ../main.py --subject leetcode -c list --by recent --direction dec)" | fzf --ansi)"
 
 identifier="$(echo "$item" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
 name="$(echo "$item" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"

@@ -5,7 +5,7 @@ TAGS="all"
 BY="view"
 DIRECTION="inc"
 
-while getopts ":s:t:b:d" opt; do
+while getopts ":s:t:b:d:" opt; do
   case $opt in
     s) STATES="$OPTARG"
     ;;

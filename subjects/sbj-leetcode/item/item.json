@@ -2,11 +2,31 @@
   "3": {
     "identifier": "3",
     "tags": [
-      "two-pointers",
-      "E+"
+      "E+",
+      "two-pointers"
     ],
     "content": {
       "name": "longest-substring-without-repeating-character"
+    }
+  },
+  "15": {
+    "identifier": "15",
+    "tags": [
+      "two-pointers",
+      "M"
+    ],
+    "content": {
+      "name": "3sum"
+    }
+  },
+  "1932": {
+    "identifier": "1932",
+    "tags": [
+      "H",
+      "tree"
+    ],
+    "content": {
+      "name": "merge-bsts-to-create-single-bst"
     }
   }
 }

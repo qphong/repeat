@@ -148,7 +148,7 @@ class Manager:
             print(f"Randomly generate identifier: {identifier}.")
 
         elif identifier in self.item_tracker_data:
-            print(f"{item.identifier} already exists!")
+            print(f"{identifier} already exists!")
             return 1
 
         item = Item(identifier, tags, content)
