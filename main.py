@@ -21,7 +21,7 @@ parser.add_argument(
         "list",  # subject, states, tags, by, direction
         "add",  # subject, identifier, name, tags
         "get_file",  # subject, identifier, postifx
-        "get_name", # subject, identifier
+        "get_name",  # subject, identifier
         "list_file",  # list all postfix # subject, identifier
         "review",  # subject, tags, k
         "add_tag",  # subject, identifier, tags
@@ -133,6 +133,7 @@ elif command == "list":
                 constants.LABEL_PASS_PCT,
                 constants.LABEL_DURATION,
             ],
+            emphasis=[by]
         )
         print(readable_info)
 

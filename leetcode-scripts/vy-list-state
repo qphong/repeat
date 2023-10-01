@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo -e "$(python ../main.py --subject leetcode -c list_state)" | fzf
+echo -e "$(python ../main.py --subject leetcode -c list_state)" | fzf --ansi

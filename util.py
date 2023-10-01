@@ -101,18 +101,15 @@ def get_readable_tag(tag, style=False):
 
     return tag
 
+
 def get_readable_state(state, style=False):
     if not style:
-        return state
+        return f"_state_"
 
     if state == constants.STATE_NEW:
-        return (
-            f"{constants.STYLE_WARNING}{constants.STYLE_UNDERLINE}{state}{constants.STYLE_ENDC}"
-        )
+        return f"{constants.STYLE_WARNING}_{constants.STYLE_UNDERLINE}{state}_{constants.STYLE_ENDC}"
     elif state == constants.STATE_STUDYING:
-        return (
-            f"{constants.STYLE_FAIL}{constants.STYLE_UNDERLINE}{state}{constants.STYLE_ENDC}"
-        )
+        return f"{constants.STYLE_FAIL}_{constants.STYLE_UNDERLINE}{state}_{constants.STYLE_ENDC}"
 
     return state
 
@@ -127,6 +124,7 @@ def get_readable_info(
         constants.LABEL_PASS_PCT,
         constants.LABEL_DURATION,
     ],
+    emphasis=[],
 ):
     # info_dict is returned from get_info function
     string = f"[{info_dict['identifier']:6s}]"
@@ -142,25 +140,37 @@ def get_readable_info(
             "since_last_start_study" in info_dict
             and info_dict["since_last_start_study"] < constants.INF
         ):
-            string += (
-                f"  {get_readable_duration(info_dict['since_last_start_study'])} ago"
-            )
+            if "recent" in emphasis:
+                string += f"  {constants.STYLE_BOLD}({get_readable_duration(info_dict['since_last_start_study'])} ago){constants.STYLE_ENDC}"
+
+            else:
+                string += f"  ({get_readable_duration(info_dict['since_last_start_study'])} ago)"
 
         elif (
             "since_last_end_study" in info_dict
             and info_dict["since_last_end_study"] < constants.INF
         ):
-            string += (
-                f"  {get_readable_duration(info_dict['since_last_end_study'])} ago"
-            )
+            if "recent" in emphasis:
+                string += f"  {constants.STYLE_BOLD}({get_readable_duration(info_dict['since_last_end_study'])} ago){constants.STYLE_ENDC}"
+            else:
+                string += (
+                    f"  ({get_readable_duration(info_dict['since_last_end_study'])} ago)"
+                )
+
 
     if constants.LABEL_PASS_PCT in extra_info:
         if info_dict["n_study"] > 0:
-            string += f"  ({info_dict['n_pass']}:{info_dict['n_pass'] / info_dict['n_study'] * 100:.0f}%P)"
+            if "pass" in emphasis:
+                string += f"  {constants.STYLE_BOLD}({info_dict['n_pass']}:{info_dict['n_pass'] / info_dict['n_study'] * 100:.0f}%P){constants.STYLE_ENDC}"
+            else:
+                string += f"  ({info_dict['n_pass']}:{info_dict['n_pass'] / info_dict['n_study'] * 100:.0f}%P)"
 
     if constants.LABEL_DURATION in extra_info:
         if info_dict["duration"] > 0:
-            string += f"  (T:{get_readable_duration(info_dict['duration'])})"
+            if "duration" in emphasis:
+                string += f"  {constants.STYLE_BOLD}(T:{get_readable_duration(info_dict['duration'])}){constants.STYLE_ENDC}"
+            else:
+                string += f"  (T:{get_readable_duration(info_dict['duration'])})"
 
     if constants.LABEL_TAG in extra_info:
         string += "  :"
@@ -171,7 +181,10 @@ def get_readable_info(
         string += ":"
 
     if constants.LABEL_COMPETENCY in extra_info:
-        string += f"  B:{int(info_dict['competency'])}"
+        if "competency" in emphasis:
+            string += f"  {constants.STYLE_BOLD}B:{int(info_dict['competency'])}{constants.STYLE_ENDC}"
+        else:
+            string += f"  B:{int(info_dict['competency'])}"
 
     return string
 
