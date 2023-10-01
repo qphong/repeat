@@ -55,7 +55,7 @@ parser.add_argument(
     "-s",
     "--states",
     type=str,
-    choices=constants.STATES,
+    # choices=constants.STATES,
     help="states separated by comma",
     default=None,
 )  # comma separated
@@ -64,13 +64,11 @@ parser.add_argument(
     "--by",
     type=str,
     choices=[
-        "pass_percentage", # total pass_percentage
+        "pass", # pass
         "competency", # time-aware box
         "view", # n_study
         "recent", # since last start
         "duration", # total duration
-        "studying", # studying
-        "new",
     ],
     default="view",
 )
@@ -118,7 +116,24 @@ elif command == "list":
     identifiers = manager.get_identifiers_by_states_and_tags(tags, states)
     info_list = manager.get_item_by_identifiers(identifiers)
 
-    for info_dict in info_list:
+    by_to_property = {
+        "pass": "n_pass", # total pass_percentage
+        "competency": "competency", # time-aware box
+        "view": "n_study", # n_study
+        "recent": "since_last_start_study", # since last start
+        "duration": "duration", # total duration
+    }
+
+    info_property = by_to_property[by]
+    sorted_info_list = []
+    for i,info_dict in enumerate(info_list):
+        sorted_info_list.append( (info_dict[info_property],i, info_dict) )
+
+    sorted_info_list = sorted(sorted_info_list)
+    if direction == "dec":
+        sorted_info_list = sorted_info_list[::-1]
+
+    for _, _, info_dict in sorted_info_list:
         readable_info = util.get_readable_info(
             info_dict,
             content_fields=["name"],

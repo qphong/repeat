@@ -165,8 +165,12 @@ class Manager:
     def get_identifiers_by_states_and_tags(
         self, tags=[], states=[], within_identifiers=set()
     ):
+        identifiers = self.get_identifiers_by_states(states, within_identifiers)
+        if len(identifiers) == 0:
+            return set()
+
         return self.get_identifiers_by_tags(
-            tags, self.get_identifiers_by_states(states, within_identifiers)
+            tags, identifiers
         )
 
     def get_item_by_identifiers(self, identifiers):
