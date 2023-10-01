@@ -91,10 +91,13 @@ class Tracker:
         if not at_time:
             at_time = util.get_now_epoch()
 
-        discrete_at_time = self.epoch_to_discrete(at_time)
-        discrete_end_study_time = self.epoch_to_discrete(self.end_study_time)
+        if self.prev_end_study_time < constants.INF:
+            discrete_at_time = self.epoch_to_discrete(at_time)
+            discrete_end_study_time = self.epoch_to_discrete(self.prev_end_study_time)
 
-        since_last_study = discrete_at_time - discrete_end_study_time
+            since_last_study = discrete_at_time - discrete_end_study_time
+        else:
+            since_last_study = 0
 
         if since_last_study > self.max_tracker_data_key:
             since_last_study = self.max_tracker_data_key

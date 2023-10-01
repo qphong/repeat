@@ -2,8 +2,8 @@
   "3": {
     "identifier": "3",
     "tags": [
-      "E+",
-      "two-pointers"
+      "two-pointers",
+      "E+"
     ],
     "content": {
       "name": "longest-substring-without-repeating-character"
