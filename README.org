@@ -25,6 +25,7 @@
 - [[#vy-learns-with-spaced-repetition][Vy Learns with Spaced-Repetition]]
 - [[#requirements][Requirements]]
 - [[#usage][Usage]]
+- [[#demo][Demo]]
 
 * Vy Learns with Spaced-Repetition
 Vy has recently familiarized herself with the computer keyboard and is now tackling some Leetcode problems. However, she frequently struggles to recall the problems she has solved before. Consequently, she requires assistance from a management system.
@@ -66,3 +67,6 @@ In the =leetcode-scripts= direction, run
 | =vy-remove-tag {tag}=      | remove a tag from a problem                                                |
 | =vy-suggest=               | suggest some solved problems for reviews (using the Leitner system)        |
 |----------------------------+----------------------------------------------------------------------------|
+
+* Demo
+[[repeat.mp4][A simple demo]]
