@@ -1,4 +1,5 @@
 import random
+import math
 import datetime
 import constants
 
@@ -90,7 +91,7 @@ def get_readable_info(
     string = f"[{info_dict['identifier']:6s}]"
 
     if constants.LABEL_COMPETENCY in extra_info:
-        string += f" BOX:{info_dict['competency']}"
+        string += f" BOX:{int(info_dict['competency'])}"
 
     if constants.LABEL_TAG in extra_info:
         string += " "
@@ -102,7 +103,7 @@ def get_readable_info(
 
     if constants.LABEL_PASS_PCT in extra_info:
         if info_dict["n_study"] > 0:
-            string += f" ({info_dict['n_pass'] / info_dict['n_study' *100]:.0f}%)"
+            string += f" ({info_dict['n_pass'] / info_dict['n_study'] * 100:.0f}% PASS)"
 
     if constants.LABEL_STATE in extra_info:
         string += f" <{info_dict['state'].upper()}>"
@@ -112,7 +113,7 @@ def get_readable_info(
             and info_dict["since_last_start_study"] < constants.INF
         ):
             string += (
-                f" since {get_readable_duration(info_dict['since_last_start_study'])}"
+                f" {get_readable_duration(info_dict['since_last_start_study'])} ago"
             )
 
         elif (
@@ -120,7 +121,7 @@ def get_readable_info(
             and info_dict["since_last_end_study"] < constants.INF
         ):
             string += (
-                f" since {get_readable_duration(info_dict['since_last_end_study'])}"
+                f" {get_readable_duration(info_dict['since_last_end_study'])} ago"
             )
 
     return string

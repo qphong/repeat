@@ -1,13 +1,3 @@
-"""
-list filtered by tags, state
-   sorted by since_last_start_study
-          by since_last_end_study
-
-review tags (for completed items by suggesting)
-
-start_study_item
-end_study_item: pass, fail
-"""
 from manager import Manager
 
 import constants
