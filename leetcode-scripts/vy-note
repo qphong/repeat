@@ -47,8 +47,7 @@ if [ "$item" != "" ]
 then
 	PATHTONOTE="$(python ../main.py --subject leetcode -c get_file -i "$identifier" --postfix "node.md")"
 
-	echo "# $identifier. $name" >> $PATHTONOTE \
-		&& echo "Note for $identifier. $name at $PATHTONOTE" \
+	echo "Note for $identifier. $name at $PATHTONOTE" \
 		&& neovide "$PATHTONOTE"
 fi
 
