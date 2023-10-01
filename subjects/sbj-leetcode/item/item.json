@@ -2,8 +2,8 @@
   "3": {
     "identifier": "3",
     "tags": [
-      "E+",
-      "two-pointers"
+      "two-pointers",
+      "E+"
     ],
     "content": {
       "name": "longest-substring-without-repeating-character"
@@ -12,8 +12,8 @@
   "15": {
     "identifier": "15",
     "tags": [
-      "M",
-      "two-pointers"
+      "two-pointers",
+      "M"
     ],
     "content": {
       "name": "3sum"
@@ -22,8 +22,8 @@
   "1932": {
     "identifier": "1932",
     "tags": [
-      "H",
-      "tree"
+      "tree",
+      "H"
     ],
     "content": {
       "name": "merge-bsts-to-create-single-bst"
@@ -32,8 +32,8 @@
   "72": {
     "identifier": "72",
     "tags": [
-      "H-",
-      "dynamic-programming"
+      "dynamic-programming",
+      "H-"
     ],
     "content": {
       "name": "edit-distance"
@@ -42,8 +42,8 @@
   "360": {
     "identifier": "360",
     "tags": [
-      "M",
-      "two-pointers"
+      "two-pointers",
+      "M"
     ],
     "content": {
       "name": "sort-transformed-array"
@@ -52,8 +52,8 @@
   "26": {
     "identifier": "26",
     "tags": [
-      "H-",
-      "two-pointers"
+      "two-pointers",
+      "H-"
     ],
     "content": {
       "name": "remove-duplicates-from-sorted-array"

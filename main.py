@@ -285,7 +285,7 @@ elif command == "list_state_by_tag":
     tag_count = manager.list_tags(states)
 
     for tag, count in tag_count:
-        print(f"{tag:25s}: {count:3d} -- ", end="")
+        print(f"{tag:20s}: {count:3d} -- ", end="")
         state_count = manager.list_states([tag], states)
         for state, count in state_count:
             print(f"{state}:{count}", end="  ")

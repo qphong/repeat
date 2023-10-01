@@ -84,6 +84,24 @@ def get_info(identifier, item, tracker):
     return info
 
 
+def get_readable_tag(tag, style=False):
+    if not style:
+        return tag
+
+    if tag.startswith("E"):
+        return f"{constants.STYLE_OKGREEN}{constants.STYLE_BOLD}{tag}{constants.STYLE_ENDC}"
+    elif tag.startswith("M"):
+        return (
+            f"{constants.STYLE_OKBLUE}{constants.STYLE_BOLD}{tag}{constants.STYLE_ENDC}"
+        )
+    elif tag.startswith("H"):
+        return (
+            f"{constants.STYLE_FAIL}{constants.STYLE_BOLD}{tag}{constants.STYLE_ENDC}"
+        )
+
+    return tag
+
+
 def get_readable_info(
     info_dict,
     content_fields,
@@ -101,9 +119,7 @@ def get_readable_info(
     for field in content_fields:
         string += f" \"{info_dict['content'][field]}\""
 
-    if (
-        constants.LABEL_STATE in extra_info
-    ):
+    if constants.LABEL_STATE in extra_info:
         if info_dict["state"] != constants.STATE_STUDIED:
             string += f" <{info_dict['state'].upper()}>"
 
@@ -119,7 +135,9 @@ def get_readable_info(
             "since_last_end_study" in info_dict
             and info_dict["since_last_end_study"] < constants.INF
         ):
-            string += f"  {get_readable_duration(info_dict['since_last_end_study'])} ago"
+            string += (
+                f"  {get_readable_duration(info_dict['since_last_end_study'])} ago"
+            )
 
     if constants.LABEL_PASS_PCT in extra_info:
         if info_dict["n_study"] > 0:
@@ -132,7 +150,9 @@ def get_readable_info(
     if constants.LABEL_TAG in extra_info:
         string += "  :"
         for i, tag in enumerate(info_dict["tags"]):
-            string += f"{tag}" + (":" if i < len(info_dict["tags"]) - 1 else "")
+            string += f"{get_readable_tag(tag, style=True)}" + (
+                ":" if i < len(info_dict["tags"]) - 1 else ""
+            )
         string += ":"
 
     if constants.LABEL_COMPETENCY in extra_info:

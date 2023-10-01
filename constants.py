@@ -40,3 +40,15 @@ BY_TO_PROPERTY = {
     "recent": "since_last_start_study",  # since last start
     "duration": "duration",  # total duration
 }
+
+
+STYLE_HEADER = '\033[95m'
+STYLE_OKBLUE = '\033[94m'
+STYLE_OKCYAN = '\033[96m'
+STYLE_OKGREEN = '\033[92m'
+STYLE_WARNING = '\033[93m'
+STYLE_FAIL = '\033[91m'
+STYLE_BOLD = '\033[1m'
+STYLE_UNDERLINE = '\033[4m'
+STYLE_ENDC = '\033[0m'
+
