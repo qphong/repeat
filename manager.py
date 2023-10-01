@@ -1,6 +1,9 @@
+import os
 from collections import defaultdict
+import json
 import random
 
+import files
 import constants
 import util
 
@@ -9,10 +12,59 @@ from item import Item
 
 
 class Manager:
-    def __init__(self):
+    def __init__(self, subject):
         self.item_tracker_data = {}  # identifier -> {"item": item, "tracker": tracker}
+        self.subject = subject
+        self.subject_root = files.get_subject_root(subject)
         self.tags = set()  # set of tags
         self.identifier_by_tag = defaultdict(set)  # tag -> set of item identifiers
+
+    def save(self):
+        item_dict = {}
+        tracker_dict = {}
+
+        for identifier, item_tracker in self.item_tracker_data.items():
+            item_dict[identifier] = item_tracker["item"].to_dictionary()
+            tracker_dict[identifier] = item_tracker["tracker"].to_dictionary()
+
+        with open(
+            f"{files.get_item_directory(self.subject_root)}/item.json",
+            "w",
+            encoding="utf-8",
+        ) as file:
+            json.dump(item_dict, file, indent=2)
+
+        with open(
+            f"{files.get_tracker_directory(self.subject_root)}/tracker.json",
+            "w",
+            encoding="utf-8",
+        ) as file:
+            json.dump(tracker_dict, file, indent=2)
+
+    def load(self):
+        item_path = f"{files.get_item_directory(self.subject_root)}/item.json"
+        tracker_path = f"{files.get_tracker_directory(self.subject_root)}/tracker.json"
+
+        item_dict = {}
+        tracker_dict = {}
+
+        if os.path.exists(item_path):
+            with open(item_path, "r", encoding="utf-8") as file:
+                item_dict = json.load(file)
+        if os.path.exists(tracker_path):
+            with open(tracker_path, "r", encoding="utf-8") as file:
+                tracker_dict = json.load(file)
+
+        for identifier in item_dict:
+            item = Item.load_from_dictionary(item_dict[identifier])
+            tracker = Tracker.load_from_dictionary(tracker_dict[identifier])
+
+            self.item_tracker_data[identifier] = {
+                "item": item,
+                "tracker": tracker,
+            }
+
+            self.add_tags(identifier, item.tags)
 
     def get_n_item(self):
         return len(self.item_tracker_data)
@@ -33,10 +85,12 @@ class Manager:
     def list_tags(self):
         return [(tag, len(ids)) for tag, ids in self.identifier_by_tag.items()]
 
-    def list_states(self):
+    def list_states(self, tags):
+        identifiers = self.get_identifiers_by_tags(tags)
         state_count = defaultdict(int)
 
-        for item_tracker in self.item_tracker_data.values():
+        for identifier in identifiers:
+            item_tracker = self.item_tracker_data[identifier]
             tracker = item_tracker["tracker"]
             state = tracker.get_state()
             state_count[state] += 1
@@ -123,24 +177,23 @@ class Manager:
             item = item_tracker["item"]
             tracker = item_tracker["tracker"]
 
-            item_list.append(util.get_info(item, tracker))
+            item_list.append(util.get_info(identifier, item, tracker))
 
         return item_list
 
     def start_study_item(self, identifier):
         self.item_tracker_data[identifier]["tracker"].start_study()
 
-    def end_study_item(self, identifier):
-        self.item_tracker_data[identifier]["tracker"].end_study()
+    def end_study_item(self, identifier, passfail):
+        self.item_tracker_data[identifier]["tracker"].end_study(passfail)
 
     def suggest(
         self,
         k=1,
         tags=[],
-        states=[],
         next_box_prob=constants.DEFAULT_NEXT_BOX_PROBABILITY,
     ):
-        within_identifiers = self.get_identifiers_by_states_and_tags(tags, states)
+        within_identifiers = self.get_identifiers_by_states_and_tags(tags)
 
         # get list of min_box from all items
         assessing_boxes = defaultdict(list)  # box -> list of identifiers

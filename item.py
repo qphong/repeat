@@ -13,7 +13,7 @@ class Item:
         return {
             "identifier": self.identifier,
             "tags": list(self.tags),
-            "content": content,
+            "content": self.content,
         }
 
     @staticmethod

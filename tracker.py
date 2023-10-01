@@ -48,6 +48,7 @@ class Tracker:
             "end_study_time": self.end_study_time,
             "prev_start_study_time": self.prev_start_study_time,
             "prev_end_study_time": self.prev_end_study_time,
+            "state": self.get_state(),
         }
 
     @staticmethod
@@ -64,7 +65,7 @@ class Tracker:
         tracker.prev_end_study_time = data_dict["prev_end_study_time"]
 
         for key, data in data_dict["time_aware_tracker_data"].items():
-            tracker.time_aware_tracker_data[key] = data
+            tracker.time_aware_tracker_data[int(key)] = data
 
         return tracker
 
@@ -105,6 +106,10 @@ class Tracker:
         return self.time_aware_tracker_data[key]
 
     def start_study(self, at_time=None):
+        if self.is_studying():
+            print(f"WARNING: {self.identifier} already started studying!")
+            return
+
         if not at_time:
             at_time = util.get_now_epoch()
 
@@ -184,7 +189,6 @@ class Tracker:
 
         if status == constants.PASS:
             tracker_data["n_pass"] += 1
-            tracker_data["box"] += 1
             # increase box of self.time_aware_tracker_data[key] to 0 for all key <= at_key by 1
             for key in self.time_aware_tracker_data:
                 if key <= at_key:

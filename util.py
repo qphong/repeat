@@ -4,14 +4,49 @@ import constants
 
 
 def get_random_string():
-    return f"{random.getrandbits(35)}"
+    return f"{random.getrandbits(20)}"
 
 
 def get_now_epoch():
     return (datetime.datetime.utcnow() - datetime.datetime(1970, 1, 1)).total_seconds()
 
 
-def get_info(item, tracker):
+def parse_args(config, arguments, required):
+    results = []
+
+    for i, argument in enumerate(arguments):
+        if argument in [
+            "command",
+            "subject",
+            "identifier",
+            "name",
+            "by",
+            "direction",
+            "postfix",
+            "passfail",
+        ]:
+            if required[i] and (
+                config[argument] == None or config[argument] == constants.AUTO_ID
+            ):
+                raise Exception(f"Require {argument}")
+
+            results.append(config[argument])
+
+        elif argument in ["tags", "states"]:
+            if config[argument]:
+                results.append([elem.strip() for elem in config[argument].split(",")])
+            else:
+                results.append([])
+
+        else:
+            raise Exception(f"Unknown argument: {argument}")
+
+    if len(results) == 1:
+        return results[0]
+    return results
+
+
+def get_info(identifier, item, tracker):
     state = tracker.get_state()
     box = tracker.get_assessing_box(transformation=constants.DEFAULT_BOX_TRANSFORMATION)
 
@@ -44,27 +79,33 @@ def get_info(item, tracker):
 def get_readable_info(
     info_dict,
     content_fields,
-    extra_info=[constants.LABEL_TAG, constants.LABEL_STATE, constants.LABEL_COMPETENCY],
+    extra_info=[
+        constants.LABEL_TAG,
+        constants.LABEL_STATE,
+        constants.LABEL_COMPETENCY,
+        constants.LABEL_PASS_PCT,
+    ],
 ):
     # info_dict is returned from get_info function
-    string = f"[{identifier}]"
-    for field in content_fields:
-        string += f" {info_dict['content'][field]}"
+    string = f"[{info_dict['identifier']:6s}]"
 
-    if constants.LABEL_PASS in extra_info:
-        if info_dict["n_study"] > 0:
-            string += f" ({info_dict['n_pass'] / info_dict['n_study' *100]:.0f}%)"
+    if constants.LABEL_COMPETENCY in extra_info:
+        string += f" BOX:{info_dict['competency']}"
 
     if constants.LABEL_TAG in extra_info:
         string += " "
         for i, tag in enumerate(info_dict["tags"]):
             string += f"{tag}" + ("|" if i < len(info_dict["tags"]) - 1 else "")
 
-    if constants.LABEL_COMPETENCY in extra_info:
-        string += f" {info_dict['competency']}"
+    for field in content_fields:
+        string += f" \"{info_dict['content'][field]}\""
+
+    if constants.LABEL_PASS_PCT in extra_info:
+        if info_dict["n_study"] > 0:
+            string += f" ({info_dict['n_pass'] / info_dict['n_study' *100]:.0f}%)"
 
     if constants.LABEL_STATE in extra_info:
-        string += f" {info_dict['state']}"
+        string += f" <{info_dict['state'].upper()}>"
 
         if (
             "since_last_start_study" in info_dict
