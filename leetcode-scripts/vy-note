@@ -1,5 +1,43 @@
 #!/bin/sh
 
+identifier=""
+
+while getopts ":i:" opt; do
+  case $opt in
+    i) identifier="$OPTARG"
+    ;;
+    \?) echo "Invalid option -$OPTARG" >&2
+    exit 1
+    ;;
+  esac
+done
+
+
+if [ "$identifier" != "" ]
+then
+	name="$(python ../main.py --subject leetcode -c get_name -i "$identifier")"
+	if [[ "$name" == "##_not_exist_##" ]]
+	then
+		echo "$identifier does not exist!"
+		exit 1
+	fi
+
+	yesno="$(echo -e "yes\nno" | fzf --prompt "Add notes to $identifier($name)? ")"
+
+	if [[ "$yesno" == "yes" ]]
+	then
+		PATHTOCODE="$(python ../main.py --subject leetcode -c get_file -i "$identifier" --postfix "code.py")"
+
+		python ../main.py --subject leetcode -c start -i "$identifier" \
+			&& echo "Start coding $identifier. $name at $PATHTOCODE" \
+			&& neovide "$PATHTOCODE"
+	fi
+
+	exit 0
+fi
+
+
+
 item="$(echo -e "$(python ../main.py --subject leetcode -c list --by recent --direction inc)" | fzf --ansi)"
 
 identifier="$(echo "$item" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"

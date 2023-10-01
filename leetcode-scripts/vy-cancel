@@ -11,7 +11,7 @@ fi
 identifier="$(echo "$item" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
 name="$(echo "$item" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
 
-yesno="$(echo -e "yes\nno" | fzf --prompt "Cancel? ")"
+yesno="$(echo -e "yes\nno" | fzf --prompt "Cancel studying $identifier($name)? ")"
 
 if [[ "$item" != "" && "$yesno" == "yes" ]]
 then

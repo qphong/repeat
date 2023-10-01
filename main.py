@@ -277,13 +277,16 @@ elif command == "list_state":
         print(f"{state}: {count}")
 
 elif command == "list_state_by_tag":
-    subject = util.parse_args(config, ["subject"], [True])
+    # subject, states
+    subject, states = util.parse_args(config, ["subject", "states"], [True])
     manager = Manager(subject)
     manager.load()
-    tag_count = manager.list_tags()
+
+    tag_count = manager.list_tags(states)
+
     for tag, count in tag_count:
-        print(f"{tag}: {count} -- ", end="")
-        state_count = manager.list_states([tag])
+        print(f"{tag:25s}: {count:3d} -- ", end="")
+        state_count = manager.list_states([tag], states)
         for state, count in state_count:
             print(f"{state}:{count}", end="  ")
         print("")

@@ -22,21 +22,22 @@ then
 		exit 1
 	fi
 
-	yesno="$(echo -e "yes\nno" | fzf --prompt "Start to study $identifier. $name? ")"
+	yesno="$(echo -e "yes\nno" | fzf --prompt "Start to study $identifier($name)? ")"
 
 	if [[ "$yesno" == "yes" ]]
 	then
 		PATHTOCODE="$(python ../main.py --subject leetcode -c get_file -i "$identifier" --postfix "code.py")"
 
 		python ../main.py --subject leetcode -c start -i "$identifier" \
-			&& echo "Start coding $identifier. $name at $PATHTOCODE" \
+			&& echo "Start coding $identifier($name) at $PATHTOCODE" \
 			&& neovide "$PATHTOCODE"
 	fi
 
 	exit 0
 fi
 
-tag="$(echo -e "$(python ../main.py --subject leetcode -c list_tag --states new,studied)" | fzf | awk -F ':' '{print $1}')"
+
+tag="$(echo -e "$(python ../main.py --subject leetcode -c list_state_by_tag --states new,studied)" | fzf | awk -F ':' '{print $1}')"
 # if [[ "$tag" == "" ]]
 # then
 # 	echo "Nothing to start learning"

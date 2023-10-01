@@ -110,9 +110,9 @@ class Manager:
             self.tags.add(tag)
             self.identifier_by_tag[tag].add(identifier)
 
-    def list_tags(self, states):
+    def list_tags(self, states=[]):
         if len(states) == 0:
-            return [(tag, len(ids)) for tag, ids in self.identifier_by_tag.items()]
+            return sorted([(tag, len(ids)) for tag, ids in self.identifier_by_tag.items()])
 
         identifiers = self.get_identifiers_by_states(states)
         tag_count = defaultdict(int)
@@ -125,10 +125,10 @@ class Manager:
             if tracker.get_state() in states:
                 for tag in item.tags:
                     tag_count[tag] += 1
-        return list(tag_count.items())
+        return sorted(list(tag_count.items()))
 
-    def list_states(self, tags):
-        identifiers = self.get_identifiers_by_tags(tags)
+    def list_states(self, tags=[], states=[]):
+        identifiers = self.get_identifiers_by_states_and_tags(tags, states)
         state_count = defaultdict(int)
 
         for identifier in identifiers:
@@ -137,7 +137,7 @@ class Manager:
             state = tracker.get_state()
             state_count[state] += 1
 
-        return list(state_count.items())
+        return sorted(list(state_count.items()))
 
     def add(self, identifier, tags, content):
         if identifier == constants.AUTO_ID:
