@@ -31,3 +31,12 @@ LABEL_DURATION = "duration"
 EXTRA_INFO = [LABEL_TAG, LABEL_STATE, LABEL_COMPETENCY, LABEL_PASS_PCT, LABEL_DURATION]
 
 DEFAULT_NUMBER_OF_SUGGESTION = 3
+
+
+BY_TO_PROPERTY = {
+    "pass": "n_pass",  # total n_pass
+    "competency": "competency",  # time-aware box
+    "view": "n_study",  # n_study
+    "recent": "since_last_start_study",  # since last start
+    "duration": "duration",  # total duration
+}

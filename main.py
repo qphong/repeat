@@ -21,6 +21,7 @@ parser.add_argument(
         "list",  # subject, states, tags, by, direction
         "add",  # subject, identifier, name, tags
         "get_file",  # subject, identifier, postifx
+        "get_name", # subject, identifier
         "list_file",  # list all postfix # subject, identifier
         "review",  # subject, tags, k
         "add_tag",  # subject, identifier, tags
@@ -65,13 +66,7 @@ parser.add_argument(
     "-b",
     "--by",
     type=str,
-    choices=[
-        "pass",  # pass
-        "competency",  # time-aware box
-        "view",  # n_study
-        "recent",  # since last start
-        "duration",  # total duration
-    ],
+    choices=list(constants.BY_TO_PROPERTY.keys()),
     default="view",
 )
 parser.add_argument(
@@ -118,15 +113,7 @@ elif command == "list":
     identifiers = manager.get_identifiers_by_states_and_tags(tags, states)
     info_list = manager.get_item_by_identifiers(identifiers)
 
-    by_to_property = {
-        "pass": "n_pass",  # total pass_percentage
-        "competency": "competency",  # time-aware box
-        "view": "n_study",  # n_study
-        "recent": "since_last_start_study",  # since last start
-        "duration": "duration",  # total duration
-    }
-
-    info_property = by_to_property[by]
+    info_property = constants.BY_TO_PROPERTY[by]
     sorted_info_list = []
     for i, info_dict in enumerate(info_list):
         sorted_info_list.append((info_dict[info_property], i, info_dict))
@@ -157,11 +144,32 @@ elif command == "get_file":
     manager = Manager(subject)
     manager.load()
     content = manager.get_content_by_identifier(identifier)
+    if not content:
+        print("##_not_exist_##")
+        exit(1)
+
     name = "unnamed"
-    if content:
+    if "name" in content:
         name = content["name"]
 
     print(files.get_study_file(subject, identifier, postfix, name))
+
+elif command == "get_name":
+    # subject, identifier
+    subject, identifier = util.parse_args(
+        config, ["subject", "identifier"], [True, True, True]
+    )
+    manager = Manager(subject)
+    manager.load()
+    content = manager.get_content_by_identifier(identifier)
+    if not content:
+        print("##_not_exist_##")
+        exit(1)
+
+    name = "unnamed"
+    if "name" in content:
+        name = content["name"]
+    print(name)
 
 elif command == "list_file":
     # list all postfix # subject, identifier

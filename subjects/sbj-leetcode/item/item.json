@@ -2,8 +2,8 @@
   "3": {
     "identifier": "3",
     "tags": [
-      "two-pointers",
-      "E+"
+      "E+",
+      "two-pointers"
     ],
     "content": {
       "name": "longest-substring-without-repeating-character"
@@ -32,8 +32,8 @@
   "72": {
     "identifier": "72",
     "tags": [
-      "dynamic-programming",
-      "H-"
+      "H-",
+      "dynamic-programming"
     ],
     "content": {
       "name": "edit-distance"
@@ -47,6 +47,16 @@
     ],
     "content": {
       "name": "sort-transformed-array"
+    }
+  },
+  "26": {
+    "identifier": "26",
+    "tags": [
+      "H-",
+      "two-pointers"
+    ],
+    "content": {
+      "name": "remove-duplicates-from-sorted-array"
     }
   }
 }
