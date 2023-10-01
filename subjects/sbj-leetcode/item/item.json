@@ -12,8 +12,8 @@
   "15": {
     "identifier": "15",
     "tags": [
-      "M",
-      "two-pointers"
+      "two-pointers",
+      "M"
     ],
     "content": {
       "name": "3sum"
@@ -22,8 +22,8 @@
   "1932": {
     "identifier": "1932",
     "tags": [
-      "H",
-      "tree"
+      "tree",
+      "H"
     ],
     "content": {
       "name": "merge-bsts-to-create-single-bst"

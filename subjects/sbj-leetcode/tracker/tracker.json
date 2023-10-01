@@ -4,20 +4,20 @@
     "time_aware_tracker_data": {
       "0": {
         "n_pass": 8,
-        "n_fail": 0,
-        "n_study": 8,
-        "study_duration": 31555.644472122192,
-        "box": 8
+        "n_fail": 1,
+        "n_study": 9,
+        "study_duration": 31563.702085018158,
+        "box": 0
       }
     },
     "interval": 300.0,
     "oldest_epoch": 2592000.0,
     "max_tracker_data_key": 8640,
-    "start_study_time": 1696140277.99137,
-    "end_study_time": 1696170784.045402,
-    "prev_start_study_time": 1696140214.756731,
-    "prev_end_study_time": 1696140275.503088,
-    "state": "studied"
+    "start_study_time": 1696172882.768245,
+    "end_study_time": 1e+16,
+    "prev_start_study_time": 1696172788.248511,
+    "prev_end_study_time": 1696172796.306124,
+    "state": "studying"
   },
   "15": {
     "identifier": "15",
