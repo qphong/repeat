@@ -26,8 +26,8 @@ parser.add_argument(
         "start",  # subject, identifier
         "end",  # subject, identifier, passfail
         "cancel", # subject, identifier
-        "list_tags",  # subject
-        "list_states",  # subject, tags
+        "list_tag",  # subject
+        "list_state",  # subject, tags
         "list_state_by_tag",  # subject, tags
     ],
     type=str,
@@ -64,13 +64,13 @@ parser.add_argument(
     "--by",
     type=str,
     choices=[
-        "hard",
-        "view",
-        "recent",
-        "duration",
-        "pending",
+        "pass_percentage", # total pass_percentage
+        "competency", # time-aware box
+        "view", # n_study
+        "recent", # since last start
+        "duration", # total duration
+        "studying", # studying
         "new",
-        "all",
     ],
     default="view",
 )
@@ -127,6 +127,7 @@ elif command == "list":
                 constants.LABEL_STATE,
                 constants.LABEL_COMPETENCY,
                 constants.LABEL_PASS_PCT,
+                constants.LABEL_DURATION,
             ],
         )
         print(readable_info)
@@ -197,7 +198,7 @@ elif command == "cancel":
     manager.cancel_study_item(identifier)
     manager.save()
 
-elif command == "list_tags":
+elif command == "list_tag":
     # subject
     subject = util.parse_args(config, ["subject"], [True])
     manager = Manager(subject)
@@ -206,7 +207,7 @@ elif command == "list_tags":
     for tag, count in tag_count:
         print(f"{tag}: {count}")
 
-elif command == "list_states":
+elif command == "list_state":
     # subject, tags
     subject, tags = util.parse_args(config, ["subject", "tags"], [True, False])
     manager = Manager(subject)

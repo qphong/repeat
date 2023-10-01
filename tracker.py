@@ -160,6 +160,12 @@ class Tracker:
             n_fail += tracker["n_fail"]
         return n_fail
 
+    def get_overall_duration(self):
+        duration = 0.0
+        for tracker in self.time_aware_tracker_data.values():
+            duration += tracker["study_duration"]
+        return duration
+
     def cancel_study(self):
         if self.is_studying():
             self.start_study_time = self.prev_start_study_time

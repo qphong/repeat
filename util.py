@@ -60,6 +60,7 @@ def get_info(identifier, item, tracker):
         "n_pass": tracker.get_overall_n_pass(),
         "n_fail": tracker.get_overall_n_fail(),
         "n_study": tracker.get_overall_n_study(),
+        "duration": tracker.get_overall_duration(),
     }
 
     since_last_end_study = tracker.get_duration_since_last_end_study()
@@ -85,6 +86,7 @@ def get_readable_info(
         constants.LABEL_STATE,
         constants.LABEL_COMPETENCY,
         constants.LABEL_PASS_PCT,
+        constants.LABEL_DURATION,
     ],
 ):
     # info_dict is returned from get_info function
@@ -100,10 +102,6 @@ def get_readable_info(
 
     for field in content_fields:
         string += f" \"{info_dict['content'][field]}\""
-
-    if constants.LABEL_PASS_PCT in extra_info:
-        if info_dict["n_study"] > 0:
-            string += f" ({info_dict['n_pass'] / info_dict['n_study'] * 100:.0f}% PASS)"
 
     if constants.LABEL_STATE in extra_info:
         string += f" <{info_dict['state'].upper()}>"
@@ -123,6 +121,14 @@ def get_readable_info(
             string += (
                 f" {get_readable_duration(info_dict['since_last_end_study'])} ago"
             )
+
+    if constants.LABEL_PASS_PCT in extra_info:
+        if info_dict["n_study"] > 0:
+            string += f" ({info_dict['n_pass'] / info_dict['n_study'] * 100:.0f}% PASS)"
+
+    if constants.LABEL_DURATION in extra_info:
+        if info_dict["duration"] > 0:
+            string += f" (study time {get_readable_duration(info_dict['duration'])})"
 
     return string
 
