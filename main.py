@@ -35,6 +35,7 @@ parser.add_argument(
         "review",  # subject, tags, k
         "start",  # subject, identifier
         "end",  # subject, identifier, passfail
+        "cancel", # subject, identifier
         "list_tags",  # subject
         "list_states",  # subject, tags
         "list_state_by_tag",  # subject, tags
@@ -195,6 +196,15 @@ elif command == "end":
     manager = Manager(subject)
     manager.load()
     manager.end_study_item(identifier, passfail)
+    manager.save()
+
+elif command == "cancel":
+    subject, identifier = util.parse_args(
+        config, ["subject", "identifier"], [True, True]
+    )
+    manager = Manager(subject)
+    manager.load()
+    manager.cancel_study_item(identifier)
     manager.save()
 
 elif command == "list_tags":

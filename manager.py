@@ -187,6 +187,9 @@ class Manager:
     def end_study_item(self, identifier, passfail):
         self.item_tracker_data[identifier]["tracker"].end_study(passfail)
 
+    def cancel_study_item(self, identifier):
+        self.item_tracker_data[identifier]["tracker"].cancel_study()
+
     def suggest(
         self,
         k=1,

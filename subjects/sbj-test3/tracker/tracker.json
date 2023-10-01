@@ -37,10 +37,10 @@
     "interval": 300.0,
     "oldest_epoch": 2592000.0,
     "max_tracker_data_key": 8640,
-    "start_study_time": 1696129350.990161,
-    "end_study_time": 1e+16,
+    "start_study_time": 1696129337.098676,
+    "end_study_time": 1696129349.849631,
     "prev_start_study_time": 1696129337.098676,
     "prev_end_study_time": 1696129349.849631,
-    "state": "studying"
+    "state": "studied"
   }
 }
