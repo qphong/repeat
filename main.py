@@ -23,9 +23,11 @@ parser.add_argument(
         "get_file",  # subject, identifier, postifx
         "list_file",  # list all postfix # subject, identifier
         "review",  # subject, tags, k
+        "add_tag",  # subject, identifier, tags
+        "remove_tag",  # subject, identifier, tags
         "start",  # subject, identifier
         "end",  # subject, identifier, passfail
-        "cancel", # subject, identifier
+        "cancel",  # subject, identifier
         "list_tag",  # subject
         "list_state",  # subject, tags
         "list_state_by_tag",  # subject, tags
@@ -64,11 +66,11 @@ parser.add_argument(
     "--by",
     type=str,
     choices=[
-        "pass", # pass
-        "competency", # time-aware box
-        "view", # n_study
-        "recent", # since last start
-        "duration", # total duration
+        "pass",  # pass
+        "competency",  # time-aware box
+        "view",  # n_study
+        "recent",  # since last start
+        "duration",  # total duration
     ],
     default="view",
 )
@@ -117,17 +119,17 @@ elif command == "list":
     info_list = manager.get_item_by_identifiers(identifiers)
 
     by_to_property = {
-        "pass": "n_pass", # total pass_percentage
-        "competency": "competency", # time-aware box
-        "view": "n_study", # n_study
-        "recent": "since_last_start_study", # since last start
-        "duration": "duration", # total duration
+        "pass": "n_pass",  # total pass_percentage
+        "competency": "competency",  # time-aware box
+        "view": "n_study",  # n_study
+        "recent": "since_last_start_study",  # since last start
+        "duration": "duration",  # total duration
     }
 
     info_property = by_to_property[by]
     sorted_info_list = []
-    for i,info_dict in enumerate(info_list):
-        sorted_info_list.append( (info_dict[info_property],i, info_dict) )
+    for i, info_dict in enumerate(info_list):
+        sorted_info_list.append((info_dict[info_property], i, info_dict))
 
     sorted_info_list = sorted(sorted_info_list)
     if direction == "dec":
@@ -190,6 +192,34 @@ elif command == "review":
             ],
         )
         print(readable_info)
+
+elif command == "add_tag":
+    # subject, identifier, tags
+    subject, identifier, tags = util.parse_args(
+        config, ["subject", "identifier", "tags"], [True, True, True]
+    )
+    if len(tags) == 0:
+        print("No tag provided!")
+        exit(1)
+
+    manager = Manager(subject)
+    manager.load()
+    manager.add_tags_to_identifier(identifier, tags)
+    manager.save()
+
+elif command == "remove_tag":
+    # subject, identifier, tags
+    subject, identifier, tags = util.parse_args(
+        config, ["subject", "identifier", "tags"], [True, True, True]
+    )
+    if len(tags) == 0:
+        print("No tag provided!")
+        exit(1)
+
+    manager = Manager(subject)
+    manager.load()
+    manager.remove_tags_from_identifier(identifier, tags)
+    manager.save()
 
 elif command == "start":
     # subject, identifier
