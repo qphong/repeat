@@ -50,5 +50,17 @@
     "prev_start_study_time": -1e+16,
     "prev_end_study_time": 1e+16,
     "state": "studied"
+  },
+  "72": {
+    "identifier": "72",
+    "time_aware_tracker_data": {},
+    "interval": 300.0,
+    "oldest_epoch": 2592000.0,
+    "max_tracker_data_key": 8640,
+    "start_study_time": 1696171486.023453,
+    "end_study_time": 1e+16,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studying"
   }
 }

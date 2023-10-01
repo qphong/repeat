@@ -71,15 +71,15 @@ def get_info(identifier, item, tracker):
 
     since_last_end_study = tracker.get_duration_since_last_end_study()
 
-    if state == constants.STATE_STUDYING:
-        info["since_last_start_study"] = tracker.get_duration_since_last_start_study()
-    else:
+    if state == constants.STATE_NEW:
         info["since_last_start_study"] = constants.INF
-
-    if state == constants.STATE_STUDIED:
-        info["since_last_end_study"] = tracker.get_duration_since_last_end_study()
     else:
+        info["since_last_start_study"] = tracker.get_duration_since_last_start_study()
+
+    if state == constants.STATE_NEW:
         info["since_last_end_study"] = constants.INF
+    else:
+        info["since_last_end_study"] = tracker.get_duration_since_last_end_study()
 
     return info
 

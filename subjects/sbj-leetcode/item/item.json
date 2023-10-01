@@ -2,8 +2,8 @@
   "3": {
     "identifier": "3",
     "tags": [
-      "E+",
-      "two-pointers"
+      "two-pointers",
+      "E+"
     ],
     "content": {
       "name": "longest-substring-without-repeating-character"
@@ -27,6 +27,16 @@
     ],
     "content": {
       "name": "merge-bsts-to-create-single-bst"
+    }
+  },
+  "72": {
+    "identifier": "72",
+    "tags": [
+      "dynamic-programming",
+      "H-"
+    ],
+    "content": {
+      "name": "edit-distance"
     }
   }
 }
