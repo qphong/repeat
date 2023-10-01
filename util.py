@@ -109,7 +109,7 @@ def get_readable_info(
     for field in content_fields:
         string += f" \"{info_dict['content'][field]}\""
 
-    if constants.LABEL_STATE in extra_info:
+    if constants.LABEL_STATE in extra_info and info_dict['state'] != constants.STATE_STUDIED:
         string += f" <{info_dict['state'].upper()}>"
 
         if (

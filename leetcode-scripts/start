@@ -1,11 +1,11 @@
 #!/bin/sh
 
 tag="$(echo -e "$(python ../main.py --subject leetcode -c list_tag --states new,studied)" | fzf | awk -F ':' '{print $1}')"
-if [[ "$tag" == "" ]]
-then
-	echo "Nothing to start learning"
-	exit 0
-fi
+# if [[ "$tag" == "" ]]
+# then
+# 	echo "Nothing to start learning"
+# 	exit 0
+# fi
 
 item="$(echo -e "$(python ../main.py --subject leetcode -c list --tags "$tag" --states new,studied)" | fzf --ansi)"
 
