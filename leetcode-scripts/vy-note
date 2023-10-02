@@ -45,7 +45,7 @@ name="$(echo "$item" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 
 
 if [ "$item" != "" ]
 then
-	PATHTONOTE="$(python ../main.py --subject leetcode -c get_file -i "$identifier" --postfix "node.md")"
+	PATHTONOTE="$(python ../main.py --subject leetcode -c get_file -i "$identifier" --postfix "notes.md")"
 
 	echo "Note for $identifier. $name at $PATHTONOTE" \
 		&& neovide "$PATHTONOTE"

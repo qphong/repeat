@@ -12,8 +12,8 @@
   "15": {
     "identifier": "15",
     "tags": [
-      "two-pointers",
-      "M"
+      "M",
+      "two-pointers"
     ],
     "content": {
       "name": "3sum"
@@ -22,8 +22,8 @@
   "1932": {
     "identifier": "1932",
     "tags": [
-      "tree",
-      "H"
+      "H",
+      "tree"
     ],
     "content": {
       "name": "merge-bsts-to-create-single-bst"
@@ -32,8 +32,8 @@
   "72": {
     "identifier": "72",
     "tags": [
-      "H-",
-      "dynamic-programming"
+      "dynamic-programming",
+      "H-"
     ],
     "content": {
       "name": "edit-distance"
@@ -42,8 +42,8 @@
   "360": {
     "identifier": "360",
     "tags": [
-      "two-pointers",
-      "M"
+      "M",
+      "two-pointers"
     ],
     "content": {
       "name": "sort-transformed-array"
@@ -107,6 +107,16 @@
     ],
     "content": {
       "name": "sort-colors"
+    }
+  },
+  "402": {
+    "identifier": "402",
+    "tags": [
+      "H-",
+      "stack"
+    ],
+    "content": {
+      "name": "remove-k-digits"
     }
   }
 }

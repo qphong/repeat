@@ -161,9 +161,9 @@ def get_readable_info(
     if constants.LABEL_PASS_PCT in extra_info:
         if info_dict["n_study"] > 0:
             if "pass" in emphasis:
-                string += f"  {constants.STYLE_BOLD}({info_dict['n_pass']}:{info_dict['n_pass'] / info_dict['n_study'] * 100:.0f}%P){constants.STYLE_ENDC}"
+                string += f"  {constants.STYLE_BOLD}({info_dict['n_study']}:{info_dict['n_pass'] / info_dict['n_study'] * 100:.0f}%P){constants.STYLE_ENDC}"
             else:
-                string += f"  ({info_dict['n_pass']}:{info_dict['n_pass'] / info_dict['n_study'] * 100:.0f}%P)"
+                string += f"  ({info_dict['n_study']}:{info_dict['n_pass'] / info_dict['n_study'] * 100:.0f}%P)"
 
     if constants.LABEL_DURATION in extra_info:
         if info_dict["duration"] > 0:
