@@ -25,6 +25,7 @@
 - [[#vy-leetcodes-with-spaced-repetition][Vy Leetcodes with Spaced-Repetition]]
 - [[#requirements][Requirements]]
 - [[#usage][Usage]]
+  - [[#a-note-on-the-experimental-commands-vy-list-competency-and-vy-suggest][A note on the experimental commands: =vy-list-competency= and =vy-suggest=]]
 - [[#demo][Demo]]
 
 * Vy Leetcodes with Spaced-Repetition
@@ -67,10 +68,14 @@ In the =leetcode-scripts= direction, run
 | =vy-list-studying=         | list pending problems                                                      |
 | =vy-list-duration=         | list solved problems by time spent solving                                 |
 | =vy-list-recent-study=     | list solved problems by the most recent attempt                            |
+| =vy-list-competency=       | list solved problems by based on how compentent the learner is             |
 | =vy-add-tag {tag}=         | add a tag to a problem                                                     |
 | =vy-remove-tag {tag}=      | remove a tag from a problem                                                |
 | =vy-suggest=               | suggest some solved problems for reviews (using the Leitner system)        |
 |----------------------------+----------------------------------------------------------------------------|
+
+** A note on the experimental commands: =vy-list-competency= and =vy-suggest=
+=vy-list-competency= lists problems based on how competent the learner is about solving it. This competency is measured by the BOX property, shown as B:x. The large the BOX is, the higher the competency is, following the Leitner system. Note that the competency takes into the time since the last seeing the problem. Thus, it seems to be incorrect at first (as the model has not interacted with the learner a lot). For the model to correctly learn the level of competency, run =vy-suggest= and start solving problem that you are not confident; or skip the problem that you are confident. This is a way that the model interacts with the learner to learn about the level of competency.
 
 * Demo
 [[https://youtu.be/eiihUy-vjZI][Youtube demo]]
