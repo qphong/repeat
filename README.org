@@ -26,6 +26,7 @@
 - [[#requirements][Requirements]]
 - [[#usage][Usage]]
 - [[#demo][Demo]]
+- [[#an-extension-of-leitner-system][An Extension of Leitner System]]
 
 * Vy Leetcodes with Spaced-Repetition
 Vy has recently familiarized herself with the computer keyboard and is now tackling some Leetcode problems. However, she frequently struggles to recall the problems she has solved before. Consequently, she requires assistance from a management system.
@@ -70,3 +71,6 @@ In the =leetcode-scripts= direction, run
 
 * Demo
 [[repeat.mp4][A simple demo]]
+
+* An Extension of Leitner System
+[[time-leitner.png][An Extension of Leitner System]]
