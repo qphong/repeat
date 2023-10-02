@@ -71,5 +71,4 @@ In the =leetcode-scripts= direction, run
 |----------------------------+----------------------------------------------------------------------------|
 
 * Demo
-[[repeat.mp4][A simple demo]]
-
+[[https://youtu.be/eiihUy-vjZI][Youtube demo]]
