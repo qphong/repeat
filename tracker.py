@@ -201,7 +201,13 @@ class Tracker:
             # increase box of self.time_aware_tracker_data[key] to 0 for all key <= at_key by 1
             for key in self.time_aware_tracker_data:
                 if key <= at_key:
-                    self.time_aware_tracker_data[key]["box"] += 1
+                    upper_key = self.get_upper_key(key)
+                    if upper_key:
+                        self.time_aware_tracker_data[key]["box"] = (
+                            self.time_aware_tracker_data[upper_key]["box"] + 1
+                        )
+                    else:
+                        self.time_aware_tracker_data[key]["box"] += 1
 
         elif status == constants.FAIL:
             tracker_data["n_fail"] += 1
@@ -212,6 +218,16 @@ class Tracker:
         else:
             raise Exception(f"Unknown status: {status}")
 
+    def get_upper_key(self, at_key):
+        if at_key not in self.time_aware_tracker_data:
+            upper_key = None
+            for key in self.time_aware_tracker_data:
+                if key > at_key:
+                    upper_key = min(upper_key, key) if upper_key else key
+
+            return upper_key
+        return at_key
+
     def get_assessing_box(
         self, at_time=None, transformation=constants.DEFAULT_BOX_TRANSFORMATION
     ):
@@ -220,24 +236,13 @@ class Tracker:
             at_time = util.get_now_epoch()
         at_key = self.get_tracker_data_key(at_time)
 
-        upper_key = at_key
-        # lower_key = -1
-
         if at_key not in self.time_aware_tracker_data:
-            for key in self.time_aware_tracker_data:
-                if key > at_key:
-                    upper_key = min(upper_key, key)
-                # else:
-                    # lower_key = max(lower_key, key)
+            upper_key = self.get_upper_key(at_key)
 
-            if upper_key in self.time_aware_tracker_data:
+            if upper_key:
                 return transformation(
                     at_key, self.time_aware_tracker_data[upper_key]["box"]
                 )
-            # elif lower_key in self.time_aware_tracker_data:
-                # return transformation(
-                    # at_key, self.time_aware_tracker_data[lower_key]["box"]
-                # )
             else:
                 return 0
 

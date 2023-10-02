@@ -12,8 +12,8 @@
   "15": {
     "identifier": "15",
     "tags": [
-      "two-pointers",
-      "M"
+      "M",
+      "two-pointers"
     ],
     "content": {
       "name": "3sum"
@@ -42,8 +42,8 @@
   "360": {
     "identifier": "360",
     "tags": [
-      "two-pointers",
-      "M"
+      "M",
+      "two-pointers"
     ],
     "content": {
       "name": "sort-transformed-array"
@@ -52,8 +52,8 @@
   "26": {
     "identifier": "26",
     "tags": [
-      "two-pointers",
-      "H-"
+      "H-",
+      "two-pointers"
     ],
     "content": {
       "name": "remove-duplicates-from-sorted-array"
@@ -62,8 +62,8 @@
   "409": {
     "identifier": "409",
     "tags": [
-      "hash-map",
-      "M"
+      "M",
+      "hash-map"
     ],
     "content": {
       "name": "longest-palindrome"
@@ -112,8 +112,8 @@
   "402": {
     "identifier": "402",
     "tags": [
-      "stack",
-      "H-"
+      "H-",
+      "stack"
     ],
     "content": {
       "name": "remove-k-digits"

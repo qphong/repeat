@@ -22,6 +22,7 @@ STATES = [STATE_STUDYING, STATE_NEW, STATE_STUDIED]
 INVALID_DURATION = -1
 
 DEFAULT_BOX_TRANSFORMATION = lambda at_time, box: box + 1.0 * math.exp(-at_time)
+IDENTITY_BOX_TRANSFORMATION = lambda at_time, box: box
 
 LABEL_COMPETENCY = "competency"
 LABEL_TAG = "tag"
