@@ -30,12 +30,12 @@
 * Vy Leetcodes with Spaced-Repetition
 Vy has recently familiarized herself with the computer keyboard and is now tackling some Leetcode problems. However, she frequently struggles to recall the problems she has solved before. Consequently, she requires assistance from a management system.
 
-This approach involves keeping track of several parameters related the learning and [[time-leitner.png][an experimental basic version of the Leitner system, enhanced by incorporating time-awareness]]. In other words, it utilizes distinct Leitner systems tailored for various time intervals. To reduce it the classic Leitner system, set the constant (in =constants.py=) =TRACKER_DEFAULT_INTERVAL= to a large value such as =SECS_DAY(1000000)=.
+This approach involves keeping track of several parameters related the learning and [[time-leitner.png][an experimental basic version of the Leitner system, enhanced by incorporating time-awareness]] ([[https://en.wikipedia.org/wiki/Leitner_system][classic Leitner system]]). In other words, it utilizes distinct Leitner systems tailored for various time intervals. To reduce it the classic Leitner system, set the constant (in =constants.py=) =TRACKER_DEFAULT_INTERVAL= to a large value such as =SECS_DAY(1000000)=.
 
 The project is implemented in Python which is easily hackable by Leetcode users. It can be used for studying other subjects than solving Leetcode problems.
 
 * Requirements
-The Python implementation does not require any additional packages. However, to use the leetcode-scripts, it requires =Neovide= (a text editor) and =fzf= (a fuzzy search) to quickly browser problems.
+The Python implementation does not require any additional packages. However, to use the leetcode-scripts, it requires [[https://neovide.dev/][=Neovide=]] (a text editor, you can change it to your favorite editor) to edit the code and [[https://github.com/junegunn/fzf][=fzf=]] (a fuzzy search) to quickly browser problems.
 
 * Usage
 A study item (a Leetcode problem) has 3 states: new (haven't attempted), studying (currently solving: the command =vy-start= is issued but neither =vy-complete= nor =vy-cancel= is issued), and studied (was attempted before, regarding whether we solved it, i.e., pass or fail).
@@ -46,6 +46,8 @@ Relevant directories:
 + Study results are stored in =subjects/sbj-leetcode/study/=
 + Added problems are stored in =subject/sbj-leetcode/item/item.json=
 + Parameters related to the learning are stored in =subject/sbj-leetcode/tracker/tracker.json=
++ =problem-lists.txt= contains problem titles and some tags. It is to simplify the process of adding a new problem.
+I downloaded that file from some github repo long time ago that, unfortunately, I cannot remember where it comes from. You can change the =problem-lists.txt= to your own problem lists.
 
 In the =leetcode-scripts= direction, run
 |----------------------------+----------------------------------------------------------------------------|
