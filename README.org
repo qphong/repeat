@@ -38,7 +38,7 @@ The project is implemented in Python which is easily hackable by Leetcode users.
 The Python implementation does not require any additional packages. However, to use the leetcode-scripts, it requires =Neovide= (a text editor) and =fzf= (a fuzzy search) to quickly browser problems.
 
 * Usage
-A study item (a Leetcode problem) has 3 states: new (haven't attempted), studying (currently solving: the command =vy-start= is issued by neither =vy-complete= nor =vy-cancel= is issued), and studied (was attempted before, regarding whether we solved it, i.e., pass, or not, i.e., fail).
+A study item (a Leetcode problem) has 3 states: new (haven't attempted), studying (currently solving: the command =vy-start= is issued but neither =vy-complete= nor =vy-cancel= is issued), and studied (was attempted before, regarding whether we solved it, i.e., pass or fail).
 
 All commands can be skipped with ESC.
 
