@@ -199,15 +199,17 @@ class Tracker:
         if status == constants.PASS:
             tracker_data["n_pass"] += 1
             # increase box of self.time_aware_tracker_data[key] to 0 for all key <= at_key by 1
+            upper_key = self.get_upper_key(at_key)
+            if upper_key:
+                current_box = self.time_aware_tracker_data[upper_key]["box"]
+            else:
+                current_box = self.time_aware_tracker_data[at_key]["box"]
+
             for key in self.time_aware_tracker_data:
                 if key <= at_key:
-                    upper_key = self.get_upper_key(key)
-                    if upper_key:
-                        self.time_aware_tracker_data[key]["box"] = (
-                            self.time_aware_tracker_data[upper_key]["box"] + 1
-                        )
-                    else:
-                        self.time_aware_tracker_data[key]["box"] += 1
+                    self.time_aware_tracker_data[key]["box"] = max(
+                        current_box + 1, self.time_aware_tracker_data[key]["box"]
+                    )
 
         elif status == constants.FAIL:
             tracker_data["n_fail"] += 1

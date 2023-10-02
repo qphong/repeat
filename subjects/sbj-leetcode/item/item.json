@@ -2,8 +2,8 @@
   "3": {
     "identifier": "3",
     "tags": [
-      "two-pointers",
-      "E+"
+      "E+",
+      "two-pointers"
     ],
     "content": {
       "name": "longest-substring-without-repeating-character"
@@ -32,8 +32,8 @@
   "72": {
     "identifier": "72",
     "tags": [
-      "dynamic-programming",
-      "H-"
+      "H-",
+      "dynamic-programming"
     ],
     "content": {
       "name": "edit-distance"
@@ -62,8 +62,8 @@
   "409": {
     "identifier": "409",
     "tags": [
-      "M",
-      "hash-map"
+      "hash-map",
+      "M"
     ],
     "content": {
       "name": "longest-palindrome"
@@ -82,8 +82,8 @@
   "141": {
     "identifier": "141",
     "tags": [
-      "two-pointers",
-      "E+"
+      "E+",
+      "two-pointers"
     ],
     "content": {
       "name": "linked-list-cycle"
