@@ -1,6 +1,5 @@
 #!/bin/bash
-# states, tags, by, direction
-# default: list by number of studies, newest first
+# list problems based on how recently we solved them
 TAGS="all"
 
 while getopts ":s:t:b:d:" opt; do

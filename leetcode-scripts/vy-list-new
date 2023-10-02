@@ -1,5 +1,5 @@
 #!/bin/bash
-# states, tags, by, direction
+# list new problems only (haven't attempted)
 TAGS="all"
 BY="view"
 DIRECTION="inc"

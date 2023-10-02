@@ -1,5 +1,4 @@
 #!/bin/bash
-# states, tags, by, direction
 TAGS="all"
 BY="view"
 DIRECTION="inc"

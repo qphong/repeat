@@ -1,6 +1,5 @@
 #!/bin/bash
-# states, tags, by, direction
-# default: list by number of studies, newest first
+# list by the total amount of time we spent on a problem
 STATES="studied,studying"
 TAGS="all"
 BY="duration"
