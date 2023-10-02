@@ -232,11 +232,11 @@ class Tracker:
 
             if upper_key in self.time_aware_tracker_data:
                 return transformation(
-                    upper_key, self.time_aware_tracker_data[upper_key]["box"]
+                    at_key, self.time_aware_tracker_data[upper_key]["box"]
                 )
             elif lower_key in self.time_aware_tracker_data:
                 return transformation(
-                    lower_key, self.time_aware_tracker_data[lower_key]["box"]
+                    at_key, self.time_aware_tracker_data[lower_key]["box"]
                 )
             else:
                 return 0
