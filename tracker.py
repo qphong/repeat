@@ -221,23 +221,23 @@ class Tracker:
         at_key = self.get_tracker_data_key(at_time)
 
         upper_key = at_key
-        lower_key = -1
+        # lower_key = -1
 
         if at_key not in self.time_aware_tracker_data:
             for key in self.time_aware_tracker_data:
                 if key > at_key:
                     upper_key = min(upper_key, key)
-                else:
-                    lower_key = max(lower_key, key)
+                # else:
+                    # lower_key = max(lower_key, key)
 
             if upper_key in self.time_aware_tracker_data:
                 return transformation(
                     at_key, self.time_aware_tracker_data[upper_key]["box"]
                 )
-            elif lower_key in self.time_aware_tracker_data:
-                return transformation(
-                    at_key, self.time_aware_tracker_data[lower_key]["box"]
-                )
+            # elif lower_key in self.time_aware_tracker_data:
+                # return transformation(
+                    # at_key, self.time_aware_tracker_data[lower_key]["box"]
+                # )
             else:
                 return 0
 
