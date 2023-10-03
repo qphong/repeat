@@ -1,6 +1,10 @@
 #!/bin/bash
 # states, tags, by, direction
 # default: list by number of studies, newest first
+
+BASEDIR=$(dirname $0)
+source "${BASEDIR}"/vy-config
+
 STATES="all"
 TAGS="all"
 BY="view"
@@ -22,5 +26,5 @@ while getopts ":s:t:b:d:" opt; do
   esac
 done
 
-echo -e "$(python ../main.py --subject leetcode -c list --states $STATES --tags $TAGS --by $BY --direction $DIRECTION)" | fzf --ansi
+echo -e "$(python ../main.py --subject $SUBJECT -c list --states $STATES --tags $TAGS --by $BY --direction $DIRECTION)" | fzf --ansi
 

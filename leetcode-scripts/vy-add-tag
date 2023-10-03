@@ -1,19 +1,22 @@
 #!/bin/sh
 
+BASEDIR=$(dirname $0)
+source "${BASEDIR}"/vy-config
+
 if [ "$#" = 0 ]
 then
 	echo "Require tags"
 	exit
 fi
 
-item="$(echo -e "$(python ../main.py --subject leetcode -c list --by recent --direction dec)" | fzf --ansi)"
+ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --by recent --direction dec)" | fzf --ansi)"
 
-identifier="$(echo "$item" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
-name="$(echo "$item" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
+IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
+NAME="$(echo "$ITEM" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
 
-if [ "$item" != "" ]
+if [ "$ITEM" != "" ]
 then
-	echo "Add tags: $1 to: $identifier. $name"
-	python ../main.py --subject leetcode -c add_tag -i "$identifier" --tags "$1"
+	echo "Add tags: $1 to: $IDENTIFIER ($NAME)"
+	python ../main.py --subject $SUBJECT -c add_tag -i "$IDENTIFIER" --tags "$1"
 fi
 

@@ -1,5 +1,8 @@
 #!/bin/bash
 # list new problems only (haven't attempted)
+BASEDIR=$(dirname $0)
+source "${BASEDIR}"/vy-config
+
 TAGS="all"
 BY="view"
 DIRECTION="inc"
@@ -18,5 +21,5 @@ while getopts ":t:b:d:" opt; do
   esac
 done
 
-echo -e "$(python ../main.py --subject leetcode -c list --states new --tags $TAGS --by $BY --direction $DIRECTION)" | fzf --ansi
+echo -e "$(python ../main.py --subject $SUBJECT -c list --states new --tags $TAGS --by $BY --direction $DIRECTION)" | fzf --ansi
 

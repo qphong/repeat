@@ -1,21 +1,24 @@
 #!/bin/sh
 
-item="$(echo -e "$(python ../main.py --subject leetcode -c list --states studying)" | fzf --ansi)"
+BASEDIR=$(dirname $0)
+source "${BASEDIR}"/vy-config
 
-if [[ "$item" == "" ]]
+ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --states studying)" | fzf --ansi)"
+
+if [[ "$ITEM" == "" ]]
 then
 	echo "Nothing to cancel"
 	exit 0
 fi
 
-identifier="$(echo "$item" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
-name="$(echo "$item" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
+IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
+NAME="$(echo "$ITEM" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
 
-yesno="$(echo -e "yes\nno" | fzf --ansi --prompt "Cancel studying $identifier($name)? ")"
+yesno="$(echo -e "yes\nno" | fzf --ansi --prompt "Cancel studying $IDENTIFIER ($NAME)? ")"
 
-if [[ "$item" != "" && "$yesno" == "yes" ]]
+if [[ "$ITEM" != "" && "$yesno" == "yes" ]]
 then
-	echo "Cancel studying $identifier. $name"
- 	python ../main.py --subject leetcode -c cancel -i "$identifier"
+	echo "Cancel studying $IDENTIFIER ($NAME)"
+ 	python ../main.py --subject $SUBJECT -c cancel -i "$IDENTIFIER"
 fi
 

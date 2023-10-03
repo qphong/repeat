@@ -1,28 +1,30 @@
 #!/bin/sh
+BASEDIR=$(dirname $0)
+source "${BASEDIR}"/vy-config
 
-tag="$(echo -e "$(python ../main.py --subject leetcode -c list_tag --states studied)" | fzf --ansi | awk -F ':' '{print $1}')"
+tag="$(echo -e "$(python ../main.py --subject $SUBJECT -c list_tag --states studied)" | fzf --ansi | awk -F ':' '{print $1}')"
 
-item="$(python ../main.py --subject leetcode -c review --tags "$tag" --states studied)"
+ITEM="$(python ../main.py --subject $SUBJECT -c review --tags "$tag" --states studied)"
 
-identifier="$(echo "$item" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
-name="$(echo "$item" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
+IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
+NAME="$(echo "$ITEM" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
 
-if [ "$item" != "" ]
+if [ "$ITEM" != "" ]
 then
-	action="$(echo -e "Sure, let's do it now!\nNah, it's too easy, skip it for now!" | fzf --ansi --prompt "Review [$identifier]\"$name\" by solving it again? ")"
+	action="$(echo -e "Sure, let's do it now!\nNah, it's too easy, skip it for now!" | fzf --ansi --prompt "Review $IDENTIFIER ($NAME) by solving it again? ")"
 
 	if [ "$action" == "Sure, let's do it now!" ]
 	then
-	PATHTOCODE="$(python ../main.py --subject leetcode -c get_file -i "$identifier" --postfix "code.py")"
+	PATHTOCODE="$(python ../main.py --subject $SUBJECT -c get_file -i "$IDENTIFIER" --postfix "code.py")"
 
-	python ../main.py --subject leetcode -c start -i "$identifier" \
-		&& echo "# $identifier. $name" >> $PATHTOCODE \
-		&& echo "Start coding $identifier($name) at $PATHTOCODE" \
-		&& neovide "$PATHTOCODE"
+	python ../main.py --subject $SUBJECT -c start -i "$IDENTIFIER" \
+		&& echo "# $IDENTIFIER ($NAME)" >> $PATHTOCODE \
+		&& echo "Start coding $IDENTIFIER ($NAME) at $PATHTOCODE" \
+		&& $EDITOR "$PATHTOCODE"
 
 	else
-		python ../main.py --subject leetcode -c start -i "$identifier" \
-			&& python ../main.py --subject leetcode -c end -i "$identifier" --passfail pass
+		python ../main.py --subject $SUBJECT -c start -i "$IDENTIFIER" \
+			&& python ../main.py --subject $SUBJECT -c end -i "$IDENTIFIER" --passfail pass
 	fi
 
 else

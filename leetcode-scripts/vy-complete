@@ -1,17 +1,20 @@
 #!/bin/sh
 
-item="$(echo -e "$(python ../main.py --subject leetcode -c list --states studying)" | fzf --ansi)"
+BASEDIR=$(dirname $0)
+source "${BASEDIR}"/vy-config
 
-identifier="$(echo "$item" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
-name="$(echo "$item" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
+ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --states studying)" | fzf --ansi)"
 
-if [[ "$item" != "" ]]
+IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
+NAME="$(echo "$ITEM" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
+
+if [[ "$ITEM" != "" ]]
 then
 	passfail="$(echo -e "pass\nfail" | fzf --ansi)"
 	if [[ "$passfail" != "" ]]
 	then
-		echo "$passfail $identifier ($name)"
-		python ../main.py --subject leetcode -c end -i "$identifier" --passfail $passfail
+		echo "$passfail $IDENTIFIER ($NAME)"
+		python ../main.py --subject $SUBJECT -c end -i "$IDENTIFIER" --passfail $passfail
 	fi
 fi
 

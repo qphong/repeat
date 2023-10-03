@@ -1,14 +1,17 @@
 #!/bin/sh
 
-probleminfo="$(cat "problem-lists.txt" | fzf)"
+BASEDIR=$(dirname $0)
+source "${BASEDIR}"/vy-config
 
-ID="$(echo -e "$probleminfo" | awk '{print $1}')"
-PROBLEM="$(echo -e "$probleminfo" | awk '{print $2}')"
-TAGS="$(echo -e "$probleminfo" | awk '{print $3}')"
+PROBLEMINFO="$(cat "problem-lists.txt" | fzf)"
+
+ID="$(echo -e "$PROBLEMINFO" | awk '{print $1}')"
+PROBLEM="$(echo -e "$PROBLEMINFO" | awk '{print $2}')"
+TAGS="$(echo -e "$PROBLEMINFO" | awk '{print $3}')"
 
 if [ "$PROBLEM" != "" ]
 then
 	echo "Add $ID ($PROBLEM)"
-	python ../main.py --subject leetcode -c add --identifier $ID --name $PROBLEM --tags $TAGS
+	python ../main.py --subject $SUBJECT -c add --identifier $ID --name $PROBLEM --tags $TAGS
 fi
 

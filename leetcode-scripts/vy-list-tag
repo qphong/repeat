@@ -1,3 +1,5 @@
 #!/bin/bash
+BASEDIR=$(dirname $0)
+source "${BASEDIR}"/vy-config
 
-echo -e "$(python ../main.py --subject leetcode -c list_state_by_tag --states new,studied,studying)" | fzf --ansi
+echo -e "$(python ../main.py --subject $SUBJECT -c list_state_by_tag --states new,studied,studying)" | fzf --ansi

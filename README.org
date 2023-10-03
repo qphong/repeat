@@ -36,7 +36,7 @@ This approach involves keeping track of several parameters related the learning 
 The project is implemented in Python which is easily hackable by Leetcode users. It can be used for studying other subjects than solving Leetcode problems.
 
 * Requirements
-The Python implementation does not require any additional packages. However, to use the leetcode-scripts, it requires [[https://neovide.dev/][=Neovide=]] (a text editor, you can change it to your favorite editor) to edit the code and [[https://github.com/junegunn/fzf][=fzf=]] (a fuzzy search) to quickly browser problems.
+The Python implementation does not require any additional packages. However, to use the leetcode-scripts, it requires neovim (a text editor, you can change it to your favorite editor) to edit the code and [[https://github.com/junegunn/fzf][=fzf=]] (a fuzzy search) to quickly browser problems.
 
 * Usage
 A study item (a Leetcode problem) has 3 states: new (haven't attempted), studying (currently solving: the command =vy-start= is issued but neither =vy-complete= nor =vy-cancel= is issued), and studied (was attempted before, regarding whether we solved it, i.e., pass or fail).
@@ -56,7 +56,7 @@ In the =leetcode-scripts= direction, run
 |----------------------------+----------------------------------------------------------------------------|
 | =vy-learn-leetcode=        | initializing the leetcode project by generating necessary directories      |
 | =vy-add=                   | add a problem to solve from =problem-lists.txt=                            |
-| =vy-start=                 | select a problem to start coding with =Neovide=                            |
+| =vy-start=                 | select a problem to start coding with nvim                                 |
 | =vy-start -i {problem_id}= | same as =vy-add= but with provided =problem_id=                            |
 | =vy-end=                   | complete a problem with result (if successfully or not in solving problem) |
 | =vy-cancel=                | cancel solving a problem                                                   |

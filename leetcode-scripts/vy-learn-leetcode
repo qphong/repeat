@@ -1,7 +1,8 @@
 #!/bin/sh
 
-subject="leetcode"
+BASEDIR=$(dirname $0)
+source "${BASEDIR}"/vy-config
 
 # create leetcode subject in case it does not exist
-python ../main.py --subject $subject -c add_subject
+python ../main.py --subject $SUBJECT -c add_subject
 

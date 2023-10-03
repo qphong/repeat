@@ -1,0 +1,4 @@
+#!/bin/sh
+
+SUBJECT=leetcode
+EDITOR=/usr/bin/nvim

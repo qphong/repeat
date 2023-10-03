@@ -1,4 +1,7 @@
 #!/bin/bash
+BASEDIR=$(dirname $0)
+source "${BASEDIR}"/vy-config
+
 TAGS="all"
 BY="view"
 DIRECTION="inc"
@@ -17,5 +20,5 @@ while getopts ":s:t:b:d:" opt; do
   esac
 done
 
-echo -e "$(python ../main.py --subject leetcode -c list --states studying --tags $TAGS --by $BY --direction $DIRECTION)" | fzf --ansi
+echo -e "$(python ../main.py --subject $SUBJECT -c list --states studying --tags $TAGS --by $BY --direction $DIRECTION)" | fzf --ansi
 

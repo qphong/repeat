@@ -1,10 +1,12 @@
 #!/bin/sh
+BASEDIR=$(dirname $0)
+source "${BASEDIR}"/vy-config
 
-identifier=""
+IDENTIFIER=""
 
 while getopts ":i:" opt; do
   case $opt in
-    i) identifier="$OPTARG"
+    i) IDENTIFIER="$OPTARG"
     ;;
     \?) echo "Invalid option -$OPTARG" >&2
     exit 1
@@ -13,24 +15,24 @@ while getopts ":i:" opt; do
 done
 
 
-if [ "$identifier" != "" ]
+if [ "$IDENTIFIER" != "" ]
 then
-	name="$(python ../main.py --subject leetcode -c get_name -i "$identifier")"
-	if [[ "$name" == "##_not_exist_##" ]]
+	NAME="$(python ../main.py --subject $SUBJECT -c get_name -i "$IDENTIFIER")"
+	if [[ "$NAME" == "##_not_exist_##" ]]
 	then
-		echo "$identifier does not exist!"
+		echo "$IDENTIFIER does not exist!"
 		exit 1
 	fi
 
-	yesno="$(echo -e "yes\nno" | fzf --ansi --prompt "Add notes to $identifier($name)? ")"
+	yesno="$(echo -e "yes\nno" | fzf --ansi --prompt "Add notes to $IDENTIFIER($NAME)? ")"
 
 	if [[ "$yesno" == "yes" ]]
 	then
-		PATHTOCODE="$(python ../main.py --subject leetcode -c get_file -i "$identifier" --postfix "code.py")"
+		PATHTOCODE="$(python ../main.py --subject $SUBJECT -c get_file -i "$IDENTIFIER" --postfix "code.py")"
 
-		python ../main.py --subject leetcode -c start -i "$identifier" \
-			&& echo "Start coding $identifier. $name at $PATHTOCODE" \
-			&& neovide "$PATHTOCODE"
+		python ../main.py --subject $SUBJECT -c start -i "$IDENTIFIER" \
+			&& echo "Start coding $IDENTIFIER ($NAME) at $PATHTOCODE" \
+			&& $EDITOR "$PATHTOCODE"
 	fi
 
 	exit 0
@@ -38,16 +40,16 @@ fi
 
 
 
-item="$(echo -e "$(python ../main.py --subject leetcode -c list --by recent --direction inc)" | fzf --ansi)"
+ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --by recent --direction inc)" | fzf --ansi)"
 
-identifier="$(echo "$item" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
-name="$(echo "$item" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
+IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
+NAME="$(echo "$ITEM" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
 
-if [ "$item" != "" ]
+if [ "$ITEM" != "" ]
 then
-	PATHTONOTE="$(python ../main.py --subject leetcode -c get_file -i "$identifier" --postfix "notes.md")"
+	PATHTONOTE="$(python ../main.py --subject $SUBJECT -c get_file -i "$IDENTIFIER" --postfix "notes.md")"
 
-	echo "Note for $identifier. $name at $PATHTONOTE" \
-		&& neovide "$PATHTONOTE"
+	echo "Note for $IDENTIFIER ($NAME) at $PATHTONOTE" \
+		&& $EDITOR "$PATHTONOTE"
 fi
 

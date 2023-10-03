@@ -1,5 +1,9 @@
 #!/bin/bash
 # list by the total amount of time we spent on a problem
+
+BASEDIR=$(dirname $0)
+source "${BASEDIR}"/vy-config
+
 STATES="studied,studying"
 TAGS="all"
 BY="duration"
@@ -17,5 +21,5 @@ while getopts ":s:t:b:d:" opt; do
   esac
 done
 
-echo -e "$(python ../main.py --subject leetcode -c list --states $STATES --tags $TAGS --by $BY --direction $DIRECTION)" | fzf --ansi
+echo -e "$(python ../main.py --subject $SUBJECT -c list --states $STATES --tags $TAGS --by $BY --direction $DIRECTION)" | fzf --ansi
 
