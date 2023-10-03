@@ -26,16 +26,26 @@ IDENTITY_BOX_TRANSFORMATION = lambda at_time, box: box
 
 LABEL_COMPETENCY = "competency"
 LABEL_TAG = "tag"
+LABEL_CONTENT = "content"
 LABEL_STATE = "state"
 LABEL_PASS_PCT = "pass_percentage"
+LABEL_SINCE = "since"
 LABEL_DURATION = "duration"
-EXTRA_INFO = [LABEL_TAG, LABEL_STATE, LABEL_COMPETENCY, LABEL_PASS_PCT, LABEL_DURATION]
+EXTRA_INFO = [
+    LABEL_CONTENT,
+    LABEL_TAG,
+    LABEL_STATE,
+    LABEL_SINCE,
+    LABEL_COMPETENCY,
+    LABEL_PASS_PCT,
+    LABEL_DURATION,
+]
 
 DEFAULT_NUMBER_OF_SUGGESTION = 1
 
 
 BY_TO_PROPERTY = {
-    "pass": "n_pass",  # total n_pass
+    "pass": "pass_pct",  # total n_pass
     "competency": "competency",  # time-aware box
     "view": "n_study",  # n_study
     "recent": "since_last_start_study",  # since last start
@@ -45,49 +55,53 @@ BY_TO_PROPERTY = {
 BY_TO_INFO_SHOW = {
     "pass": {
         "show": [
-            LABEL_TAG,
-            LABEL_STATE,
             LABEL_PASS_PCT,
-            LABEL_DURATION,
+            LABEL_STATE,
+            LABEL_CONTENT,
+            LABEL_TAG,
+            LABEL_SINCE,
         ],
-        "emphasis": [],
+        "emphasis": [LABEL_PASS_PCT],
     },  # total n_pass
     "competency": {
         "show": [
-            LABEL_TAG,
-            LABEL_STATE,
             LABEL_COMPETENCY,
-            LABEL_DURATION,
+            LABEL_STATE,
+            LABEL_CONTENT,
+            LABEL_TAG,
+            LABEL_SINCE,
         ],
-        "emphasis": [],
+        "emphasis": [LABEL_COMPETENCY],
     },  # time-aware box
     "view": {
         "show": [
-            LABEL_TAG,
-            LABEL_STATE,
-            LABEL_COMPETENCY,
             LABEL_PASS_PCT,
-            LABEL_DURATION,
+            LABEL_STATE,
+            LABEL_CONTENT,
+            LABEL_TAG,
+            LABEL_SINCE,
         ],
-        "emphasis": [],
+        "emphasis": [LABEL_PASS_PCT],
     },  # n_study
     "recent": {
         "show": [
-            LABEL_TAG,
+            LABEL_SINCE,
             LABEL_STATE,
+            LABEL_CONTENT,
+            LABEL_TAG,
             LABEL_PASS_PCT,
-            LABEL_DURATION,
         ],
-        "emphasis": [],
+        "emphasis": [LABEL_SINCE],
     },  # since last start
     "duration": {
         "show": [
-            LABEL_TAG,
-            LABEL_STATE,
-            LABEL_PASS_PCT,
             LABEL_DURATION,
+            LABEL_STATE,
+            LABEL_CONTENT,
+            LABEL_TAG,
+            LABEL_PASS_PCT,
         ],
-        "emphasis": [],
+        "emphasis": [LABEL_DURATION],
     },  # total duration
 }
 
@@ -104,4 +118,3 @@ STYLE_ENDC = "\033[0m"
 
 BOLD_TEXT = lambda string: f"{STYLE_BOLD}{string}{STYLE_ENDC}"
 UNDERLINE_TEXT = lambda string: f"{STYLE_UNDERLINE}{string}{STYLE_ENDC}"
-

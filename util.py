@@ -56,6 +56,10 @@ def parse_args(config, arguments, required):
 def get_info(identifier, item, tracker):
     state = tracker.get_state()
     box = tracker.get_assessing_box(transformation=constants.DEFAULT_BOX_TRANSFORMATION)
+    n_pass = tracker.get_overall_n_pass()
+    n_fail = tracker.get_overall_n_fail()
+    n_study = n_pass + n_fail
+    duration = tracker.get_overall_duration()
 
     info = {
         "identifier": identifier,
@@ -63,10 +67,11 @@ def get_info(identifier, item, tracker):
         "tags": list(item.tags),
         "state": state,
         "competency": box,
-        "n_pass": tracker.get_overall_n_pass(),
-        "n_fail": tracker.get_overall_n_fail(),
-        "n_study": tracker.get_overall_n_study(),
-        "duration": tracker.get_overall_duration(),
+        "n_pass": n_pass,
+        "n_fail": n_fail,
+        "n_study": n_study,
+        "pass_pct": float(n_pass) / n_study if n_study > 0 else 0.0,
+        "duration": duration,
     }
 
     since_last_end_study = tracker.get_duration_since_last_end_study()
@@ -107,9 +112,9 @@ def get_readable_state(state, style=False):
         return f"_state_"
 
     if state == constants.STATE_NEW:
-        return f"{constants.STYLE_WARNING}_{constants.STYLE_UNDERLINE}{state}_{constants.STYLE_ENDC}"
+        return f"{constants.STYLE_WARNING}_{state}_{constants.STYLE_ENDC}"
     elif state == constants.STATE_STUDYING:
-        return f"{constants.STYLE_FAIL}_{constants.STYLE_UNDERLINE}{state}_{constants.STYLE_ENDC}"
+        return f"{constants.STYLE_FAIL}_{state}_{constants.STYLE_ENDC}"
 
     return state
 
@@ -126,77 +131,118 @@ def get_readable_info(
     ],
     emphasis=[],
 ):
+    info_to_func = {
+        constants.LABEL_CONTENT: lambda info_dict, emphasis: show_content(
+            info_dict, content_fields, emphasis
+        ),
+        constants.LABEL_STATE: show_state,
+        constants.LABEL_SINCE: show_since,
+        constants.LABEL_PASS_PCT: show_passpct,
+        constants.LABEL_DURATION: show_duration,
+        constants.LABEL_TAG: show_tag,
+        constants.LABEL_COMPETENCY: show_competency,
+    }
+
     # info_dict is returned from get_info function
     string = f"[{info_dict['identifier']:6s}]"
 
-    for field in content_fields:
-        string += f" \"{info_dict['content'][field]}\""
-
-    if constants.LABEL_STATE in extra_info:
-        if info_dict["state"] != constants.STATE_STUDIED:
-            state_str = get_readable_state(info_dict["state"], style=True)
-
-            string += f" {state_str}"
-
-        if (
-            "since_last_start_study" in info_dict
-            and info_dict["since_last_start_study"] < constants.INF
-        ):
-            duration_str = (
-                f"({get_readable_duration(info_dict['since_last_start_study'])} ago)"
-            )
-
-            if "recent" in emphasis:
-                string += f"  {constants.BOLD_TEXT(duration_str)}"
-            else:
-                string += f"  {duration_str}"
-
-        elif (
-            "since_last_end_study" in info_dict
-            and info_dict["since_last_end_study"] < constants.INF
-        ):
-            duration_str = (
-                f"({get_readable_duration(info_dict['since_last_end_study'])} ago)"
-            )
-            if "recent" in emphasis:
-                string += f"  {constants.BOLD_TEXT(duration_str)}"
-            else:
-                string += f"  {duration_str}"
-
-    if constants.LABEL_PASS_PCT in extra_info:
-        if info_dict["n_study"] > 0:
-            pass_str = f"({info_dict['n_study']}:{info_dict['n_pass'] / info_dict['n_study'] * 100:.0f}%P)"
-
-            if "pass" in emphasis:
-                string += f"  {constants.BOLD_TEXT(pass_str)}"
-            else:
-                string += f"  {pass_str}"
-
-    if constants.LABEL_DURATION in extra_info:
-        if info_dict["duration"] > 0:
-            study_duration = f"(T:{get_readable_duration(info_dict['duration'])})"
-
-            if "duration" in emphasis:
-                string += f"  {constants.BOLD_TEXT(study_duration)}"
-            else:
-                string += f"  {study_duration}"
-
-    if constants.LABEL_TAG in extra_info:
-        string += "  :"
-        for i, tag in enumerate(info_dict["tags"]):
-            tag_str = get_readable_tag(tag, style=True)
-            string += tag_str + (":" if i < len(info_dict["tags"]) - 1 else "")
-        string += ":"
-
-    if constants.LABEL_COMPETENCY in extra_info:
-        competency_str = f"B:{int(info_dict['competency'])}"
-
-        if "competency" in emphasis:
-            string += f"  {constants.BOLD_TEXT(competency_str)}"
-        else:
-            string += f"  {competency_str}"
+    for info in extra_info:
+        string += f" {info_to_func[info](info_dict, info in emphasis)}"
 
     return string
+
+
+def show_content(info_dict, fields, emphasis=False):
+    string = '"'
+
+    for i, field in enumerate(fields):
+        string += f"{info_dict['content'][field]}"
+        if i > 0:
+            string += "|"
+
+    string += '"'
+
+    return string
+
+
+def show_state(info_dict, emphasis=False):
+    state_str = ""
+
+    if info_dict["state"] != constants.STATE_STUDIED:
+        state_str = get_readable_state(info_dict["state"], style=True)
+
+    if emphasis:
+        return constants.BOLD_TEXT(state_str)
+    return state_str
+
+
+def show_since(info_dict, emphasis=False):
+    since_str = ""
+
+    if (
+        "since_last_start_study" in info_dict
+        and info_dict["since_last_start_study"] < constants.INF
+    ):
+        since_str = (
+            f"{get_readable_duration(info_dict['since_last_start_study']):>7s} ago"
+        )
+
+    elif (
+        "since_last_end_study" in info_dict
+        and info_dict["since_last_end_study"] < constants.INF
+    ):
+        since_str = (
+            f"{get_readable_duration(info_dict['since_last_end_study']):>7s} ago"
+        )
+
+    if emphasis:
+        return constants.BOLD_TEXT(since_str)
+    return since_str
+
+
+def show_passpct(info_dict, emphasis=False):
+    pass_str = ""
+
+    # if info_dict["n_study"] > 0:
+    # pass_str = f"({info_dict['n_study']}:{info_dict['n_pass'] / info_dict['n_study'] * 100:.0f}%P)"
+    # pass_str = f"{info_dict['n_pass']:3d}/{info_dict['n_study']:<3d}"
+
+    pass_str = f"{info_dict['n_pass']:3d}/{info_dict['n_study']:<3d}"
+
+    if emphasis:
+        return constants.BOLD_TEXT(pass_str)
+    return pass_str
+
+
+def show_duration(info_dict, emphasis=False):
+    study_duration_str = ""
+
+    if info_dict["duration"] > 0:
+        study_duration_str = f"in {get_readable_duration(info_dict['duration']):<7s}"
+
+    if emphasis:
+        return constants.BOLD_TEXT(study_duration_str)
+    return study_duration_str
+
+
+def show_tag(info_dict, emphasis=False):
+    string = ":"
+    for i, tag in enumerate(info_dict["tags"]):
+        tag_str = get_readable_tag(tag, style=True)
+        string += tag_str + (":" if i < len(info_dict["tags"]) - 1 else "")
+    string += ":"
+
+    if emphasis:
+        return constants.BOLD_TEXT(string)
+    return string
+
+
+def show_competency(info_dict, emphasis=False):
+    competency_str = f"B:{int(info_dict['competency']):<2d}"
+
+    if emphasis:
+        return constants.BOLD_TEXT(competency_str)
+    return competency_str
 
 
 def get_readable_duration(duration):
