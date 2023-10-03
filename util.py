@@ -184,7 +184,7 @@ def show_since(info_dict, emphasis=False):
         and info_dict["since_last_start_study"] < constants.INF
     ):
         since_str = (
-            f"{get_readable_duration(info_dict['since_last_start_study']):>7s} ago"
+            f"{get_readable_duration(info_dict['since_last_start_study'])} ago"
         )
 
     elif (
@@ -192,12 +192,12 @@ def show_since(info_dict, emphasis=False):
         and info_dict["since_last_end_study"] < constants.INF
     ):
         since_str = (
-            f"{get_readable_duration(info_dict['since_last_end_study']):>7s} ago"
+            f"{get_readable_duration(info_dict['since_last_end_study'])} ago"
         )
 
     if emphasis:
-        return constants.BOLD_TEXT(since_str)
-    return since_str
+        return f"{constants.BOLD_TEXT(since_str):<11s}"
+    return f"{constants.UNDERLINE_TEXT(since_str):<11s}"
 
 
 def show_passpct(info_dict, emphasis=False):

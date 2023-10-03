@@ -12,8 +12,8 @@
   "15": {
     "identifier": "15",
     "tags": [
-      "two-pointers",
-      "M"
+      "M",
+      "two-pointers"
     ],
     "content": {
       "name": "3sum"
@@ -22,8 +22,8 @@
   "1932": {
     "identifier": "1932",
     "tags": [
-      "H",
-      "tree"
+      "tree",
+      "H"
     ],
     "content": {
       "name": "merge-bsts-to-create-single-bst"
@@ -42,8 +42,8 @@
   "360": {
     "identifier": "360",
     "tags": [
-      "two-pointers",
-      "M"
+      "M",
+      "two-pointers"
     ],
     "content": {
       "name": "sort-transformed-array"
@@ -62,8 +62,8 @@
   "409": {
     "identifier": "409",
     "tags": [
-      "hash-map",
-      "M"
+      "M",
+      "hash-map"
     ],
     "content": {
       "name": "longest-palindrome"
@@ -72,8 +72,8 @@
   "11": {
     "identifier": "11",
     "tags": [
-      "two-pointers",
-      "M+"
+      "M+",
+      "two-pointers"
     ],
     "content": {
       "name": "container-with-most-water"
@@ -92,8 +92,8 @@
   "76": {
     "identifier": "76",
     "tags": [
-      "two-pointers",
-      "M+"
+      "M+",
+      "two-pointers"
     ],
     "content": {
       "name": "minimum-window-substring"
@@ -102,8 +102,8 @@
   "75": {
     "identifier": "75",
     "tags": [
-      "two-pointers",
-      "M+"
+      "M+",
+      "two-pointers"
     ],
     "content": {
       "name": "sort-colors"
@@ -112,8 +112,8 @@
   "402": {
     "identifier": "402",
     "tags": [
-      "H-",
-      "stack"
+      "stack",
+      "H-"
     ],
     "content": {
       "name": "remove-k-digits"
