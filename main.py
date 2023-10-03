@@ -126,14 +126,8 @@ elif command == "list":
         readable_info = util.get_readable_info(
             info_dict,
             content_fields=["name"],
-            extra_info=[
-                constants.LABEL_TAG,
-                constants.LABEL_STATE,
-                constants.LABEL_COMPETENCY,
-                constants.LABEL_PASS_PCT,
-                constants.LABEL_DURATION,
-            ],
-            emphasis=[by]
+            extra_info= constants.BY_TO_INFO_SHOW[by]["show"],
+            emphasis=constants.BY_TO_INFO_SHOW[by]["emphasis"]
         )
         print(readable_info)
 

@@ -42,14 +42,66 @@ BY_TO_PROPERTY = {
     "duration": "duration",  # total duration
 }
 
+BY_TO_INFO_SHOW = {
+    "pass": {
+        "show": [
+            LABEL_TAG,
+            LABEL_STATE,
+            LABEL_PASS_PCT,
+            LABEL_DURATION,
+        ],
+        "emphasis": [],
+    },  # total n_pass
+    "competency": {
+        "show": [
+            LABEL_TAG,
+            LABEL_STATE,
+            LABEL_COMPETENCY,
+            LABEL_DURATION,
+        ],
+        "emphasis": [],
+    },  # time-aware box
+    "view": {
+        "show": [
+            LABEL_TAG,
+            LABEL_STATE,
+            LABEL_COMPETENCY,
+            LABEL_PASS_PCT,
+            LABEL_DURATION,
+        ],
+        "emphasis": [],
+    },  # n_study
+    "recent": {
+        "show": [
+            LABEL_TAG,
+            LABEL_STATE,
+            LABEL_PASS_PCT,
+            LABEL_DURATION,
+        ],
+        "emphasis": [],
+    },  # since last start
+    "duration": {
+        "show": [
+            LABEL_TAG,
+            LABEL_STATE,
+            LABEL_PASS_PCT,
+            LABEL_DURATION,
+        ],
+        "emphasis": [],
+    },  # total duration
+}
 
-STYLE_HEADER = '\033[95m'
-STYLE_OKBLUE = '\033[94m'
-STYLE_OKCYAN = '\033[96m'
-STYLE_OKGREEN = '\033[92m'
-STYLE_WARNING = '\033[93m'
-STYLE_FAIL = '\033[91m'
-STYLE_BOLD = '\033[1m'
-STYLE_UNDERLINE = '\033[4m'
-STYLE_ENDC = '\033[0m'
+
+STYLE_HEADER = "\033[95m"
+STYLE_OKBLUE = "\033[94m"
+STYLE_OKCYAN = "\033[96m"
+STYLE_OKGREEN = "\033[92m"
+STYLE_WARNING = "\033[93m"
+STYLE_FAIL = "\033[91m"
+STYLE_BOLD = "\033[1m"
+STYLE_UNDERLINE = "\033[4m"
+STYLE_ENDC = "\033[0m"
+
+BOLD_TEXT = lambda string: f"{STYLE_BOLD}{string}{STYLE_ENDC}"
+UNDERLINE_TEXT = lambda string: f"{STYLE_UNDERLINE}{string}{STYLE_ENDC}"
 
