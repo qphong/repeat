@@ -116,12 +116,14 @@ e.g., below are screenshots of
 [[images/list-recent.png]]
 
 ** Tag
-|-----------------------+-----------------------------|
-| Command               | Description                 |
-|-----------------------+-----------------------------|
-| =vy-add-tag {tag}=    | add a tag to a problem      |
-| =vy-remove-tag {tag}= | remove a tag from a problem |
-|-----------------------+-----------------------------|
+|--------------------------------------------------------------+--------------------------------------------|
+| Command                                                      | Description                                |
+|--------------------------------------------------------------+--------------------------------------------|
+| =vy-add-tag -t {tags_separated_by_comma}=                    | add tags to a problem                      |
+| =vy-add-tag -t {tags_separated_by_comma} -i {problem_id}=    | add tags to a problem with problem_id      |
+| =vy-remove-tag -t {tags_separated_by_comma}=                 | remove tags from a problem                 |
+| =vy-remove-tag -t {tags_separated_by_comma} -i {problem_id}= | remove tags from a problem with problem_id |
+|--------------------------------------------------------------+--------------------------------------------|
 
 ** Review a problem
 |-------------------------+---------------------------------------------------------------------------------------------------|

@@ -62,8 +62,8 @@
   "409": {
     "identifier": "409",
     "tags": [
-      "M",
-      "hash-map"
+      "hash-map",
+      "M"
     ],
     "content": {
       "name": "longest-palindrome"
@@ -112,8 +112,8 @@
   "402": {
     "identifier": "402",
     "tags": [
-      "H-",
-      "stack"
+      "stack",
+      "H-"
     ],
     "content": {
       "name": "remove-k-digits"

@@ -1,11 +1,48 @@
-#!/bin/sh
+#!/bin/bash
+
 BASEDIR=$(dirname $0)
 source "${BASEDIR}"/vy-config
 
-if [ "$#" = 0 ]
+IDENTIFIER=""
+TAGS=""
+
+while getopts ":i:t:" opt; do
+  case $opt in
+    i) IDENTIFIER="$OPTARG"
+    ;;
+    t) TAGS="$OPTARG"
+    ;;
+    \?) echo "Invalid option -$OPTARG" >&2
+    exit 1
+    ;;
+  esac
+done
+
+if [ "$TAGS" == "" ]
 then
-	echo "Require tags"
-	exit
+	echo "Require tag -t"
+	exit 1
+fi
+
+if [ "$IDENTIFIER" != "" ]
+then
+	NAME="$(python ../main.py --subject $SUBJECT -c get_name -i "$IDENTIFIER")"
+
+	if [[ "$NAME" == "##_not_exist_##" ]]
+	then
+		echo "$IDENTIFIER does not exist!"
+		exit 1
+	fi
+
+	yesno="$(echo -e "yes\nno" | fzf --ansi --prompt "Remove tags $TAGS from $IDENTIFIER ($NAME)? ")"
+
+	if [[ "$yesno" == "yes" ]]
+	then
+		echo "Remove tags: $TAGS from: $IDENTIFIER ($NAME)"
+		python ../main.py --subject $SUBJECT -c remove_tag -i "$IDENTIFIER" --tags $TAGS
+	fi
+
+	exit 0
 fi
 
 ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --by recent --direction dec)" | fzf --ansi)"
@@ -15,7 +52,7 @@ NAME="$(echo "$ITEM" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 
 
 if [ "$ITEM" != "" ]
 then
-	echo "Remove tags: $1 to: $IDENTIFIER ($NAME)"
-	python ../main.py --subject $SUBJECT -c remove_tag -i "$IDENTIFIER" --tags "$1"
+	echo "Remove tags: $TAGS to: $IDENTIFIER ($NAME)"
+	python ../main.py --subject $SUBJECT -c remove_tag -i "$IDENTIFIER" --tags "$TAGS"
 fi
 

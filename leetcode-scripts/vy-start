@@ -18,6 +18,7 @@ done
 if [ "$IDENTIFIER" != "" ]
 then
 	NAME="$(python ../main.py --subject $SUBJECT -c get_name -i "$IDENTIFIER")"
+
 	if [[ "$NAME" == "##_not_exist_##" ]]
 	then
 		echo "$IDENTIFIER does not exist!"
