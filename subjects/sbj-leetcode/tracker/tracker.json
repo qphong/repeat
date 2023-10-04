@@ -538,18 +538,6 @@
     "prev_end_study_time": 1e+16,
     "state": "studied"
   },
-  "16": {
-    "identifier": "16",
-    "time_aware_tracker_data": {},
-    "interval": 86400.0,
-    "oldest_epoch": 5184000.0,
-    "max_tracker_data_key": 60,
-    "start_study_time": -1e+16,
-    "end_study_time": 1e+16,
-    "prev_start_study_time": -1e+16,
-    "prev_end_study_time": 1e+16,
-    "state": "new"
-  },
   "532": {
     "identifier": "532",
     "time_aware_tracker_data": {},

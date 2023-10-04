@@ -20,6 +20,7 @@ parser.add_argument(
         "list_subjects",
         "list",  # subject, states, tags, by, direction
         "add",  # subject, identifier, name, tags
+        "remove",  # subject, identifier
         "get_file",  # subject, identifier, postifx
         "get_name",  # subject, identifier
         "list_file",  # list all postfix # subject, identifier
@@ -98,6 +99,17 @@ elif command == "add":
     manager = Manager(subject)
     manager.load()
     manager.add(identifier, tags, {"name": name})
+    manager.save()
+
+elif command == "remove":
+    # subject, identifier
+    subject, identifier = util.parse_args(
+        config, ["subject", "identifier"], [True, True]
+    )
+
+    manager = Manager(subject)
+    manager.load()
+    manager.remove_item_by_identifier(identifier)
     manager.save()
 
 elif command == "list":

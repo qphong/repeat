@@ -72,6 +72,10 @@ class Manager:
     def get_n_item(self):
         return len(self.item_tracker_data)
 
+    def remove_item_by_identifier(self, identifier):
+        self.remove_tags(identifier, self.item_tracker_data[identifier]["item"].tags)
+        del self.item_tracker_data[identifier]
+
     def remove_tags_from_identifier(self, identifier, tags):
         if identifier not in self.item_tracker_data:
             print(f"{identifier} does not exist!")
@@ -106,6 +110,14 @@ class Manager:
 
             self.tags.add(tag)
             self.identifier_by_tag[tag].add(identifier)
+
+    def remove_tags(self, identifier, tags):
+        # do not modify tags of item
+        for tag in tags:
+            self.identifier_by_tag[tag].remove(identifier)
+            if len(self.identifier_by_tag[tag]) == 0:
+                del self.identifier_by_tag[tag]
+                self.tags.remove(tag)
 
     def add_tags(self, identifier, tags):
         # do not modify tags of item
