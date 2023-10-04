@@ -31,7 +31,6 @@
   - [[#tag][Tag]]
   - [[#review-a-problem][Review a problem]]
   - [[#a-note-on-the-experimental-commands-vy-list-competency-and-vy-suggest-competency][A note on the experimental commands: =vy-list-competency= and =vy-suggest-competency=]]
-- [[#demo][Demo]]
 
 * Vy Leetcodes with Spaced-Repetition
 Vy has recently familiarized herself with the computer keyboard and is now tackling some Leetcode problems. However, she frequently struggles to recall the problems she has solved before. Consequently, she requires assistance from a management system.
@@ -43,7 +42,7 @@ This approach involves keeping track of several parameters related the learning 
 The project is implemented in Python which is easily hackable by Leetcode users. It can be used for studying other subjects than solving Leetcode problems.
 
 * Requirements
-The Python implementation does not require any additional packages. However, to use the leetcode-scripts, it requires neovim (a text editor, you can change it to your favorite editor) to edit the code and [[https://github.com/junegunn/fzf][=fzf=]] (a fuzzy search) to quickly browser problems.
+The Python implementation does not require any additional packages. However, to use the leetcode-scripts, it requires neovim (a text editor, you can change it to your favorite editor in =leetcode-scripts/vy-config=) to edit the code and [[https://github.com/junegunn/fzf][=fzf=]] (a fuzzy search) to quickly browser problems.
 
 * Usage
 A study item (a Leetcode problem) has 3 states: new (haven't attempted), studying (currently solving: the command =vy-start= is issued but neither =vy-complete= nor =vy-cancel= is issued), and studied (was attempted before, regarding whether we solved it, i.e., pass or fail).
@@ -66,17 +65,20 @@ In the =leetcode-scripts= direction, run
 | =vy-add=            | add a problem to solve from =problem-lists.txt=                       |
 |---------------------+-----------------------------------------------------------------------|
 
+e.g., below is the following screenshot of =vy-add=
+[[images/add-problem.png]]
+
 ** Solving a problem
-|----------------------------+----------------------------------------------------------------------------|
-| Command                    | Description                                                                |
-|----------------------------+----------------------------------------------------------------------------|
-| =vy-start=                 | select a problem to start coding with nvim                                 |
-| =vy-start -i {problem_id}= | same as =vy-add= but with provided =problem_id=                            |
-| =vy-end=                   | complete a problem with result (if successfully or not in solving problem) |
-| =vy-cancel=                | cancel solving a problem                                                   |
-| =vy-note=                  | select a problem to add a note (or retrieve previous note)                 |
-| =vy-note -i {problem_i}=   | same as =vy-note=, but with a provided =problem_id=                        |
-|----------------------------+----------------------------------------------------------------------------|
+|----------------------------+--------------------------------------------------------------------------------------------------------|
+| Command                    | Description                                                                                            |
+|----------------------------+--------------------------------------------------------------------------------------------------------|
+| =vy-start=                 | select a problem to start coding with =nvim= (change to another editor in =leetcode-scripts/vy-config= |
+| =vy-start -i {problem_id}= | same as =vy-add= but with provided =problem_id=                                                        |
+| =vy-end=                   | complete a problem with result (if successfully or not in solving problem)                             |
+| =vy-cancel=                | cancel solving a problem                                                                               |
+| =vy-note=                  | select a problem to add a note (or retrieve previous note)                                             |
+| =vy-note -i {problem_i}=   | same as =vy-note=, but with a provided =problem_id=                                                    |
+|----------------------------+--------------------------------------------------------------------------------------------------------|
 
 ** List problems
 |------------------------+----------------------------------------------------------------------------|
@@ -91,6 +93,9 @@ In the =leetcode-scripts= direction, run
 | =vy-list-competency=   | list solved problems by based on how compentent the learner is             |
 |------------------------+----------------------------------------------------------------------------|
 
+e.g., below is the screenshot of =vy-list-recent=
+[[images/list-recent.png]]
+
 ** Tag
 |-----------------------+-----------------------------|
 | Command               | Description                 |
@@ -100,17 +105,14 @@ In the =leetcode-scripts= direction, run
 |-----------------------+-----------------------------|
 
 ** Review a problem
-|-------------------------+-------------------------------------------------------------------------------------------------------|
-| Command                 | Description                                                                                           |
-|-------------------------+-------------------------------------------------------------------------------------------------------|
-| =vy-suggest-competency= | suggest some solved problems for reviews (based on the Leitner system)                                |
-| =vy-suggest-duration=   | suggest some solved problems for reviews (based on the amount of time spent on the problem            |
-| =vy-suggest-pass=       | suggest some solved problems for reviews (based on the percentage of successfully solving the problem |
-| =vy-suggest-recent=     | suggest some solved problems for reviews (based on how recent the problem is solved)                  |
-|-------------------------+-------------------------------------------------------------------------------------------------------|
+|-------------------------+---------------------------------------------------------------------------------------------------|
+| Command                 | Description                                                                                       |
+|-------------------------+---------------------------------------------------------------------------------------------------|
+| =vy-suggest-competency= | suggest a solved problem for reviews (based on the Leitner system)                                |
+| =vy-suggest-duration=   | suggest a solved problem for reviews (based on the amount of time spent on the problem            |
+| =vy-suggest-pass=       | suggest a solved problem for reviews (based on the percentage of successfully solving the problem |
+| =vy-suggest-recent=     | suggest a solved problem for reviews (based on how recent the problem is solved)                  |
+|-------------------------+---------------------------------------------------------------------------------------------------|
 
 ** A note on the experimental commands: =vy-list-competency= and =vy-suggest-competency=
 =vy-list-competency= lists problems based on how competent the learner is about solving it. This competency is measured by the BOX property, shown as B:x. The large the BOX is, the higher the competency is, following the Leitner system. Note that the competency takes into the time since the last seeing the problem. Thus, it seems to be incorrect at first (as the model has not interacted with the learner a lot). For the model to correctly learn the level of competency, run =vy-suggest-competency= and start solving problem that you are not confident; or skip the problem that you are confident. This is a way that the model interacts with the learner to learn about the level of competency.
-
-* Demo
-[[https://youtu.be/eiihUy-vjZI][Youtube demo]]
