@@ -25,13 +25,20 @@
 - [[#vy-leetcodes-with-spaced-repetition][Vy Leetcodes with Spaced-Repetition]]
 - [[#requirements][Requirements]]
 - [[#usage][Usage]]
-  - [[#a-note-on-the-experimental-commands-vy-list-competency-and-vy-suggest][A note on the experimental commands: =vy-list-competency= and =vy-suggest=]]
+  - [[#initialization][Initialization]]
+  - [[#solving-a-problem][Solving a problem]]
+  - [[#list-problems][List problems]]
+  - [[#tag][Tag]]
+  - [[#review-a-problem][Review a problem]]
+  - [[#a-note-on-the-experimental-commands-vy-list-competency-and-vy-suggest-competency][A note on the experimental commands: =vy-list-competency= and =vy-suggest-competency=]]
 - [[#demo][Demo]]
 
 * Vy Leetcodes with Spaced-Repetition
 Vy has recently familiarized herself with the computer keyboard and is now tackling some Leetcode problems. However, she frequently struggles to recall the problems she has solved before. Consequently, she requires assistance from a management system.
 
-This approach involves keeping track of several parameters related the learning and [[time-leitner.png][an experimental basic version of the Leitner system, enhanced by incorporating time-awareness]] ([[https://en.wikipedia.org/wiki/Leitner_system][classic Leitner system]]). In other words, it utilizes distinct Leitner systems tailored for various time intervals. To reduce it the classic Leitner system, set the constant (in =constants.py=) =TRACKER_DEFAULT_INTERVAL= to a large value such as =SECS_DAY(1000000)=.
+This approach involves keeping track of several parameters related the learning and an experimental basic version of the Leitner system, enhanced by incorporating time-awareness ([[https://en.wikipedia.org/wiki/Leitner_system][classic Leitner system]]). In other words, it utilizes distinct Leitner systems tailored for various time intervals. To reduce it the classic Leitner system, set the constant (in =constants.py=) =TRACKER_DEFAULT_INTERVAL= to a large value such as =SECS_DAY(1000000)=.
+
+[[images/time-leitner.png]]
 
 The project is implemented in Python which is easily hackable by Leetcode users. It can be used for studying other subjects than solving Leetcode problems.
 
@@ -50,32 +57,60 @@ Relevant directories:
 + =problem-lists.txt= contains problem titles and some tags. It is to simplify the process of adding a new problem.
 I downloaded that file from some github repo long time ago that, unfortunately, I cannot remember where it comes from. You can change the =problem-lists.txt= to your own problem lists.
 
+** Initialization
 In the =leetcode-scripts= direction, run
+|---------------------+-----------------------------------------------------------------------|
+| Command             | Description                                                           |
+|---------------------+-----------------------------------------------------------------------|
+| =vy-learn-leetcode= | initializing the leetcode project by generating necessary directories |
+| =vy-add=            | add a problem to solve from =problem-lists.txt=                       |
+|---------------------+-----------------------------------------------------------------------|
+
+** Solving a problem
 |----------------------------+----------------------------------------------------------------------------|
 | Command                    | Description                                                                |
 |----------------------------+----------------------------------------------------------------------------|
-| =vy-learn-leetcode=        | initializing the leetcode project by generating necessary directories      |
-| =vy-add=                   | add a problem to solve from =problem-lists.txt=                            |
 | =vy-start=                 | select a problem to start coding with nvim                                 |
 | =vy-start -i {problem_id}= | same as =vy-add= but with provided =problem_id=                            |
 | =vy-end=                   | complete a problem with result (if successfully or not in solving problem) |
 | =vy-cancel=                | cancel solving a problem                                                   |
 | =vy-note=                  | select a problem to add a note (or retrieve previous note)                 |
 | =vy-note -i {problem_i}=   | same as =vy-note=, but with a provided =problem_id=                        |
-| =vy-list=                  | list added problems                                                        |
-| =vy-list-new=              | list added, but not attempted, problems                                    |
-| =vy-list-pass=             | list solved problems by # of successfully solving the problem              |
-| =vy-list-studying=         | list pending problems                                                      |
-| =vy-list-duration=         | list solved problems by time spent solving                                 |
-| =vy-list-recent-study=     | list solved problems by the most recent attempt                            |
-| =vy-list-competency=       | list solved problems by based on how compentent the learner is             |
-| =vy-add-tag {tag}=         | add a tag to a problem                                                     |
-| =vy-remove-tag {tag}=      | remove a tag from a problem                                                |
-| =vy-suggest=               | suggest some solved problems for reviews (using the Leitner system)        |
 |----------------------------+----------------------------------------------------------------------------|
 
-** A note on the experimental commands: =vy-list-competency= and =vy-suggest=
-=vy-list-competency= lists problems based on how competent the learner is about solving it. This competency is measured by the BOX property, shown as B:x. The large the BOX is, the higher the competency is, following the Leitner system. Note that the competency takes into the time since the last seeing the problem. Thus, it seems to be incorrect at first (as the model has not interacted with the learner a lot). For the model to correctly learn the level of competency, run =vy-suggest= and start solving problem that you are not confident; or skip the problem that you are confident. This is a way that the model interacts with the learner to learn about the level of competency.
+** List problems
+|------------------------+----------------------------------------------------------------------------|
+| Command                | Description                                                                |
+|------------------------+----------------------------------------------------------------------------|
+| =vy-list=              | list added problems                                                        |
+| =vy-list-new=          | list added, but not attempted, problems                                    |
+| =vy-list-pass=         | list solved problems by the percentage of successfully solving the problem |
+| =vy-list-studying=     | list pending problems                                                      |
+| =vy-list-duration=     | list solved problems by time spent solving                                 |
+| =vy-list-recent-study= | list solved problems by the most recent attempt                            |
+| =vy-list-competency=   | list solved problems by based on how compentent the learner is             |
+|------------------------+----------------------------------------------------------------------------|
+
+** Tag
+|-----------------------+-----------------------------|
+| Command               | Description                 |
+|-----------------------+-----------------------------|
+| =vy-add-tag {tag}=    | add a tag to a problem      |
+| =vy-remove-tag {tag}= | remove a tag from a problem |
+|-----------------------+-----------------------------|
+
+** Review a problem
+|-------------------------+-------------------------------------------------------------------------------------------------------|
+| Command                 | Description                                                                                           |
+|-------------------------+-------------------------------------------------------------------------------------------------------|
+| =vy-suggest-competency= | suggest some solved problems for reviews (based on the Leitner system)                                |
+| =vy-suggest-duration=   | suggest some solved problems for reviews (based on the amount of time spent on the problem            |
+| =vy-suggest-pass=       | suggest some solved problems for reviews (based on the percentage of successfully solving the problem |
+| =vy-suggest-recent=     | suggest some solved problems for reviews (based on how recent the problem is solved)                  |
+|-------------------------+-------------------------------------------------------------------------------------------------------|
+
+** A note on the experimental commands: =vy-list-competency= and =vy-suggest-competency=
+=vy-list-competency= lists problems based on how competent the learner is about solving it. This competency is measured by the BOX property, shown as B:x. The large the BOX is, the higher the competency is, following the Leitner system. Note that the competency takes into the time since the last seeing the problem. Thus, it seems to be incorrect at first (as the model has not interacted with the learner a lot). For the model to correctly learn the level of competency, run =vy-suggest-competency= and start solving problem that you are not confident; or skip the problem that you are confident. This is a way that the model interacts with the learner to learn about the level of competency.
 
 * Demo
 [[https://youtu.be/eiihUy-vjZI][Youtube demo]]
