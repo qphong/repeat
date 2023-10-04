@@ -57,6 +57,7 @@ Relevant directories:
 I downloaded that file from some github repo long time ago that, unfortunately, I cannot remember where it comes from. You can change the =problem-lists.txt= to your own problem lists.
 
 ** Initialization
+Remove everything in the directory =subjects/= to start the study anew.
 In the =leetcode-scripts= direction, run
 |---------------------+-----------------------------------------------------------------------|
 | Command             | Description                                                           |
