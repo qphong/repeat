@@ -92,7 +92,7 @@ Below are screenshots of =vy-start=. It first lists all tags with the number of 
 [[images/start-problem-tag.png]]
 Then, we can choose a tag to list problems in that tags. We can list all problems in all tags by pressing ESC.
 [[images/start-problem.png]]
-Then, we can search for a problem in this list to start. The program will open a python script with a unique name for that problem.
+Then, we can search for a problem in this list to start. The program will open a python script with a unique name for that problem. If the state of a problem is =_studying_=, it means we continue the problem we started before. Note that if the state of a problem is =_studied_=, we do not show its state. Starting a =_studied_= problem will open the script containing the solution that we coded before.
 
 ** List problems
 |------------------------+----------------------------------------------------------------------------|
