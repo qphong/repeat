@@ -45,7 +45,6 @@ The project is implemented in Python which is easily hackable by Leetcode users.
 The Python implementation does not require any additional packages. However, to use the leetcode-scripts, it requires neovim (a text editor, you can change it to your favorite editor in =leetcode-scripts/vy-config=) to edit the code and [[https://github.com/junegunn/fzf][=fzf=]] (a fuzzy search) to quickly browser problems.
 
 * Usage
-A study item (a Leetcode problem) has 3 states: new (haven't attempted), studying (currently solving: the command =vy-start= is issued but neither =vy-complete= nor =vy-cancel= is issued), and studied (was attempted before, regardless we solved it, i.e., pass or fail).
 
 All commands can be skipped with ESC.
 
@@ -70,16 +69,24 @@ e.g., below is the following screenshot of =vy-add=
 [[images/add-problem.png]]
 
 ** Solving a problem
-|----------------------------+--------------------------------------------------------------------------------------------------------|
-| Command                    | Description                                                                                            |
-|----------------------------+--------------------------------------------------------------------------------------------------------|
-| =vy-start=                 | select a problem to start coding with =nvim= (change to another editor in =leetcode-scripts/vy-config= |
-| =vy-start -i {problem_id}= | same as =vy-add= but with provided =problem_id=                                                        |
-| =vy-end=                   | complete a problem with result (if successfully or not in solving problem)                             |
-| =vy-cancel=                | cancel solving a problem                                                                               |
-| =vy-note=                  | select a problem to add a note (or retrieve previous note)                                             |
-| =vy-note -i {problem_i}=   | same as =vy-note=, but with a provided =problem_id=                                                    |
-|----------------------------+--------------------------------------------------------------------------------------------------------|
+
+A study item (a Leetcode problem) has 3 states: (1) new (haven't attempted), (2) studying (currently solving), and (3) studied (was attempted before, regardless we solved it, i.e., pass or fail). The transitions between these states are as follows.
+
++ =vy-add= ---[new]---> =vy-start= ---[studying]---> =vy-complete= (regardless pass, i.e., we solved it by ourself like in an interview, or fail, i.e., we looked at the solution, asked someone)---[studied]
++ =vy-add= ---[new]---> =vy-start= ---[studying]---> =vy-cancel= ---[new]
++ [studied]---> =vy-start= ---[studying]---> =vy-complete= / =vy-cancel= ---[studied]
++ [studied]---> =vy-review-xxx= ---[studying]---> =vy-complete= / =vy-cancel= ---[studied]
+
+|----------------------------+--------------------------------------------------------------------------------------------------------------------------------|
+| Command                    | Description                                                                                                                    |
+|----------------------------+--------------------------------------------------------------------------------------------------------------------------------|
+| =vy-start=                 | select a problem to start coding with =nvim= (change to another editor in =leetcode-scripts/vy-config=). The program automatically creates a python script with a unique name (based on the problem id) in =subjects/sbj-leetcode/study=, and opens it with a text editor (default is =nvim=). If we start the same problem with =vy-start=, the same file is opened, so the program helps us manage the python scripts of all solved problems. |
+| =vy-start -i {problem_id}= | same as =vy-add= but with provided =problem_id=                                                                                |
+| =vy-end=                   | complete a problem with result: pass (we solved it by ourself, like in an interview), fail (we looked at the solution, or we asked someone) |
+| =vy-cancel=                | cancel solving a problem                                                                                                       |
+| =vy-note=                  | select a problem to add a note (or retrieve previous note). It is similar to =vy-start=. A markdown file with a unique name (based on the problem id) is created in =subjects/sbj-leetcode/study=. |
+| =vy-note -i {problem_i}=   | same as =vy-note=, but with a provided =problem_id=                                                                            |
+|----------------------------+--------------------------------------------------------------------------------------------------------------------------------|
 
 ** List problems
 |------------------------+----------------------------------------------------------------------------|
@@ -114,7 +121,7 @@ e.g., below are screenshots of
 |-------------------------+---------------------------------------------------------------------------------------------------|
 | Command                 | Description                                                                                       |
 |-------------------------+---------------------------------------------------------------------------------------------------|
-| =vy-suggest-competency= | suggest a solved problem for reviews (based on the Leitner system)                                |
+| =vy-suggest-competency= | suggest a solved problem for reviews (based on the Leitner system). If the user decides to review the problem, the program runs =vy-start=. |
 | =vy-suggest-duration=   | suggest a solved problem for reviews (based on the amount of time spent on the problem            |
 | =vy-suggest-pass=       | suggest a solved problem for reviews (based on the percentage of successfully solving the problem |
 | =vy-suggest-recent=     | suggest a solved problem for reviews (based on how recent the problem is solved)                  |
