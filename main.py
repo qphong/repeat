@@ -188,6 +188,7 @@ elif command == "review":
             info_dict,
             content_fields=["name"],
             extra_info=[
+                constants.LABEL_CONTENT,
                 constants.LABEL_TAG,
                 constants.LABEL_STATE,
                 constants.LABEL_COMPETENCY,

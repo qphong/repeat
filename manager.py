@@ -261,7 +261,10 @@ class Manager:
 
         if len(assessing_boxes) == 0:
             return []
+        return Manager.get_randomized_box(k, assessing_boxes, next_box_prob)
 
+    @staticmethod
+    def get_randomized_box(k, assessing_boxes, next_box_prob):
         suggested_identifiers = []
         sorted_boxes = sorted(list(assessing_boxes.keys()))
 

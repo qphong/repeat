@@ -7,7 +7,7 @@ tag="$(echo -e "$(python ../main.py --subject $SUBJECT -c list_tag --states stud
 ITEM="$(python ../main.py --subject $SUBJECT -c review --tags "$tag" --states studied)"
 
 IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
-NAME="$(echo "$ITEM" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
+NAME="$(echo "$ITEM" | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
 
 if [ "$ITEM" != "" ]
 then
@@ -18,7 +18,6 @@ then
 	PATHTOCODE="$(python ../main.py --subject $SUBJECT -c get_file -i "$IDENTIFIER" --postfix "code.py")"
 
 	python ../main.py --subject $SUBJECT -c start -i "$IDENTIFIER" \
-		&& echo "# $IDENTIFIER ($NAME)" >> $PATHTOCODE \
 		&& echo "Start coding $IDENTIFIER ($NAME) at $PATHTOCODE" \
 		&& $EDITOR "$PATHTOCODE"
 
