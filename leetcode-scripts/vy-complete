@@ -3,14 +3,14 @@
 BASEDIR=$(dirname $0)
 source "${BASEDIR}"/vy-config
 
-ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --states studying)" | fzf --ansi)"
+ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --states studying)" | fzf --cycle --ansi)"
 
 IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
 NAME="$(echo "$ITEM" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
 
 if [[ "$ITEM" != "" ]]
 then
-	passfail="$(echo -e "pass\nfail" | fzf --ansi)"
+	passfail="$(echo -e "pass\nfail" | fzf --cycle --ansi)"
 	if [[ "$passfail" != "" ]]
 	then
 		echo "$passfail $IDENTIFIER ($NAME)"

@@ -3,7 +3,7 @@
 BASEDIR=$(dirname $0)
 source "${BASEDIR}"/vy-config
 
-PROBLEMINFO="$(cat "problem-lists.txt" | fzf)"
+PROBLEMINFO="$(cat "problem-lists.txt" | fzf --cycle)"
 
 ID="$(echo -e "$PROBLEMINFO" | awk '{print $1}')"
 PROBLEM="$(echo -e "$PROBLEMINFO" | awk '{print $2}')"

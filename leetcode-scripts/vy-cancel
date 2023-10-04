@@ -3,7 +3,7 @@
 BASEDIR=$(dirname $0)
 source "${BASEDIR}"/vy-config
 
-ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --states studying)" | fzf --ansi)"
+ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --states studying)" | fzf --cycle --ansi)"
 
 if [[ "$ITEM" == "" ]]
 then
@@ -14,7 +14,7 @@ fi
 IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
 NAME="$(echo "$ITEM" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
 
-yesno="$(echo -e "yes\nno" | fzf --ansi --prompt "Cancel studying $IDENTIFIER ($NAME)? ")"
+yesno="$(echo -e "yes\nno" | fzf --cycle --ansi --prompt "Cancel studying $IDENTIFIER ($NAME)? ")"
 
 if [[ "$ITEM" != "" && "$yesno" == "yes" ]]
 then

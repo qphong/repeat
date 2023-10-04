@@ -2,7 +2,7 @@
 BASEDIR=$(dirname $0)
 source "${BASEDIR}"/vy-config
 
-tag="$(echo -e "$(python ../main.py --subject $SUBJECT -c list_tag --states studied)" | fzf --ansi | awk -F ':' '{print $1}')"
+tag="$(echo -e "$(python ../main.py --subject $SUBJECT -c list_tag --states studied)" | fzf --cycle --ansi | awk -F ':' '{print $1}')"
 
 ITEM="$(python ../main.py --subject $SUBJECT -c review --tags "$tag" --states studied --by recent)"
 
@@ -11,7 +11,7 @@ NAME="$(echo "$ITEM" | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
 
 if [ "$ITEM" != "" ]
 then
-	action="$(echo -e "Sure, let's do it now!\nNah, it's too easy, skip it for now!" | fzf --ansi --prompt "Review $IDENTIFIER ($NAME) by solving it again? ")"
+	action="$(echo -e "Sure, let's do it now!\nNah, it's too easy, skip it for now!" | fzf --cycle --ansi --prompt "Review $IDENTIFIER ($NAME) by solving it again? ")"
 
 	if [ "$action" == "Sure, let's do it now!" ]
 	then

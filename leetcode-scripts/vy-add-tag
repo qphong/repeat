@@ -34,7 +34,7 @@ then
 		exit 1
 	fi
 
-	yesno="$(echo -e "yes\nno" | fzf --ansi --prompt "Add tags $TAGS to $IDENTIFIER ($NAME)? ")"
+	yesno="$(echo -e "yes\nno" | fzf --cycle --ansi --prompt "Add tags $TAGS to $IDENTIFIER ($NAME)? ")"
 
 	if [[ "$yesno" == "yes" ]]
 	then
@@ -45,7 +45,7 @@ then
 	exit 0
 fi
 
-ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --by recent --direction dec)" | fzf --ansi)"
+ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --by recent --direction dec)" | fzf --cycle --ansi)"
 
 IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
 NAME="$(echo "$ITEM" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
