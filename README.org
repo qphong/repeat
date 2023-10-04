@@ -88,6 +88,12 @@ A study item (a Leetcode problem) has 3 states: (1) new (haven't attempted), (2)
 | =vy-note -i {problem_i}=   | same as =vy-note=, but with a provided =problem_id=                                                                            |
 |----------------------------+--------------------------------------------------------------------------------------------------------------------------------|
 
+Below are screenshots of =vy-start=. It first lists all tags with the number of problems in each tag (and in a state).
+[[images/start-problem-tag.png]]
+Then, we can choose a tag to list problems in that tags. We can list all problems in all tags by pressing ESC.
+[[images/start-problem.png]]
+Then, we can search for a problem in this list to start. The program will open a python script with a unique name for that problem.
+
 ** List problems
 |------------------------+----------------------------------------------------------------------------|
 | Command                | Description                                                                |
