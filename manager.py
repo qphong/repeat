@@ -1,7 +1,10 @@
+import sys
 import os
 from collections import defaultdict
 import json
 import random
+import bisect
+import math
 
 import files
 import constants
@@ -112,7 +115,9 @@ class Manager:
 
     def list_tags(self, states=[]):
         if len(states) == 0:
-            return sorted([(tag, len(ids)) for tag, ids in self.identifier_by_tag.items()])
+            return sorted(
+                [(tag, len(ids)) for tag, ids in self.identifier_by_tag.items()]
+            )
 
         identifiers = self.get_identifiers_by_states(states)
         tag_count = defaultdict(int)
@@ -244,13 +249,66 @@ class Manager:
         self,
         k=1,
         tags=[],
+        by="competency",
         next_box_prob=constants.DEFAULT_NEXT_BOX_PROBABILITY,
     ):
         within_identifiers = self.get_identifiers_by_states_and_tags(tags)
 
-        # get list of min_box from all items
+        if by == "competency":
+            assessing_boxes = self.group_identifiers_by_assessing_box(
+                within_identifiers
+            )
+            if len(assessing_boxes) == 0:
+                return []
+            return Manager.get_randomized_box(k, assessing_boxes, next_box_prob)
+
+        elif by == "pass":
+            unnormalized_probs = [0.0] * len(within_identifiers)
+
+            for i, identifier in enumerate(within_identifiers):
+                tracker = self.item_tracker_data[identifier]["tracker"]
+                n_pass = tracker.get_overall_n_pass()
+                n_study = tracker.get_overall_n_study()
+
+                pass_pct = float(n_pass) / float(n_study) if n_study > 0 else 0.0
+                unnormalized_probs[i] = math.exp(-2.5 * pass_pct)
+
+            return Manager.get_randomized_identifier(
+                k, within_identifiers, unnormalized_probs
+            )
+
+        elif by == "recent":
+            unnormalized_probs = [0.0] * len(within_identifiers)
+
+            for i, identifier in enumerate(within_identifiers):
+                tracker = self.item_tracker_data[identifier]["tracker"]
+                state = tracker.get_state()
+
+                if state == constants.STATE_NEW or state == constants.STATE_STUDYING:
+                    unnormalized_probs[i] = 0.0
+                else:
+                    unnormalized_probs[i] = tracker.get_duration_since_last_end_study()
+
+            return Manager.get_randomized_identifier(
+                k, within_identifiers, unnormalized_probs
+            )
+
+        elif by == "duration":
+            unnormalized_probs = [0.0] * len(within_identifiers)
+
+            for i, identifier in enumerate(within_identifiers):
+                tracker = self.item_tracker_data[identifier]["tracker"]
+                unnormalized_probs[i] = tracker.get_overall_duration()
+
+            return Manager.get_randomized_identifier(
+                k, within_identifiers, unnormalized_probs
+            )
+        else:
+            raise Exception(f"Manager:suggest: Haven't implemented for {by}!")
+
+    def group_identifiers_by_assessing_box(self, identifiers):
         assessing_boxes = defaultdict(list)  # box -> list of identifiers
-        for identifier in within_identifiers:
+        for identifier in identifiers:
             tracker = self.item_tracker_data[identifier]["tracker"]
 
             if tracker.is_studied():
@@ -258,10 +316,29 @@ class Manager:
                     transformation=constants.DEFAULT_BOX_TRANSFORMATION
                 )
                 assessing_boxes[box].append(identifier)
+        return assessing_boxes
 
-        if len(assessing_boxes) == 0:
-            return []
-        return Manager.get_randomized_box(k, assessing_boxes, next_box_prob)
+    @staticmethod
+    def get_randomized_identifier(k, identifiers, unnormalized_probs):
+        suggested_identifiers = []
+
+        while len(suggested_identifiers) < k and len(identifiers):
+            normalizer = sum(unnormalized_probs)
+
+            cprobs = [0.0] * len(unnormalized_probs)
+            cprobs[0] = unnormalized_probs[0] / float(normalizer)
+            for i in range(1, len(cprobs)):
+                cprobs[i] = cprobs[i - 1] + unnormalized_probs[i] / float(normalizer)
+
+            t = min(random.random(), 1.0 - 1e-9)
+            idx = bisect.bisect_left(cprobs, t)
+
+            identifier = identifiers[idx]
+            suggested_identifiers.append(identifier)
+            identifiers.remove(identifier)
+            del unnormalized_probs[idx]
+
+        return suggested_identifiers
 
     @staticmethod
     def get_randomized_box(k, assessing_boxes, next_box_prob):

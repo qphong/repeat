@@ -4,7 +4,7 @@ source "${BASEDIR}"/vy-config
 
 tag="$(echo -e "$(python ../main.py --subject $SUBJECT -c list_tag --states studied)" | fzf --ansi | awk -F ':' '{print $1}')"
 
-ITEM="$(python ../main.py --subject $SUBJECT -c review --tags "$tag" --states studied)"
+ITEM="$(python ../main.py --subject $SUBJECT -c review --tags "$tag" --states studied --by recent)"
 
 IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
 NAME="$(echo "$ITEM" | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"

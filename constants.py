@@ -41,7 +41,12 @@ EXTRA_INFO = [
     LABEL_DURATION,
 ]
 
-DEFAULT_NUMBER_OF_SUGGESTION = 1
+DEFAULT_NUMBER_OF_SUGGESTION = {
+    "competency": 1,
+    "pass": 1,
+    "recent": 1,
+    "duration": 1,
+}
 
 
 BY_TO_PROPERTY = {

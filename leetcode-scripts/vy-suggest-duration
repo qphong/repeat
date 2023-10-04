@@ -1,0 +1,32 @@
+#!/bin/sh
+BASEDIR=$(dirname $0)
+source "${BASEDIR}"/vy-config
+
+tag="$(echo -e "$(python ../main.py --subject $SUBJECT -c list_tag --states studied)" | fzf --ansi | awk -F ':' '{print $1}')"
+
+ITEM="$(python ../main.py --subject $SUBJECT -c review --tags "$tag" --states studied --by duration)"
+
+IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
+NAME="$(echo "$ITEM" | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
+
+if [ "$ITEM" != "" ]
+then
+	action="$(echo -e "Sure, let's do it now!\nNah, it's too easy, skip it for now!" | fzf --ansi --prompt "Review $IDENTIFIER ($NAME) by solving it again? ")"
+
+	if [ "$action" == "Sure, let's do it now!" ]
+	then
+	PATHTOCODE="$(python ../main.py --subject $SUBJECT -c get_file -i "$IDENTIFIER" --postfix "code.py")"
+
+	python ../main.py --subject $SUBJECT -c start -i "$IDENTIFIER" \
+		&& echo "Start coding $IDENTIFIER ($NAME) at $PATHTOCODE" \
+		&& $EDITOR "$PATHTOCODE"
+
+	else
+		python ../main.py --subject $SUBJECT -c start -i "$IDENTIFIER" \
+			&& python ../main.py --subject $SUBJECT -c end -i "$IDENTIFIER" --passfail pass
+	fi
+
+else
+	echo "So sorry, no problem to suggest for now! Please practice more."
+fi
+

@@ -126,8 +126,8 @@ elif command == "list":
         readable_info = util.get_readable_info(
             info_dict,
             content_fields=["name"],
-            extra_info= constants.BY_TO_INFO_SHOW[by]["show"],
-            emphasis=constants.BY_TO_INFO_SHOW[by]["emphasis"]
+            extra_info=constants.BY_TO_INFO_SHOW[by]["show"],
+            emphasis=constants.BY_TO_INFO_SHOW[by]["emphasis"],
         )
         print(readable_info)
 
@@ -176,10 +176,12 @@ elif command == "list_file":
 
 elif command == "review":
     # subject, tags, k
-    subject, tags = util.parse_args(config, ["subject", "tags"], [True, False])
+    subject, tags, by = util.parse_args(
+        config, ["subject", "tags", "by"], [True, False, True]
+    )
     manager = Manager(subject)
     manager.load()
-    identifiers = manager.suggest(constants.DEFAULT_NUMBER_OF_SUGGESTION, tags)
+    identifiers = manager.suggest(constants.DEFAULT_NUMBER_OF_SUGGESTION[by], tags, by=by)
 
     info_list = manager.get_item_by_identifiers(identifiers)
 
