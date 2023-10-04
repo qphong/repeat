@@ -2,8 +2,8 @@
   "3": {
     "identifier": "3",
     "tags": [
-      "two-pointers",
-      "E+"
+      "E+",
+      "two-pointers"
     ],
     "content": {
       "name": "longest-substring-without-repeating-character"
@@ -22,8 +22,8 @@
   "1932": {
     "identifier": "1932",
     "tags": [
-      "H",
-      "tree"
+      "tree",
+      "H"
     ],
     "content": {
       "name": "merge-bsts-to-create-single-bst"
@@ -82,8 +82,8 @@
   "141": {
     "identifier": "141",
     "tags": [
-      "two-pointers",
-      "E+"
+      "E+",
+      "two-pointers"
     ],
     "content": {
       "name": "linked-list-cycle"
@@ -112,8 +112,8 @@
   "402": {
     "identifier": "402",
     "tags": [
-      "stack",
-      "H-"
+      "H-",
+      "stack"
     ],
     "content": {
       "name": "remove-k-digits"
@@ -122,11 +122,31 @@
   "310": {
     "identifier": "310",
     "tags": [
-      "bfs",
-      "H-"
+      "H-",
+      "bfs"
     ],
     "content": {
       "name": "minimum-height-trees"
+    }
+  },
+  "16": {
+    "identifier": "16",
+    "tags": [
+      "M",
+      "two-pointers"
+    ],
+    "content": {
+      "name": "3sum-closet"
+    }
+  },
+  "532": {
+    "identifier": "532",
+    "tags": [
+      "H-",
+      "two-pointers"
+    ],
+    "content": {
+      "name": "k-diff-pairs-in-an-array"
     }
   }
 }

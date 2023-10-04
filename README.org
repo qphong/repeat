@@ -45,7 +45,7 @@ The project is implemented in Python which is easily hackable by Leetcode users.
 The Python implementation does not require any additional packages. However, to use the leetcode-scripts, it requires neovim (a text editor, you can change it to your favorite editor in =leetcode-scripts/vy-config=) to edit the code and [[https://github.com/junegunn/fzf][=fzf=]] (a fuzzy search) to quickly browser problems.
 
 * Usage
-A study item (a Leetcode problem) has 3 states: new (haven't attempted), studying (currently solving: the command =vy-start= is issued but neither =vy-complete= nor =vy-cancel= is issued), and studied (was attempted before, regarding whether we solved it, i.e., pass or fail).
+A study item (a Leetcode problem) has 3 states: new (haven't attempted), studying (currently solving: the command =vy-start= is issued but neither =vy-complete= nor =vy-cancel= is issued), and studied (was attempted before, regardless we solved it, i.e., pass or fail).
 
 All commands can be skipped with ESC.
 
@@ -94,7 +94,12 @@ e.g., below is the following screenshot of =vy-add=
 | =vy-list-competency=   | list solved problems by based on how compentent the learner is             |
 |------------------------+----------------------------------------------------------------------------|
 
-e.g., below is the screenshot of =vy-list-recent=
+e.g., below are screenshots of
++ =vy-list=
+[[images/list.png]]
+=17/19= indicates that the problem was successfully solved 17 times out of 19 attempts.
+
++ =vy-list-recent=
 [[images/list-recent.png]]
 
 ** Tag
