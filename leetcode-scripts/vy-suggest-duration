@@ -4,29 +4,43 @@ source "${BASEDIR}"/vy-config
 
 tag="$(echo -e "$(python ../main.py --subject $SUBJECT -c list_tag --states studied)" | fzf --cycle --ansi | awk -F ':' '{print $1}')"
 
-ITEM="$(python ../main.py --subject $SUBJECT -c review --tags "$tag" --states studied --by duration)"
+suggest()
+{
+	ITEM="$(python ../main.py --subject $SUBJECT -c review --tags "$tag" --states studied --by duration)"
 
-IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
-NAME="$(echo "$ITEM" | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
+	IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
+	NAME="$(echo "$ITEM" | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
 
-if [ "$ITEM" != "" ]
-then
-	action="$(echo -e "Sure, let's do it now!\nNah, it's too easy, skip it for now!" | fzf --cycle --ansi --prompt "Review $IDENTIFIER ($NAME) by solving it again? ")"
-
-	if [ "$action" == "Sure, let's do it now!" ]
+	if [ "$ITEM" != "" ]
 	then
-	PATHTOCODE="$(python ../main.py --subject $SUBJECT -c get_file -i "$IDENTIFIER" --postfix "code.py")"
+		action="$(echo -e "Sure, let's do it now!\nToo easy, another one please!\nQuit" | fzf --cycle --ansi --prompt "Review $IDENTIFIER ($NAME) by solving it again? ")"
 
-	python ../main.py --subject $SUBJECT -c start -i "$IDENTIFIER" \
-		&& echo "Start coding $IDENTIFIER ($NAME) at $PATHTOCODE" \
-		&& $EDITOR "$PATHTOCODE"
+		if [ "$action" == "Sure, let's do it now!" ]
+		then
+		PATHTOCODE="$(python ../main.py --subject $SUBJECT -c get_file -i "$IDENTIFIER" --postfix "code.py")"
+
+		python ../main.py --subject $SUBJECT -c start -i "$IDENTIFIER" \
+			&& echo "Start coding $IDENTIFIER ($NAME) at $PATHTOCODE" \
+			&& $EDITOR "$PATHTOCODE"
+
+		elif [ "$action" == "Too easy, another one please!" ]
+		then
+			suggest
+
+		elif [ "$action" == "Quit" ]
+		then
+			python ../main.py --subject $SUBJECT -c start -i "$IDENTIFIER" \
+				&& python ../main.py --subject $SUBJECT -c end -i "$IDENTIFIER" --passfail pass
+
+		else
+			python ../main.py --subject $SUBJECT -c start -i "$IDENTIFIER" \
+				&& python ../main.py --subject $SUBJECT -c end -i "$IDENTIFIER" --passfail pass
+		fi
 
 	else
-		python ../main.py --subject $SUBJECT -c start -i "$IDENTIFIER" \
-			&& python ../main.py --subject $SUBJECT -c end -i "$IDENTIFIER" --passfail pass
+		echo "So sorry, no problem to suggest for now! Please practice more."
 	fi
+}
 
-else
-	echo "So sorry, no problem to suggest for now! Please practice more."
-fi
+suggest
 

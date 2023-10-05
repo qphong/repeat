@@ -83,7 +83,7 @@ A study item (a Leetcode problem) has 3 states: (1) new (haven't attempted), (2)
 | Command                    | Description                                                                                                                    |
 |----------------------------+--------------------------------------------------------------------------------------------------------------------------------|
 | =vy-start=                 | select a problem to start coding with =nvim= (change to another editor in =leetcode-scripts/vy-config=). The program automatically creates a python script with a unique name (based on the problem id) in =subjects/sbj-leetcode/study=, and opens it with a text editor (default is =nvim=). If we start the same problem with =vy-start=, the same file is opened, so the program helps us manage the python scripts of all solved problems. |
-| =vy-start -i {problem_id}= | same as =vy-add= but with provided =problem_id=                                                                                |
+| =vy-start -i {problem_id}= | same as =vy-start= but with provided =problem_id=                                                                           |
 | =vy-end=                   | complete a problem with result: pass (we solved it by ourself, like in an interview), fail (we looked at the solution, or we asked someone) |
 | =vy-cancel=                | cancel solving a problem                                                                                                       |
 | =vy-note=                  | select a problem to add a note (or retrieve previous note). It is similar to =vy-start=. A markdown file with a unique name (based on the problem id) is created in =subjects/sbj-leetcode/study=. |
@@ -92,7 +92,7 @@ A study item (a Leetcode problem) has 3 states: (1) new (haven't attempted), (2)
 
 Below are screenshots of =vy-start=. It first lists all tags with the number of problems in each tag (and in a state).
 [[images/start-problem-tag.png]]
-Then, we can choose a tag to list problems in that tags. We can list all problems in all tags by pressing ESC.
+Then, we can choose a tag to list problems in that tag. We can list problems in all tags by pressing ESC.
 [[images/start-problem.png]]
 Then, we can search for a problem in this list to start. The program will open a python script with a unique name for that problem. If the state of a problem is =_studying_=, it means we continue the problem we started before. Note that if the state of a problem is =_studied_=, we do not show its state. Starting a =_studied_= problem will open the script containing the solution that we coded before.
 
@@ -105,7 +105,7 @@ Then, we can search for a problem in this list to start. The program will open a
 | =vy-list-pass=         | list solved problems by the percentage of successfully solving the problem |
 | =vy-list-studying=     | list pending problems                                                      |
 | =vy-list-duration=     | list solved problems by time spent solving                                 |
-| =vy-list-recent-study= | list solved problems by the most recent attempt                            |
+| =vy-list-recent= | list solved problems by the most recent attempt                            |
 | =vy-list-competency=   | list solved problems by based on how compentent the learner is             |
 |------------------------+----------------------------------------------------------------------------|
 
@@ -138,6 +138,17 @@ Tag can be used to mark a problem as interesting, tricky, or note a specific tri
 | =vy-suggest-pass=       | suggest a solved problem for reviews (based on the percentage of successfully solving the problem |
 | =vy-suggest-recent=     | suggest a solved problem for reviews (based on how recent the problem is solved)                  |
 |-------------------------+---------------------------------------------------------------------------------------------------|
+
+Below are screenshots of =vy-suggest-competency=. Like =vy-start=, it first lists all tags. 
+[[images/start-problem-tag.png]]
+
+Then, we can choose a tag to have a suggestion in that tag. We can consider all tags by pressing ESC. A random problem is suggested based on the criterion: competency, duration, pass, or recent.
+[[images/suggest.png]]
+
+There are 3 cases:
+1. If the suggested problem is too easy for us, we can choose to skip the suggestion, and request another suggestion
+2. If the suggested problem is interesting to us, we can choose to start the suggested problem. Its effect is the same as running =vy-start= on that problem.
+3. We can quit the command. We can also do this by pressing ESC.
 
 ** A note on the experimental commands: =vy-list-competency= and =vy-suggest-competency=
 =vy-list-competency= lists problems based on how competent the learner is about solving it. This competency is measured by the BOX property, shown as B:x. The large the BOX is, the higher the competency is, following the Leitner system. Note that the competency takes into the time since the last seeing the problem. Thus, it seems to be incorrect at first (as the model has not interacted with the learner a lot). For the model to correctly learn the level of competency, run =vy-suggest-competency= and start solving problem that you are not confident; or skip the problem that you are confident. This is a way that the model interacts with the learner to learn about the level of competency.
