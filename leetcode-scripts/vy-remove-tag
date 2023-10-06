@@ -52,7 +52,7 @@ NAME="$(echo "$ITEM" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 
 
 if [ "$ITEM" != "" ]
 then
-	echo "Remove tags: $TAGS to: $IDENTIFIER ($NAME)"
+	echo "Remove tags: $TAGS from: $IDENTIFIER ($NAME)"
 	python ../main.py --subject $SUBJECT -c remove_tag -i "$IDENTIFIER" --tags "$TAGS"
 fi
 

@@ -2,8 +2,8 @@
   "3": {
     "identifier": "3",
     "tags": [
-      "two-pointers",
-      "E+"
+      "E+",
+      "two-pointers"
     ],
     "content": {
       "name": "longest-substring-without-repeating-character"
@@ -12,8 +12,8 @@
   "15": {
     "identifier": "15",
     "tags": [
-      "M",
-      "two-pointers"
+      "two-pointers",
+      "M"
     ],
     "content": {
       "name": "3sum"
@@ -42,8 +42,8 @@
   "360": {
     "identifier": "360",
     "tags": [
-      "M",
-      "two-pointers"
+      "two-pointers",
+      "M"
     ],
     "content": {
       "name": "sort-transformed-array"
@@ -52,8 +52,8 @@
   "26": {
     "identifier": "26",
     "tags": [
-      "H-",
-      "two-pointers"
+      "two-pointers",
+      "H-"
     ],
     "content": {
       "name": "remove-duplicates-from-sorted-array"
@@ -62,8 +62,8 @@
   "409": {
     "identifier": "409",
     "tags": [
-      "M",
-      "hash-map"
+      "hash-map",
+      "M"
     ],
     "content": {
       "name": "longest-palindrome"
@@ -82,8 +82,8 @@
   "141": {
     "identifier": "141",
     "tags": [
-      "two-pointers",
-      "E+"
+      "E+",
+      "two-pointers"
     ],
     "content": {
       "name": "linked-list-cycle"
@@ -122,8 +122,8 @@
   "310": {
     "identifier": "310",
     "tags": [
-      "bfs",
-      "H-"
+      "H-",
+      "bfs"
     ],
     "content": {
       "name": "minimum-height-trees"
@@ -132,8 +132,8 @@
   "532": {
     "identifier": "532",
     "tags": [
-      "H-",
-      "two-pointers"
+      "two-pointers",
+      "H-"
     ],
     "content": {
       "name": "k-diff-pairs-in-an-array"
@@ -152,8 +152,8 @@
   "30": {
     "identifier": "30",
     "tags": [
-      "H",
-      "two-pointers"
+      "two-pointers",
+      "H"
     ],
     "content": {
       "name": "substring-with-concatenation-of-all-words"
@@ -162,8 +162,8 @@
   "283": {
     "identifier": "283",
     "tags": [
-      "M",
-      "two-pointers"
+      "two-pointers",
+      "M"
     ],
     "content": {
       "name": "move-zeroes"

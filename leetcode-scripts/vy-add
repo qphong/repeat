@@ -3,15 +3,59 @@
 BASEDIR=$(dirname $0)
 source "${BASEDIR}"/vy-config
 
+IDENTIFIER=""
+NAME=""
+TAGS=""
+
+while getopts ":i:n:t:" opt; do
+  case $opt in
+    i) IDENTIFIER="$OPTARG"
+    ;;
+	n) NAME="$OPTARG"
+	;;
+    t) TAGS="$OPTARG"
+    ;;
+    \?) echo "Invalid option -$OPTARG" >&2
+    exit 1
+    ;;
+  esac
+done
+
+if [ "$NAME" != "" ]
+then
+	if [ "$IDENTIFIER" == "" ]
+	then
+		echo "No identifier provided. Auto generate identifier."
+		echo "Add Auto_ID ($NAME)"
+
+		if [ "$TAGS" == "" ]
+		then
+			python ../main.py --subject $SUBJECT -c add --name $NAME
+		else
+			python ../main.py --subject $SUBJECT -c add --name $NAME --tags $TAGS
+		fi
+	else
+		echo "Add $IDENTIFIER ($NAME)"
+		if [ "$TAGS" == "" ]
+		then
+			python ../main.py --subject $SUBJECT -c add --identifier $IDENTIFIER --name $NAME
+		else
+			python ../main.py --subject $SUBJECT -c add --identifier $IDENTIFIER --name $NAME --tags $TAGS
+		fi
+	fi
+
+	exit 0
+fi
+
 PROBLEMINFO="$(cat "problem-lists.txt" | fzf --cycle)"
 
-ID="$(echo -e "$PROBLEMINFO" | awk '{print $1}')"
-PROBLEM="$(echo -e "$PROBLEMINFO" | awk '{print $2}')"
+IDENTIFIER="$(echo -e "$PROBLEMINFO" | awk '{print $1}')"
+NAME="$(echo -e "$PROBLEMINFO" | awk '{print $2}')"
 TAGS="$(echo -e "$PROBLEMINFO" | awk '{print $3}')"
 
-if [ "$PROBLEM" != "" ]
+if [ "$NAME" != "" ]
 then
-	echo "Add $ID ($PROBLEM)"
-	python ../main.py --subject $SUBJECT -c add --identifier $ID --name $PROBLEM --tags $TAGS
+	echo "Add $IDENTIFIER ($NAME)"
+	python ../main.py --subject $SUBJECT -c add --identifier $IDENTIFIER --name $NAME --tags $TAGS
 fi
 
