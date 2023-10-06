@@ -184,6 +184,13 @@ class Manager:
             return item.content
         return None
 
+    def get_tags_by_identifier(self, identifier):
+        if identifier in self.item_tracker_data:
+            item = self.item_tracker_data[identifier]["item"]
+            if len(item.tags):
+                return item.tags
+        return None
+
     def get_identifiers_by_states(self, states=[], within_identifiers=set()):
         # len(states) == 0 means all all states
         # len(within_identifiers) == 0 means considering all identifiers

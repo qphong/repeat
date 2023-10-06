@@ -4,25 +4,16 @@ BASEDIR=$(dirname $0)
 source "${BASEDIR}"/vy-config
 
 IDENTIFIER=""
-TAGS=""
 
 while getopts ":i:t:" opt; do
   case $opt in
     i) IDENTIFIER="$OPTARG"
-    ;;
-    t) TAGS="$OPTARG"
     ;;
     \?) echo "Invalid option -$OPTARG" >&2
     exit 1
     ;;
   esac
 done
-
-if [ "$TAGS" == "" ]
-then
-	echo "Require tag -t"
-	exit 1
-fi
 
 if [ "$IDENTIFIER" != "" ]
 then
@@ -32,14 +23,28 @@ then
 	then
 		echo "$IDENTIFIER does not exist!"
 		exit 1
+
+	else
+		TAGS="$(python ../main.py --subject $SUBJECT -c get_tags_by_identifier -i "$IDENTIFIER")"
+		if [ "$TAGS" == "" ]
+		then
+			echo "Cannot find any tags from $IDENTIFIER ($NAME)"
+			exit 1
+		fi
 	fi
 
-	yesno="$(echo -e "yes\nno" | fzf --cycle --ansi --prompt "Remove tags $TAGS from $IDENTIFIER ($NAME)? ")"
+	REMOVE_TAG="$(echo -e "$TAGS" | fzf --ansi)"
+	if [ "$REMOVE_TAG" == "" ]
+	then
+		exit 0
+	fi
+
+	yesno="$(echo -e "yes\nno" | fzf --cycle --ansi --prompt "Remove tags $REMOVE_TAG from $IDENTIFIER ($NAME)? ")"
 
 	if [[ "$yesno" == "yes" ]]
 	then
-		echo "Remove tags: $TAGS from: $IDENTIFIER ($NAME)"
-		python ../main.py --subject $SUBJECT -c remove_tag -i "$IDENTIFIER" --tags $TAGS
+		echo "Remove tags: $REMOVE_TAG from: $IDENTIFIER ($NAME)"
+		python ../main.py --subject $SUBJECT -c remove_tag -i "$IDENTIFIER" --tags $REMOVE_TAG
 	fi
 
 	exit 0
@@ -50,9 +55,29 @@ ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --by recent --di
 IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
 NAME="$(echo "$ITEM" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
 
+
 if [ "$ITEM" != "" ]
 then
-	echo "Remove tags: $TAGS from: $IDENTIFIER ($NAME)"
-	python ../main.py --subject $SUBJECT -c remove_tag -i "$IDENTIFIER" --tags "$TAGS"
+
+	TAGS="$(python ../main.py --subject $SUBJECT -c get_tags_by_identifier -i "$IDENTIFIER")"
+	if [ "$TAGS" == "" ]
+	then
+		echo "Cannot find any tags from $IDENTIFIER ($NAME)"
+		exit 1
+	fi
+
+	REMOVE_TAG="$(echo -e "$TAGS" | fzf --ansi)"
+	if [ "$REMOVE_TAG" == "" ]
+	then
+		exit 0
+	fi
+
+	yesno="$(echo -e "yes\nno" | fzf --cycle --ansi --prompt "Remove tags $REMOVE_TAG from $IDENTIFIER ($NAME)? ")"
+
+	if [[ "$yesno" == "yes" ]]
+	then
+		echo "Remove tags: $REMOVE_TAG from: $IDENTIFIER ($NAME)"
+		python ../main.py --subject $SUBJECT -c remove_tag -i "$IDENTIFIER" --tags $REMOVE_TAG
+	fi
 fi
 

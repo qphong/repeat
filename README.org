@@ -122,14 +122,15 @@ e.g., below are screenshots of
 ** Tag
 Tag can be used to mark a problem as interesting, tricky, or note a specific trick/approach to the problem.
 
-|--------------------------------------------------------------+--------------------------------------------|
-| Command                                                      | Description                                |
-|--------------------------------------------------------------+--------------------------------------------|
-| =vy-add-tag -t {tags_separated_by_comma}=                    | add tags to a problem                      |
-| =vy-add-tag -t {tags_separated_by_comma} -i {problem_id}=    | add tags to a problem with problem_id      |
-| =vy-remove-tag -t {tags_separated_by_comma}=                 | remove tags from a problem                 |
-| =vy-remove-tag -t {tags_separated_by_comma} -i {problem_id}= | remove tags from a problem with problem_id |
-|--------------------------------------------------------------+--------------------------------------------|
+|-----------------------------------------------------------+---------------------------------------------|
+| Command                                                   | Description                                 |
+|-----------------------------------------------------------+---------------------------------------------|
+| =vy-add-tag -t {tags_separated_by_comma}=                 | add tags to a problem                       |
+| =vy-add-tag -t {tags_separated_by_comma} -i {problem_id}= | add tags to a problem with problem_id       |
+| =vy-remove-tag=                                           | remove a tag from a problem                 |
+| =vy-remove-tag -i {problem_id}=                           | remove a tag from a problem with problem_id |
+|-----------------------------------------------------------+---------------------------------------------|
+#+TBLFM: $1=vy-remove-tag
 
 ** Review a problem
 |-------------------------+---------------------------------------------------------------------------------------------------|

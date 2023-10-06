@@ -23,6 +23,7 @@ parser.add_argument(
         "remove",  # subject, identifier
         "get_file",  # subject, identifier, postifx
         "get_name",  # subject, identifier
+        "get_tags_by_identifier",  # subject, identifier
         "list_file",  # list all postfix # subject, identifier
         "review",  # subject, tags, k
         "add_tag",  # subject, identifier, tags
@@ -178,6 +179,20 @@ elif command == "get_name":
     if "name" in content:
         name = content["name"]
     print(name)
+
+elif command == "get_tags_by_identifier":
+    subject, identifier = util.parse_args(
+        config, ["subject", "identifier"], [True, True, True]
+    )
+    manager = Manager(subject)
+    manager.load()
+    tags = manager.get_tags_by_identifier(identifier)
+    if not tags:
+        print(f"Cannot find any tag from {identifier}")
+        exit(1)
+
+    for tag in sorted(tags):
+        print(tag)
 
 elif command == "list_file":
     # list all postfix # subject, identifier
