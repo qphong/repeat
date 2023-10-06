@@ -110,11 +110,11 @@
     "interval": 300.0,
     "oldest_epoch": 2592000.0,
     "max_tracker_data_key": 8640,
-    "start_study_time": 1696471654.208324,
-    "end_study_time": 1e+16,
+    "start_study_time": 1696382738.500367,
+    "end_study_time": 1696382738.524802,
     "prev_start_study_time": 1696382738.500367,
     "prev_end_study_time": 1696382738.524802,
-    "state": "studying"
+    "state": "studied"
   },
   "1932": {
     "identifier": "1932",
@@ -174,15 +174,22 @@
         "n_study": 1,
         "study_duration": 0.0247039794921875,
         "box": 1
+      },
+      "581": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 49.68387484550476,
+        "box": 1
       }
     },
     "interval": 300.0,
     "oldest_epoch": 2592000.0,
     "max_tracker_data_key": 8640,
-    "start_study_time": 1696386327.753546,
-    "end_study_time": 1696386327.77825,
-    "prev_start_study_time": 1696382722.475389,
-    "prev_end_study_time": 1696382722.49916,
+    "start_study_time": 1696560665.909408,
+    "end_study_time": 1696560715.593283,
+    "prev_start_study_time": 1696386327.753546,
+    "prev_end_study_time": 1696386327.77825,
     "state": "studied"
   },
   "72": {
@@ -234,11 +241,11 @@
     "interval": 300.0,
     "oldest_epoch": 2592000.0,
     "max_tracker_data_key": 8640,
-    "start_study_time": 1696387366.483184,
-    "end_study_time": 1e+16,
+    "start_study_time": 1696385275.183927,
+    "end_study_time": 1696385275.207946,
     "prev_start_study_time": 1696385275.183927,
     "prev_end_study_time": 1696385275.207946,
-    "state": "studying"
+    "state": "studied"
   },
   "360": {
     "identifier": "360",
@@ -311,15 +318,22 @@
         "n_study": 1,
         "study_duration": 0.02656102180480957,
         "box": 1
+      },
+      "295": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 29.825162887573242,
+        "box": 1
       }
     },
     "interval": 300.0,
     "oldest_epoch": 2592000.0,
     "max_tracker_data_key": 8640,
-    "start_study_time": 1696471532.42854,
-    "end_study_time": 1696471532.457589,
-    "prev_start_study_time": 1696471465.990031,
-    "prev_end_study_time": 1696471466.016592,
+    "start_study_time": 1696559987.028409,
+    "end_study_time": 1696560016.853572,
+    "prev_start_study_time": 1696471532.42854,
+    "prev_end_study_time": 1696471532.457589,
     "state": "studied"
   },
   "409": {
@@ -377,11 +391,11 @@
     "interval": 300.0,
     "oldest_epoch": 2592000.0,
     "max_tracker_data_key": 8640,
-    "start_study_time": 1696387359.871207,
-    "end_study_time": 1e+16,
+    "start_study_time": 1696385198.702266,
+    "end_study_time": 1696385198.727148,
     "prev_start_study_time": 1696385198.702266,
     "prev_end_study_time": 1696385198.727148,
-    "state": "studying"
+    "state": "studied"
   },
   "141": {
     "identifier": "141",
@@ -606,5 +620,57 @@
     "prev_start_study_time": -1e+16,
     "prev_end_study_time": 1e+16,
     "state": "new"
+  },
+  "611": {
+    "identifier": "611",
+    "time_aware_tracker_data": {},
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": -1e+16,
+    "end_study_time": 1e+16,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "new"
+  },
+  "30": {
+    "identifier": "30",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 51.54385805130005,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1696559907.531514,
+    "end_study_time": 1696559959.075372,
+    "prev_start_study_time": 1696559907.531514,
+    "prev_end_study_time": 1696559959.075372,
+    "state": "studied"
+  },
+  "283": {
+    "identifier": "283",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 122.0568220615387,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1696560303.970701,
+    "end_study_time": 1696560426.027523,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
   }
 }
