@@ -59,16 +59,15 @@ I downloaded that file from some github repo long time ago that, unfortunately, 
 ** Initialization
 Remove everything in the directory =subjects/= to start the study anew.
 In the =leetcode-scripts= direction, run
-|----------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------|
-| Command                                                        | Description                                                                                                                    |
-|----------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------|
-| =vy-learn-leetcode=                                            | initializing the leetcode project by generating necessary directories                                                          |
-| =vy-add=                                                       | add a problem to solve from =problem-lists.txt=                                                                                |
-| #ERROR                                                         | add a problem to solve by specifying name (required), id (optional), and tags (optional) (this problem is not required to be in =problem-lists.txt= |
-| =vy-remove=                                                    | remove a problem (search from the list of added problems)                                                                      |
-| =vy-remove -i {problem_id}=                                    | remove a problem by problem_id                                                                                                 |
-|----------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------|
-#+TBLFM: $1=vy-add -i {problem_id} -n {name} -t {tags_separated_by_comma}
+|-----------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------|
+| Command                                                         | Description                                                                                                                    |
+|-----------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------|
+| =vy-learn-leetcode=                                             | initializing the leetcode project by generating necessary directories                                                          |
+| =vy-add=                                                        | add a problem to solve from =problem-lists.txt=                                                                                |
+| =vy-add -i {problem_id} -n {name} -t {tags_separated_by_comma}= | add a problem to solve by specifying name (required), id (optional), and tags (optional) (this problem is not required to be in =problem-lists.txt= |
+| =vy-remove=                                                     | remove a problem (search from the list of added problems)                                                                      |
+| =vy-remove -i {problem_id}=                                     | remove a problem by problem_id                                                                                                 |
+|-----------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------|
 
 e.g., below is the following screenshot of =vy-add=
 [[images/add-problem.png]]
