@@ -24,8 +24,18 @@ done
 
 if [ "$TAGS" = "" ]
 then
-	echo "Require tag -t"
-	exit 1
+	ALL_TAGS="$(python ../main.py --subject $SUBJECT -c list_state_by_tag --states new,studied,studying)"
+	TAGS="$(echo -e "$ALL_TAGS" | fzf --ansi --prompt "Select a tag to add: " | awk -F ':' '{ print $1 }' | xargs)"
+
+	if [ "$TAGS" == "" ]
+	then
+		read -p "Please enter a new tag: " TAGS
+		if [ "$TAGS" == "" ]
+		then
+			printf "No tag is provided. Exit."
+			exit 1
+		fi
+	fi
 fi
 
 if [ "$IDENTIFIER" != "" ]
@@ -63,7 +73,10 @@ NAME="$(echo "$ITEM" \
 		| awk -F "\"" '{print $2}' \
 		| sed 's/[^[:alnum:]-]//g')"
 
-if [ "$ITEM" != "" ]
+yesno="$(printf "yes\nno" \
+		 | fzf --cycle --ansi --prompt "Add tags $TAGS to $IDENTIFIER ($NAME)? ")"
+
+if [ "$yesno" = "yes" ]
 then
 	echo "Add tags: $TAGS to: $IDENTIFIER ($NAME)"
 	python ../main.py --subject "$SUBJECT" -c add_tag -i "$IDENTIFIER" --tags "$TAGS"
