@@ -1,20 +1,34 @@
-#!/bin/sh
+#!/usr/bin/sh
+# set the state of a _studying_ problem to studied
+# with a result pass or fail
+#  ./vy-complete
 
-BASEDIR=$(dirname $0)
-source "${BASEDIR}"/vy-config
+BASEDIR=$(dirname "$0")
+. "${BASEDIR}"/vy-config
 
-ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --states studying)" | fzf --cycle --ansi)"
+ITEM="$(printf "%s" "$(python ../main.py --subject "$SUBJECT" \
+                                         -c list \
+										 --states studying)" \
+			           | fzf --cycle --ansi)"
 
-IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
-NAME="$(echo "$ITEM" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
+IDENTIFIER="$(printf "%s" "$ITEM" \
+	          | awk -F ']' '{print $1}' \
+			  | sed 's/[^[:alnum:]]//g')"
+NAME="$(printf "%s" "$ITEM" \
+	    | awk -F ']' '{print $2}' \
+		| awk -F "\"" '{print $2}' \
+		| sed 's/[^[:alnum:]-]//g')"
 
-if [[ "$ITEM" != "" ]]
+if [ "$ITEM" != "" ]
 then
-	passfail="$(echo -e "pass\nfail" | fzf --cycle --ansi)"
-	if [[ "$passfail" != "" ]]
+	passfail="$(printf "pass\nfail" | fzf --cycle --ansi)"
+	if [ "$passfail" != "" ]
 	then
-		echo "$passfail $IDENTIFIER ($NAME)"
-		python ../main.py --subject $SUBJECT -c end -i "$IDENTIFIER" --passfail $passfail
+		printf "%s %s (%s)" "$passfail" "$IDENTIFIER" "$NAME"
+		python ../main.py --subject "$SUBJECT" \
+		                  -c end \
+						  -i "$IDENTIFIER" \
+						  --passfail "$passfail"
 	fi
 fi
 
