@@ -1,9 +1,17 @@
-#!/bin/bash
-# states, tags, by, direction
-# default: list by number of studies, newest first
+#!/usr/bin/sh
+# (1) list all added problems by number of views (least number of views first)
+#   ./vy-list
+# (2) list all add problems with a given states,
+#              tags,
+#              by some criterion,
+#              and a direction (inc: increasing or dec:decreasing) of the criterion
+#   ./vy-list -s {states_separated_by_comma}
+#             -t {tags_separated_by_comma}
+#             -b {criterion}
+#             -d {direction}
 
-BASEDIR=$(dirname $0)
-source "${BASEDIR}"/vy-config
+BASEDIR=$(dirname "$0")
+. "${BASEDIR}"/vy-config
 
 STATES="all"
 TAGS="all"
@@ -26,5 +34,11 @@ while getopts ":s:t:b:d:" opt; do
   esac
 done
 
-echo -e "$(python ../main.py --subject $SUBJECT -c list --states $STATES --tags $TAGS --by $BY --direction $DIRECTION)" | fzf --cycle --ansi
+printf "%s" "$(python ../main.py --subject "$SUBJECT" \
+	                             -c list \
+								 --states "$STATES" \
+								 --tags "$TAGS" \
+								 --by "$BY" \
+								 --direction "$DIRECTION")" \
+	   | fzf --cycle --ansi
 
