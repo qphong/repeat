@@ -104,6 +104,7 @@
 159 longest-substring-with-at-most-two-distinct-characters two-pointers,H-
 162 find-peak-element binary-search,H-
 166 fraction-to-recurring-decimal hash-map,M
+169 majority-element E,top_interview_150
 170 two-sum-iii-data-structure-design hash-map,M
 173 binary-search-tree-iterator stack,M
 173 binary-search-tree-iterator tree,M

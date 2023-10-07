@@ -41,15 +41,10 @@ fi
 
 
 tag="$(echo -e "$(python ../main.py --subject $SUBJECT -c list_state_by_tag --states new,studied,studying)" | fzf --cycle --ansi | awk -F ':' '{print $1}')"
-# if [[ "$tag" == "" ]]
-# then
-# 	echo "Nothing to start learning"
-# 	exit 0
-# fi
 
 ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --tags "$tag" --states new,studied,studying)" | fzf --cycle --ansi)"
 
- IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
+IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
 NAME="$(echo "$ITEM" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
 
 if [ "$ITEM" != "" ]

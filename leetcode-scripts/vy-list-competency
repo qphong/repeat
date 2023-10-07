@@ -1,7 +1,8 @@
 #!/usr/bin/sh
-# (1) list _studied_ or _studying_ problems based on how competent the learner is about solving it
+# (1) list _studied_ or _studying_ problems based on how competent the learner is
 #   ./vy-list-competency
-# (2) list _studied_ or _studying_ problems based on competency given tags and direction of the competency (inc: increasing or dec: decreasing)
+# (2) list _studied_ or _studying_ problems based on competency
+#     given tags and direction of the competency (inc: increasing or dec: decreasing)
 #   ./vy-list-competency -t {tags_separated_by_comma}
 #                        -d {direction}
 
