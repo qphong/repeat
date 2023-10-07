@@ -1,7 +1,7 @@
 #!/usr/bin/sh
-# to add a problem from problem_lists.txt
+# (1) to add a problem from problem_lists.txt
 #   ./vy-add
-# to add a problem with a problem_name
+# (2) to add a problem with a problem_name
 #   ./vy-add -i {problem_id} -n {problem_name} -t {problem_tags_separated_by_comma}
 #            (optional)      (required)        (optional)
 
