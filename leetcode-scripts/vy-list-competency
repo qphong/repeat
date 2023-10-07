@@ -1,15 +1,19 @@
-#!/bin/bash
-# list problems based on how competent the learner is about solving it
-#
-BASEDIR=$(dirname $0)
-source "${BASEDIR}"/vy-config
+#!/usr/bin/sh
+# (1) list _studied_ or _studying_ problems based on how competent the learner is about solving it
+#   ./vy-list-competency
+# (2) list _studied_ or _studying_ problems based on competency given tags and direction of the competency (inc: increasing or dec: decreasing)
+#   ./vy-list-competency -t {tags_separated_by_comma}
+#                        -d {direction}
+
+BASEDIR=$(dirname "$0")
+. "${BASEDIR}"/vy-config
 
 STATES="studied,studying"
 TAGS="all"
 BY="competency"
 DIRECTION="inc"
 
-while getopts ":s:t:b:d:" opt; do
+while getopts ":t:d:" opt; do
   case $opt in
     t) TAGS="$OPTARG"
     ;;
@@ -21,6 +25,12 @@ while getopts ":s:t:b:d:" opt; do
   esac
 done
 
-echo -e "$(python ../main.py --subject $SUBJECT -c list --states $STATES --tags $TAGS --by $BY --direction $DIRECTION)" | fzf --cycle --ansi
+printf "%s" "$(python ../main.py --subject "$SUBJECT" \
+	                             -c list \
+								 --states "$STATES" \
+								 --tags "$TAGS" \
+								 --by "$BY" \
+								 --direction "$DIRECTION")" \
+	   | fzf --cycle --ansi
 
 
