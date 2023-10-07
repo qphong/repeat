@@ -3,11 +3,44 @@
     "identifier": "88",
     "tags": [
       "two-pointers",
+      "M",
       "vy-todo",
-      "M"
+      "top_interview_150"
     ],
     "content": {
       "name": "merge-sorted-array"
+    }
+  },
+  "27": {
+    "identifier": "27",
+    "tags": [
+      "E",
+      "top_interview_150"
+    ],
+    "content": {
+      "name": "remove-element"
+    }
+  },
+  "26": {
+    "identifier": "26",
+    "tags": [
+      "two-pointers",
+      "E",
+      "top_interview_150"
+    ],
+    "content": {
+      "name": "remove-duplicates-from-sorted-array"
+    }
+  },
+  "80": {
+    "identifier": "80",
+    "tags": [
+      "two-pointers",
+      "M",
+      "top_interview_150"
+    ],
+    "content": {
+      "name": "remove-duplicates-from-sorted-array-ii"
     }
   }
 }

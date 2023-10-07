@@ -227,7 +227,8 @@ def show_duration(info_dict, emphasis=False):
 
 def show_tag(info_dict, emphasis=False):
     string = ":"
-    for i, tag in enumerate(info_dict["tags"]):
+    sorted_tag = sorted(info_dict["tags"])
+    for i, tag in enumerate(sorted_tag):
         tag_str = get_readable_tag(tag, style=True)
         string += tag_str + (":" if i < len(info_dict["tags"]) - 1 else "")
     string += ":"
