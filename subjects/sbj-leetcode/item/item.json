@@ -2,10 +2,10 @@
   "88": {
     "identifier": "88",
     "tags": [
-      "two-pointers",
-      "M",
       "vy-todo",
-      "top_interview_150"
+      "top_interview_150",
+      "M",
+      "two-pointers"
     ],
     "content": {
       "name": "merge-sorted-array"
@@ -24,9 +24,9 @@
   "26": {
     "identifier": "26",
     "tags": [
-      "two-pointers",
       "E",
-      "top_interview_150"
+      "top_interview_150",
+      "two-pointers"
     ],
     "content": {
       "name": "remove-duplicates-from-sorted-array"
@@ -35,9 +35,9 @@
   "80": {
     "identifier": "80",
     "tags": [
-      "two-pointers",
+      "top_interview_150",
       "M",
-      "top_interview_150"
+      "two-pointers"
     ],
     "content": {
       "name": "remove-duplicates-from-sorted-array-ii"

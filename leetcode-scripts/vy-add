@@ -1,7 +1,12 @@
-#!/bin/sh
+#!/usr/bin/sh
+# to add a problem from problem_lists.txt
+#   ./vy-add
+# to add a problem with a problem_name
+#   ./vy-add -i {problem_id} -n {problem_name} -t {problem_tags_separated_by_comma}
+#            (optional)      (required)        (optional)
 
-BASEDIR=$(dirname $0)
-source "${BASEDIR}"/vy-config
+BASEDIR=$(dirname "$0")
+. "${BASEDIR}"/vy-config
 
 IDENTIFIER=""
 NAME=""
@@ -23,39 +28,50 @@ done
 
 if [ "$NAME" != "" ]
 then
-	if [ "$IDENTIFIER" == "" ]
+	if [ "$IDENTIFIER" = "" ]
 	then
 		echo "No identifier provided. Auto generate identifier."
 		echo "Add Auto_ID ($NAME)"
 
-		if [ "$TAGS" == "" ]
+		if [ "$TAGS" = "" ]
 		then
-			python ../main.py --subject $SUBJECT -c add --name $NAME
+			python ../main.py --subject "$SUBJECT" -c add --name "$NAME"
 		else
-			python ../main.py --subject $SUBJECT -c add --name $NAME --tags $TAGS
+			python ../main.py --subject "$SUBJECT" -c add --name "$NAME" --tags "$TAGS"
 		fi
 	else
 		echo "Add $IDENTIFIER ($NAME)"
-		if [ "$TAGS" == "" ]
+		if [ "$TAGS" = "" ]
 		then
-			python ../main.py --subject $SUBJECT -c add --identifier $IDENTIFIER --name $NAME
+			python ../main.py --subject "$SUBJECT" \
+				              -c add \
+							  --identifier "$IDENTIFIER" \
+							  --name "$NAME"
 		else
-			python ../main.py --subject $SUBJECT -c add --identifier $IDENTIFIER --name $NAME --tags $TAGS
+			python ../main.py --subject "$SUBJECT" \
+				              -c add \
+							  --identifier "$IDENTIFIER" \
+							  --name "$NAME" \
+							  --tags "$TAGS"
 		fi
 	fi
 
 	exit 0
 fi
 
-PROBLEMINFO="$(cat "problem-lists.txt" | fzf --cycle)"
+PROBLEM="$(cat "problem-lists.txt" | fzf --cycle)"
 
-IDENTIFIER="$(echo -e "$PROBLEMINFO" | awk '{print $1}')"
-NAME="$(echo -e "$PROBLEMINFO" | awk '{print $2}')"
-TAGS="$(echo -e "$PROBLEMINFO" | awk '{print $3}')"
+IDENTIFIER="$(printf "%s" "$PROBLEM" | awk '{print $1}')"
+NAME="$(printf "%s" "$PROBLEM" | awk '{print $2}')"
+TAGS="$(printf "%s" "$PROBLEM" | awk '{print $3}')"
 
 if [ "$NAME" != "" ]
 then
-	echo "Add $IDENTIFIER ($NAME)"
-	python ../main.py --subject $SUBJECT -c add --identifier $IDENTIFIER --name $NAME --tags $TAGS
+	printf "Add %s (%s)" "$IDENTIFIER" "$NAME"
+	python ../main.py --subject "$SUBJECT" \
+	                  -c add \
+	                  --identifier "$IDENTIFIER" \
+	                  --name "$NAME" \
+					  --tags "$TAGS"
 fi
 
