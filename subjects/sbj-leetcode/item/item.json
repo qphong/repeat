@@ -2,10 +2,10 @@
   "88": {
     "identifier": "88",
     "tags": [
-      "M",
+      "top_interview_150",
       "two-pointers",
       "vy-todo",
-      "top_interview_150"
+      "M"
     ],
     "content": {
       "name": "merge-sorted-array"
@@ -14,8 +14,8 @@
   "27": {
     "identifier": "27",
     "tags": [
-      "E",
-      "top_interview_150"
+      "top_interview_150",
+      "E"
     ],
     "content": {
       "name": "remove-element"
@@ -24,9 +24,9 @@
   "26": {
     "identifier": "26",
     "tags": [
+      "top_interview_150",
       "two-pointers",
-      "E",
-      "top_interview_150"
+      "E"
     ],
     "content": {
       "name": "remove-duplicates-from-sorted-array"
@@ -35,9 +35,9 @@
   "80": {
     "identifier": "80",
     "tags": [
-      "M",
+      "top_interview_150",
       "two-pointers",
-      "top_interview_150"
+      "M"
     ],
     "content": {
       "name": "remove-duplicates-from-sorted-array-ii"
@@ -46,11 +46,22 @@
   "169": {
     "identifier": "169",
     "tags": [
-      "E",
-      "top_interview_150"
+      "top_interview_150",
+      "E"
     ],
     "content": {
       "name": "majority-element"
+    }
+  },
+  "189": {
+    "identifier": "189",
+    "tags": [
+      "top_interview_150",
+      "vy-todo",
+      "M"
+    ],
+    "content": {
+      "name": "rotate-array"
     }
   }
 }

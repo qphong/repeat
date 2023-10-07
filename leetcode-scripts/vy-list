@@ -15,7 +15,7 @@ BASEDIR=$(dirname "$0")
 
 STATES="all"
 TAGS="all"
-BY="view"
+BY="recent"
 DIRECTION="inc"
 
 while getopts ":s:t:b:d:" opt; do
