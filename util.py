@@ -90,33 +90,17 @@ def get_info(identifier, item, tracker):
 
 
 def get_readable_tag(tag, style=False):
-    if not style:
+    if not style or tag not in constants.TAG_STYLE:
         return tag
 
-    if tag.startswith("E"):
-        return f"{constants.STYLE_OKGREEN}{constants.STYLE_BOLD}{tag}{constants.STYLE_ENDC}"
-    elif tag.startswith("M"):
-        return (
-            f"{constants.STYLE_OKBLUE}{constants.STYLE_BOLD}{tag}{constants.STYLE_ENDC}"
-        )
-    elif tag.startswith("H"):
-        return (
-            f"{constants.STYLE_FAIL}{constants.STYLE_BOLD}{tag}{constants.STYLE_ENDC}"
-        )
-
-    return tag
+    return constants.TAG_STYLE[tag]
 
 
 def get_readable_state(state, style=False):
-    if not style:
-        return f"_state_"
+    if not style or state not in constants.STATE_STYLE:
+        return state
 
-    if state == constants.STATE_NEW:
-        return f"{constants.STYLE_WARNING}_{state}_{constants.STYLE_ENDC}"
-    elif state == constants.STATE_STUDYING:
-        return f"{constants.STYLE_FAIL}_{state}_{constants.STYLE_ENDC}"
-
-    return state
+    return constants.STATE_STYLE[state]
 
 
 def get_readable_info(
@@ -183,17 +167,13 @@ def show_since(info_dict, emphasis=False):
         "since_last_start_study" in info_dict
         and info_dict["since_last_start_study"] < constants.INF
     ):
-        since_str = (
-            f"{get_readable_duration(info_dict['since_last_start_study'])} ago"
-        )
+        since_str = f"{get_readable_duration(info_dict['since_last_start_study'])} ago"
 
     elif (
         "since_last_end_study" in info_dict
         and info_dict["since_last_end_study"] < constants.INF
     ):
-        since_str = (
-            f"{get_readable_duration(info_dict['since_last_end_study'])} ago"
-        )
+        since_str = f"{get_readable_duration(info_dict['since_last_end_study'])} ago"
 
     if emphasis:
         return f"{constants.BOLD_TEXT(since_str):<11s}"

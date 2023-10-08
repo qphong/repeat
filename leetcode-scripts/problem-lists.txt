@@ -165,7 +165,7 @@
 269 alien-dictionary bfs,H-
 270 closest-binary-search-tree-value tree,M+
 272 closest-binary-search-tree-value-ii tree,M+
-274 h-index hash-map,H
+274 h-index hash-map,H,top_interview_150
 275 h-index-ii binary-search,H
 275 h-index-ii greedy,M+
 276 paint-fence dynamic-programming,H-

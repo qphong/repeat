@@ -2,10 +2,10 @@
   "88": {
     "identifier": "88",
     "tags": [
-      "M",
-      "two-pointers",
       "vy-todo",
-      "top_interview_150"
+      "top_interview_150",
+      "two-pointers",
+      "M"
     ],
     "content": {
       "name": "merge-sorted-array"
@@ -24,8 +24,8 @@
   "26": {
     "identifier": "26",
     "tags": [
-      "two-pointers",
       "E",
+      "two-pointers",
       "top_interview_150"
     ],
     "content": {
@@ -35,9 +35,9 @@
   "80": {
     "identifier": "80",
     "tags": [
-      "M",
+      "top_interview_150",
       "two-pointers",
-      "top_interview_150"
+      "M"
     ],
     "content": {
       "name": "remove-duplicates-from-sorted-array-ii"
@@ -56,9 +56,9 @@
   "189": {
     "identifier": "189",
     "tags": [
-      "M",
       "vy-todo",
-      "top_interview_150"
+      "top_interview_150",
+      "M"
     ],
     "content": {
       "name": "rotate-array"
@@ -77,8 +77,8 @@
   "122": {
     "identifier": "122",
     "tags": [
-      "M",
-      "top_interview_150"
+      "top_interview_150",
+      "M"
     ],
     "content": {
       "name": "best-time-to-buy-and-sell-stock-ii"
@@ -87,9 +87,9 @@
   "55": {
     "identifier": "55",
     "tags": [
-      "greedy",
       "top_interview_150",
-      "E+"
+      "E+",
+      "greedy"
     ],
     "content": {
       "name": "jump-game"
@@ -98,13 +98,24 @@
   "45": {
     "identifier": "45",
     "tags": [
-      "M",
-      "greedy",
       "top_interview_150",
-      "review"
+      "M",
+      "review",
+      "greedy"
     ],
     "content": {
       "name": "jump-game-ii"
+    }
+  },
+  "274": {
+    "identifier": "274",
+    "tags": [
+      "hash-map",
+      "H",
+      "top_interview_150"
+    ],
+    "content": {
+      "name": "h-index"
     }
   }
 }
