@@ -50,7 +50,7 @@ then
 	exit 0
 fi
 
-ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --by recent --direction dec)" | fzf --cycle --ansi)"
+ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --by recent --direction inc)" | fzf --cycle --ansi)"
 
 IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
 NAME="$(echo "$ITEM" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"

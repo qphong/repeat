@@ -25,14 +25,14 @@
 42 trapping-rain-water greedy,H-
 42 trapping-rain-water stack,H
 44 wildcard-matching dynamic-programming,H-
-45 jump-game-ii greedy,M
+45 jump-game-ii greedy,M,top_interview_150
 46 permutations math,M+
 47 permutations-ii math,H
 48 rotate-image others,M+
 49 group-anagrams hash-map,M+
 51 n-queens dfs,M
 53 maximum-subarray dynamic-programming,E+
-55 jump-game greedy,E+
+55 jump-game greedy,E+,top_interview_150
 56 merge-intervals others,M
 57 insert-intervals others,M
 60 permutation-sequence math,H
@@ -69,6 +69,8 @@
 115 distinct-subsequences dynamic-programming,H-
 117 populating-next-right-pointers-in-each-node-ii tree,H
 120 triangle dynamic-programming,E
+121 best-time-to-buy-and-sell-stock E,top_interview_150
+122 best-time-to-buy-and-sell-stock-ii M,top_interview_150
 123 best-time-to-buy-and-sell-stock-iii dynamic-programming,M+
 124 binary-tree-maximum-path-sum tree,M
 126 word-ladder-ii bfs,M+

@@ -118,5 +118,85 @@
     "prev_start_study_time": 1696693069.535819,
     "prev_end_study_time": 1696693750.98527,
     "state": "studied"
+  },
+  "121": {
+    "identifier": "121",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 412.5229721069336,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1696729689.402484,
+    "end_study_time": 1696730101.925456,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "122": {
+    "identifier": "122",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 222.9868359565735,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1696737913.088618,
+    "end_study_time": 1696738136.075454,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "55": {
+    "identifier": "55",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 438.4564290046692,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1696738216.783964,
+    "end_study_time": 1696738655.240393,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "45": {
+    "identifier": "45",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 2,
+        "n_fail": 0,
+        "n_study": 2,
+        "study_duration": 1390.9521420001984,
+        "box": 2
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1696739941.462537,
+    "end_study_time": 1696740461.68341,
+    "prev_start_study_time": 1696738727.82176,
+    "prev_end_study_time": 1696739598.553029,
+    "state": "studied"
   }
 }
