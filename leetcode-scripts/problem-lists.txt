@@ -2,10 +2,11 @@
 4 median-of-two-sorted-arrays binary-search,H
 4 median-of-two-sorted-arrays priority-queue,H
 5 longest-palindromic-substring string,H
-6 zigzag-conversion string,M+
+6 zigzag-conversion string,M+,top_interview_150
 7 reverse-integer others,M
 10 regular-expression-matching dynamic-programming,H
 11 container-with-most-water two-pointers,M+
+12 integer-to-roman M,top_interview_150
 15 3sum two-pointers,M
 16 3sum-closet two-pointers,M
 18 4sum two-pointers,M
@@ -22,8 +23,7 @@
 37 sudoku-solver dfs,M+
 40 combination-sum-ii dfs,M+
 41 first-missing-positive greedy,H
-42 trapping-rain-water greedy,H-
-42 trapping-rain-water stack,H
+42 trapping-rain-water greedy,stack,H-,top_interview_150
 44 wildcard-matching dynamic-programming,H-
 45 jump-game-ii greedy,M,top_interview_150
 46 permutations math,M+
@@ -38,7 +38,7 @@
 60 permutation-sequence math,H
 61 rotate-list linked-list,M
 65 valid-number others,H-
-68 text-justification string,H
+68 text-justification string,H,top_interview_150
 71 simplify-path stack,M
 72 edit-distance dynamic-programming,H-
 75 sort-colors two-pointers,M+
@@ -1231,3 +1231,4 @@
 2563 count-the-number-of-fair-pairs binary-search,M+
 2564 substring-xor-queries two-pointers,H-
 2565 subsequence-with-the-minimum-score greedy,H-
+151 reverse-words-in-a-string M,top_interview_150
