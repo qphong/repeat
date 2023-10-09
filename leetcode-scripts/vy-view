@@ -1,0 +1,60 @@
+#!/usr/bin/sh
+# (1) to view a problem solution (previously solved) from problem_lists.txt
+#   ./vy-view
+# (2) to view a problem solution (previously solved) with a problem_id
+#   ./vy-view -i {problem_id}
+#
+BASEDIR=$(dirname "$0")
+. "${BASEDIR}"/vy-config
+
+IDENTIFIER=""
+
+while getopts ":i:" opt; do
+  case $opt in
+    i) IDENTIFIER="$OPTARG"
+    ;;
+    \?) echo "Invalid option -$OPTARG" >&2
+    exit 1
+    ;;
+  esac
+done
+
+
+if [ "$IDENTIFIER" != "" ]
+then
+	NAME="$(python ../main.py --subject $SUBJECT -c get_name -i "$IDENTIFIER")"
+
+	if [ "$NAME" = "##_not_exist_##" ]
+	then
+		echo "Problem $IDENTIFIER does not exist!"
+		exit 1
+	fi
+
+	PATHTOCODE="$(python ../main.py --subject $SUBJECT \
+	                                -c get_file \
+									-i "$IDENTIFIER" \
+									--postfix "code.py")"
+	$EDITOR "$PATHTOCODE"
+	exit 0
+fi
+
+
+ITEM="$(printf "%s" "$(python ../main.py --subject $SUBJECT \
+	                                     -c list \
+										 --states studied,studying)" \
+					   | fzf --cycle --ansi)"
+
+IDENTIFIER="$(printf "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
+NAME="$(printf "$ITEM" | awk -F ']' '{print $2}' \
+	                   | awk -F "\"" '{print $2}' \
+					   | sed 's/[^[:alnum:]-]//g')"
+
+if [ "$ITEM" != "" ]
+then
+	PATHTOCODE="$(python ../main.py --subject $SUBJECT \
+		                            -c get_file \
+									-i "$IDENTIFIER" \
+									--postfix "code.py")"
+	$EDITOR "$PATHTOCODE"
+fi
+

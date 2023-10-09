@@ -25,9 +25,9 @@ done
 if [ "$TAGS" = "" ]
 then
 	ALL_TAGS="$(python ../main.py --subject $SUBJECT -c list_state_by_tag --states new,studied,studying)"
-	TAGS="$(printf "ADD NEW TAG ***\n%s" "$ALL_TAGS" | fzf --ansi --prompt "Select a tag to add: " | awk -F ':' '{ print $1 }' | xargs)"
+	TAGS="$(printf "*** ADD NEW TAG ***\n%s" "$ALL_TAGS" | fzf --ansi --prompt "Select a tag to add: " | awk -F ':' '{ print $1 }' | xargs)"
 
-	if [ "$TAGS" = "" ] || [ "$TAGS" = "ADD NEW TAG ***" ]
+	if [ "$TAGS" = "" ] || [ "$TAGS" = "*** ADD NEW TAG ***" ]
 	then
 		read -p "Please enter a new tag: " TAGS
 		if [ "$TAGS" = "" ]

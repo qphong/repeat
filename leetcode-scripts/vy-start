@@ -21,7 +21,7 @@ then
 
 	if [[ "$NAME" == "##_not_exist_##" ]]
 	then
-		echo "$IDENTIFIER does not exist!"
+		echo "Problem $IDENTIFIER does not exist!"
 		exit 1
 	fi
 

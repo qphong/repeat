@@ -83,8 +83,8 @@
 131 palindrome-partitioning dynamic-programming,M+
 132 palindrome-partitioning-ii dynamic-programming,H-
 133 clone-graph recursion,M+
-134 gas-station greedy,H
-135 candy greedy,M+
+134 gas-station greedy,H,top_interview_150
+135 candy greedy,M+,top_interview_150
 136 single-number bit-manipulation,M
 137 single-number-ii bit-manipulation,H-
 139 word-break trie,M+
@@ -149,6 +149,7 @@
 233 number-of-digit-one others,H-
 235 lowest-common-ancestor-of-a-binary-search-tree tree,M
 236 lowest-common-ancestor-of-a-binary-tree tree,M+
+238 product-of-array-except-self M,top_interview_150
 239 sliding-window-maximum-deque,H-
 240 search-a-2d-matrix-ii others,M+
 241 different-ways-to-add-parentheses recursion,M+
@@ -237,7 +238,7 @@
 376 wiggle-subsequence dynamic-programming,H-
 377 combination-sum-iv dynamic-programming,M
 378 kth-smallest-element-in-a-sorted-matrix binary-search,H-
-380 insert-delete-getrandom-o(1) design,M+
+380 insert-delete-getrandom-o(1) design,M+,top_interview_150
 381 insert-delete-getrandom-o1-duplicates-allowed design,H-
 382 linked-list-random-node math,H
 385 mini-parser stack,H

@@ -85,11 +85,13 @@ A study item (a Leetcode problem) has 3 states: (1) new (haven't attempted), (2)
 | Command                    | Description                                                                                                                    |
 |----------------------------+--------------------------------------------------------------------------------------------------------------------------------|
 | =vy-start=                 | select a problem to start coding with =nvim= (change to another editor in =leetcode-scripts/vy-config=). The program automatically creates a python script with a unique name (based on the problem id) in =subjects/sbj-leetcode/study=, and opens it with a text editor (default is =nvim=). If we start the same problem with =vy-start=, the same file is opened, so the program helps us manage the python scripts of all solved problems. |
-| =vy-start -i {problem_id}= | same as =vy-start= but with provided =problem_id=                                                                           |
+| =vy-start -i {problem_id}= | same as =vy-start= but with provided =problem_id=                                                                              |
 | =vy-end=                   | complete a problem with result: pass (we solved it by ourself, like in an interview), fail (we looked at the solution, or we asked someone) |
 | =vy-cancel=                | cancel solving a problem                                                                                                       |
 | =vy-note=                  | select a problem to add a note (or retrieve previous note). It is similar to =vy-start=. A markdown file with a unique name (based on the problem id) is created in =subjects/sbj-leetcode/study=. |
-| =vy-note -i {problem_i}=   | same as =vy-note=, but with a provided =problem_id=                                                                            |
+| =vy-note -i {problem_id}=  | same as =vy-note=, but with a provided =problem_id=                                                                            |
+| =vy-view=                  | view a previously solved solution without starting the problem                                                                 |
+| =vy-view -i {problem_id}=  | same as =vy-view=, but with a provided =problem_id=                                                                            |
 |----------------------------+--------------------------------------------------------------------------------------------------------------------------------|
 
 Below are screenshots of =vy-start=. It first lists all tags with the number of problems in each tag (and in a state).
