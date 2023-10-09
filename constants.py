@@ -139,8 +139,18 @@ TAG_STYLE = {
     "refactor": f"{STYLE_OKGREEN}refactor{STYLE_ENDC}",
 }
 
+def GET_STYLED_TAG(tag):
+    if tag in TAG_STYLE:
+        return TAG_STYLE[tag]
+    return tag
+
 STATE_STYLE = {
     STATE_NEW: f"{STYLE_WARNING}_new_{STYLE_ENDC}",
     STATE_STUDYING: f"{STYLE_FAIL}_studying_{STYLE_ENDC}",
     STATE_STUDIED: f"{STYLE_FAIL}_studied_{STYLE_ENDC}",
 }
+
+def GET_STYLED_STATE(state):
+    if state in STATE_STYLE:
+        return STATE_STYLE[state]
+    return state

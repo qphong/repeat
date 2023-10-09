@@ -24,6 +24,7 @@ parser.add_argument(
         "get_file",  # subject, identifier, postifx
         "get_name",  # subject, identifier
         "get_tags_by_identifier",  # subject, identifier
+        "get_new_tags_to_identifier",  # subject, identifier
         "list_file",  # list all postfix # subject, identifier
         "review",  # subject, tags, k
         "add_tag",  # subject, identifier, tags
@@ -182,7 +183,7 @@ elif command == "get_name":
 
 elif command == "get_tags_by_identifier":
     subject, identifier = util.parse_args(
-        config, ["subject", "identifier"], [True, True, True]
+        config, ["subject", "identifier"], [True, True]
     )
     manager = Manager(subject)
     manager.load()
@@ -192,6 +193,22 @@ elif command == "get_tags_by_identifier":
         exit(1)
 
     for tag in sorted(tags):
+        print(tag)
+
+elif command == "get_new_tags_to_identifier":  # subject, identifier
+    subject, identifier = util.parse_args(
+        config, ["subject", "identifier"], [True, True]
+    )
+    manager = Manager(subject)
+    manager.load()
+    tags = manager.get_tags_by_identifier(identifier)
+    new_tags = list(manager.tags.difference(tags))
+
+    if not new_tags:
+        print(f"Cannot find any tag from {identifier}")
+        exit(1)
+
+    for tag in sorted(new_tags):
         print(tag)
 
 elif command == "list_file":
@@ -291,7 +308,7 @@ elif command == "list_tag":
     manager.load()
     tag_count = manager.list_tags(states)
     for tag, count in tag_count:
-        print(f"{tag}: {count}")
+        print(f"{tag:20s}: {count:>4d}")
 
 elif command == "list_state":
     # subject, tags
@@ -311,11 +328,19 @@ elif command == "list_state_by_tag":
     tag_count = manager.list_tags(states)
 
     for tag, count in tag_count:
-        print(f"{tag:20s}: {count:3d} -- ", end="")
+
+        print(f"{tag:20s} : {count:>4d}", end="")
+
         state_count = manager.list_states([tag], states)
+        display_state = False
         for state, scount in state_count:
             if state != constants.STATE_STUDIED:
-                print(f"{state}:{scount}", end="  ")
+                styled_state = constants.GET_STYLED_STATE(state)
+
+                if not display_state:
+                    print(":", end="")
+                print(f"{styled_state}({scount})", end=" ")
+                display_state = True
         print("")
 
 else:

@@ -22,21 +22,6 @@ while getopts ":i:t:" opt; do
   esac
 done
 
-if [ "$TAGS" = "" ]
-then
-	ALL_TAGS="$(python ../main.py --subject $SUBJECT -c list_state_by_tag --states new,studied,studying)"
-	TAGS="$(printf "*** ADD NEW TAG ***\n%s" "$ALL_TAGS" | fzf --ansi --prompt "Select a tag to add: " | awk -F ':' '{ print $1 }' | xargs)"
-
-	if [ "$TAGS" = "" ] || [ "$TAGS" = "*** ADD NEW TAG ***" ]
-	then
-		read -p "Please enter a new tag: " TAGS
-		if [ "$TAGS" = "" ]
-		then
-			printf "No tag is provided. Exit."
-			exit 1
-		fi
-	fi
-fi
 
 if [ "$IDENTIFIER" != "" ]
 then
@@ -46,6 +31,48 @@ then
 	then
 		echo "$IDENTIFIER does not exist!"
 		exit 1
+	fi
+else
+	ITEM="$(printf "%s" "$(python ../main.py \
+								  --subject "$SUBJECT" \
+								  -c list \
+								  --by recent \
+								  --direction inc)" \
+			| fzf --cycle --ansi)"
+
+	if [ "$ITEM" = "" ]
+	then
+		echo "No item is selected. Exit"
+		exit 0
+	fi
+
+	IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
+	NAME="$(echo "$ITEM" \
+			| awk -F ']' '{print $2}' \
+			| awk -F "\"" '{print $2}' \
+			| sed 's/[^[:alnum:]-]//g')"
+fi
+
+
+if [ "$TAGS" = "" ]
+then
+	ALL_TAGS="$(python ../main.py --subject $SUBJECT -c get_new_tags_to_identifier -i "$IDENTIFIER")"
+	TAGS="$(printf "*** ADD NEW TAG ***\n%s" "$ALL_TAGS" | fzf --ansi --prompt "Select a tag to add: " | awk -F ':' '{ print $1 }' | xargs)"
+
+	if [ "$TAGS" = "" ]
+	then
+		printf "No tag is provided. Exit"
+		exit 0
+	fi
+
+	if [ "$TAGS" = "*** ADD NEW TAG ***" ]
+	then
+		read -p "Please enter a new tag: " TAGS
+		if [ "$TAGS" = "" ]
+		then
+			printf "No tag is provided. Exit."
+			exit 1
+		fi
 	fi
 
 	yesno="$(printf "yes\nno" \
@@ -59,26 +86,3 @@ then
 
 	exit 0
 fi
-
-ITEM="$(printf "%s" "$(python ../main.py \
-	                          --subject "$SUBJECT" \
-							  -c list \
-							  --by recent \
-							  --direction inc)" \
-	    | fzf --cycle --ansi)"
-
-IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
-NAME="$(echo "$ITEM" \
-	    | awk -F ']' '{print $2}' \
-		| awk -F "\"" '{print $2}' \
-		| sed 's/[^[:alnum:]-]//g')"
-
-yesno="$(printf "yes\nno" \
-		 | fzf --cycle --ansi --prompt "Add tags $TAGS to $IDENTIFIER ($NAME)? ")"
-
-if [ "$yesno" = "yes" ]
-then
-	echo "Add tags: $TAGS to: $IDENTIFIER ($NAME)"
-	python ../main.py --subject "$SUBJECT" -c add_tag -i "$IDENTIFIER" --tags "$TAGS"
-fi
-
