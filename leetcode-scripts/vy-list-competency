@@ -26,7 +26,7 @@ while getopts ":t:d:" opt; do
   esac
 done
 
-printf "%s" "$(python ../main.py --subject "$SUBJECT" \
+printf "%s" "$(python "${BASEDIR}"/../main.py --subject "$SUBJECT" \
 	                             -c list \
 								 --states "$STATES" \
 								 --tags "$TAGS" \

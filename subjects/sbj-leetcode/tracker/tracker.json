@@ -393,6 +393,394 @@
   },
   "167": {
     "identifier": "167",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 209.84281086921692,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1696905337.892795,
+    "end_study_time": 1696905547.735606,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "11": {
+    "identifier": "11",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 333.84701776504517,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1696905621.670838,
+    "end_study_time": 1696905955.517856,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "15": {
+    "identifier": "15",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 647.25505900383,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1696906076.916423,
+    "end_study_time": 1696906724.171482,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "209": {
+    "identifier": "209",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 2825.3296370506287,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1696907177.244596,
+    "end_study_time": 1696910002.574233,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "3": {
+    "identifier": "3",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 351.0601110458374,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1696963766.26409,
+    "end_study_time": 1696964117.324201,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "30": {
+    "identifier": "30",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 2682.2872791290283,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1697052522.870123,
+    "end_study_time": 1697055205.157402,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "76": {
+    "identifier": "76",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 1256.930338859558,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1696964446.8989,
+    "end_study_time": 1696965703.829239,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "1739": {
+    "identifier": "1739",
+    "time_aware_tracker_data": {},
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": -1e+16,
+    "end_study_time": 1e+16,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "new"
+  },
+  "36": {
+    "identifier": "36",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 2,
+        "n_fail": 0,
+        "n_study": 2,
+        "study_duration": 1090.7419621944427,
+        "box": 2
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1697209522.315485,
+    "end_study_time": 1697209797.486128,
+    "prev_start_study_time": 1697208318.509559,
+    "prev_end_study_time": 1697209134.080878,
+    "state": "studied"
+  },
+  "54": {
+    "identifier": "54",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 670.442624092102,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1697209919.050262,
+    "end_study_time": 1697210589.492886,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "48": {
+    "identifier": "48",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 12616.918586969376,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1697210678.20521,
+    "end_study_time": 1697223295.123797,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "73": {
+    "identifier": "73",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 2867.862786054611,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1697223426.128291,
+    "end_study_time": 1697226293.991077,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "289": {
+    "identifier": "289",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 4.623226881027222,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1697263933.286379,
+    "end_study_time": 1697263937.909606,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "49": {
+    "identifier": "49",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 185.27378511428833,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1697725871.525873,
+    "end_study_time": 1697726056.799658,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "128": {
+    "identifier": "128",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 0,
+        "n_fail": 1,
+        "n_study": 1,
+        "study_duration": 4624.563500881195,
+        "box": 0
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1697726075.594623,
+    "end_study_time": 1697730700.158124,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "56": {
+    "identifier": "56",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 619.6534190177917,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1697730805.360074,
+    "end_study_time": 1697731425.013493,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "57": {
+    "identifier": "57",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 1275.7673988342285,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1697742869.317639,
+    "end_study_time": 1697744145.085038,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "452": {
+    "identifier": "452",
+    "time_aware_tracker_data": {
+      "0": {
+        "n_pass": 1,
+        "n_fail": 0,
+        "n_study": 1,
+        "study_duration": 509.0424690246582,
+        "box": 1
+      }
+    },
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": 1697744278.015158,
+    "end_study_time": 1697744787.057627,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "studied"
+  },
+  "71": {
+    "identifier": "71",
+    "time_aware_tracker_data": {},
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": -1e+16,
+    "end_study_time": 1e+16,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "new"
+  },
+  "155": {
+    "identifier": "155",
+    "time_aware_tracker_data": {},
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": -1e+16,
+    "end_study_time": 1e+16,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "new"
+  },
+  "150": {
+    "identifier": "150",
+    "time_aware_tracker_data": {},
+    "interval": 86400.0,
+    "oldest_epoch": 5184000.0,
+    "max_tracker_data_key": 60,
+    "start_study_time": -1e+16,
+    "end_study_time": 1e+16,
+    "prev_start_study_time": -1e+16,
+    "prev_end_study_time": 1e+16,
+    "state": "new"
+  },
+  "224": {
+    "identifier": "224",
     "time_aware_tracker_data": {},
     "interval": 86400.0,
     "oldest_epoch": 5184000.0,

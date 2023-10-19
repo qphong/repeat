@@ -3,7 +3,7 @@
 BASEDIR=$(dirname $0)
 source "${BASEDIR}"/vy-config
 
-ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --states studying)" | fzf --cycle --ansi)"
+ITEM="$(echo -e "$(python "${BASEDIR}"/../main.py --subject $SUBJECT -c list --states studying)" | fzf --cycle --ansi)"
 
 if [[ "$ITEM" == "" ]]
 then
@@ -19,6 +19,6 @@ yesno="$(echo -e "yes\nno" | fzf --cycle --ansi --prompt "Cancel studying $IDENT
 if [[ "$ITEM" != "" && "$yesno" == "yes" ]]
 then
 	echo "Cancel studying $IDENTIFIER ($NAME)"
- 	python ../main.py --subject $SUBJECT -c cancel -i "$IDENTIFIER"
+ 	python "${BASEDIR}"/../main.py --subject $SUBJECT -c cancel -i "$IDENTIFIER"
 fi
 

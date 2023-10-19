@@ -6,7 +6,7 @@
 BASEDIR=$(dirname "$0")
 . "${BASEDIR}"/vy-config
 
-ITEM="$(printf "%s" "$(python ../main.py --subject "$SUBJECT" \
+ITEM="$(printf "%s" "$(python "${BASEDIR}"/../main.py --subject "$SUBJECT" \
                                          -c list \
 										 --states studying)" \
 			           | fzf --cycle --ansi)"
@@ -25,7 +25,7 @@ then
 	if [ "$passfail" != "" ]
 	then
 		printf "%s %s (%s)" "$passfail" "$IDENTIFIER" "$NAME"
-		python ../main.py --subject "$SUBJECT" \
+		python "${BASEDIR}"/../main.py --subject "$SUBJECT" \
 		                  -c end \
 						  -i "$IDENTIFIER" \
 						  --passfail "$passfail"

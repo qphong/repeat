@@ -25,7 +25,7 @@ done
 
 if [ "$IDENTIFIER" != "" ]
 then
-	NAME="$(python ../main.py --subject "$SUBJECT" -c get_name -i "$IDENTIFIER")"
+	NAME="$(python "${BASEDIR}"/../main.py --subject "$SUBJECT" -c get_name -i "$IDENTIFIER")"
 
 	if [ "$NAME" = "##_not_exist_##" ]
 	then
@@ -33,7 +33,7 @@ then
 		exit 1
 	fi
 else
-	ITEM="$(printf "%s" "$(python ../main.py \
+	ITEM="$(printf "%s" "$(python "${BASEDIR}"/../main.py \
 								  --subject "$SUBJECT" \
 								  -c list \
 								  --by recent \
@@ -56,7 +56,7 @@ fi
 
 if [ "$TAGS" = "" ]
 then
-	ALL_TAGS="$(python ../main.py --subject $SUBJECT -c get_new_tags_to_identifier -i "$IDENTIFIER")"
+	ALL_TAGS="$(python "${BASEDIR}"/../main.py --subject $SUBJECT -c get_new_tags_to_identifier -i "$IDENTIFIER")"
 	TAGS="$(printf "*** ADD NEW TAG ***\n%s" "$ALL_TAGS" | fzf --ansi --prompt "Select a tag to add: " | awk -F ':' '{ print $1 }' | xargs)"
 
 	if [ "$TAGS" = "" ]
@@ -81,7 +81,7 @@ then
 	if [ "$yesno" = "yes" ]
 	then
 		echo "Add tags: $TAGS to: $IDENTIFIER ($NAME)"
-		python ../main.py --subject "$SUBJECT" -c add_tag -i "$IDENTIFIER" --tags "$TAGS"
+		python "${BASEDIR}"/../main.py --subject "$SUBJECT" -c add_tag -i "$IDENTIFIER" --tags "$TAGS"
 	fi
 
 	exit 0

@@ -35,20 +35,20 @@ then
 
 		if [ "$TAGS" = "" ]
 		then
-			python ../main.py --subject "$SUBJECT" -c add --name "$NAME"
+			python "${BASEDIR}"/../main.py --subject "$SUBJECT" -c add --name "$NAME"
 		else
-			python ../main.py --subject "$SUBJECT" -c add --name "$NAME" --tags "$TAGS"
+			python "${BASEDIR}"/../main.py --subject "$SUBJECT" -c add --name "$NAME" --tags "$TAGS"
 		fi
 	else
 		echo "Add $IDENTIFIER ($NAME)"
 		if [ "$TAGS" = "" ]
 		then
-			python ../main.py --subject "$SUBJECT" \
+			python "${BASEDIR}"/../main.py --subject "$SUBJECT" \
 				              -c add \
 							  --identifier "$IDENTIFIER" \
 							  --name "$NAME"
 		else
-			python ../main.py --subject "$SUBJECT" \
+			python "${BASEDIR}"/../main.py --subject "$SUBJECT" \
 				              -c add \
 							  --identifier "$IDENTIFIER" \
 							  --name "$NAME" \
@@ -68,7 +68,7 @@ TAGS="$(printf "%s" "$PROBLEM" | awk '{print $3}')"
 if [ "$NAME" != "" ]
 then
 	printf "Add %s (%s)" "$IDENTIFIER" "$NAME"
-	python ../main.py --subject "$SUBJECT" \
+	python "${BASEDIR}"/../main.py --subject "$SUBJECT" \
 	                  -c add \
 	                  --identifier "$IDENTIFIER" \
 	                  --name "$NAME" \

@@ -1,0 +1,19 @@
+#!/usr/bin/sh
+BASEDIR=$(dirname "$0")
+source "${BASEDIR}"/vy-config
+
+tag="$(echo -e "$(python ../main.py --subject $SUBJECT -c list_state_by_tag --states new,studied,studying)" | fzf --cycle --ansi | awk -F ':' '{print $1}')"
+
+if [ "$tag" != "" ]
+then
+	python ../main.py --subject $SUBJECT -c get_files_by_tag -t "$tag" --postfix "notes.md"\
+		| awk -F '/' '{print $NF}' \
+		| fzf --cycle \
+		      --preview="less \"${BASEDIR}\"/../subjects/sbj-\"$SUBJECT\"/study/{}"
+
+else
+	find . "${BASEDIR}"/../subjects/sbj-"$SUBJECT"/study \
+		| grep __notes.md \
+		| awk -F '/' '{print $NF}' \
+		| fzf --cycle --preview="less \"${BASEDIR}\"/../subjects/sbj-\"$SUBJECT\"/study/{}"
+fi

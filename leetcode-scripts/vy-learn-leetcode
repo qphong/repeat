@@ -9,5 +9,5 @@
 BASEDIR=$(dirname "$0")
 . "${BASEDIR}"/vy-config
 
-python ../main.py --subject "$SUBJECT" -c add_subject
+python "${BASEDIR}"/../main.py --subject "$SUBJECT" -c add_subject
 

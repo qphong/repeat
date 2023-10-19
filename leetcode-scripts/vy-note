@@ -17,7 +17,7 @@ done
 
 if [ "$IDENTIFIER" != "" ]
 then
-	NAME="$(python ../main.py --subject $SUBJECT -c get_name -i "$IDENTIFIER")"
+	NAME="$(python "${BASEDIR}"/../main.py --subject $SUBJECT -c get_name -i "$IDENTIFIER")"
 	if [[ "$NAME" == "##_not_exist_##" ]]
 	then
 		echo "$IDENTIFIER does not exist!"
@@ -28,7 +28,7 @@ then
 
 	if [[ "$yesno" == "yes" ]]
 	then
-		PATHTONOTE="$(python ../main.py --subject $SUBJECT -c get_file -i "$IDENTIFIER" --postfix "notes.md")"
+		PATHTONOTE="$(python "${BASEDIR}"/../main.py --subject $SUBJECT -c get_file -i "$IDENTIFIER" --postfix "notes.md")"
 
 		echo "Note for $IDENTIFIER ($NAME) at $PATHTONOTE" \
 			&& $EDITOR "$PATHTONOTE"
@@ -39,14 +39,14 @@ fi
 
 
 
-ITEM="$(echo -e "$(python ../main.py --subject $SUBJECT -c list --by recent --direction inc)" | fzf --ansi)"
+ITEM="$(echo -e "$(python "${BASEDIR}"/../main.py --subject $SUBJECT -c list --by recent --direction inc)" | fzf --ansi)"
 
 IDENTIFIER="$(echo "$ITEM" | awk -F ']' '{print $1}' | sed 's/[^[:alnum:]]//g')"
 NAME="$(echo "$ITEM" | awk -F ']' '{print $2}' | awk -F "\"" '{print $2}' | sed 's/[^[:alnum:]-]//g')"
 
 if [ "$ITEM" != "" ]
 then
-	PATHTONOTE="$(python ../main.py --subject $SUBJECT -c get_file -i "$IDENTIFIER" --postfix "notes.md")"
+	PATHTONOTE="$(python "${BASEDIR}"/../main.py --subject $SUBJECT -c get_file -i "$IDENTIFIER" --postfix "notes.md")"
 
 	echo "Note for $IDENTIFIER ($NAME) at $PATHTONOTE" \
 		&& $EDITOR "$PATHTONOTE"

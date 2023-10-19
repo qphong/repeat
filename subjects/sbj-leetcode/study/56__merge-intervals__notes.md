@@ -1,0 +1,1 @@
+- Condition when overlaps happens -> sort by either left or right ends

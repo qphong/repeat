@@ -21,5 +21,5 @@ while getopts ":t:b:d:" opt; do
   esac
 done
 
-echo -e "$(python ../main.py --subject $SUBJECT -c list --states new --tags $TAGS --by $BY --direction $DIRECTION)" | fzf --cycle --ansi
+echo -e "$(python "${BASEDIR}"/../main.py --subject $SUBJECT -c list --states new --tags $TAGS --by $BY --direction $DIRECTION)" | fzf --cycle --ansi
 

@@ -41,6 +41,8 @@ fi
 
 ITEM="$(printf "%s" "$(python ../main.py --subject $SUBJECT \
 	                                     -c list \
+										 --by recent \
+										 --direction inc \
 										 --states studied,studying)" \
 					   | fzf --cycle --ansi)"
 

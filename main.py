@@ -1,5 +1,6 @@
 from manager import Manager
 
+import os
 import constants
 import util
 import files
@@ -22,6 +23,7 @@ parser.add_argument(
         "add",  # subject, identifier, name, tags
         "remove",  # subject, identifier
         "get_file",  # subject, identifier, postifx
+        "get_files_by_tag",  # subject, tags, postifx
         "get_name",  # subject, identifier
         "get_tags_by_identifier",  # subject, identifier
         "get_new_tags_to_identifier",  # subject, identifier
@@ -164,6 +166,24 @@ elif command == "get_file":
 
     print(files.get_study_file(subject, identifier, postfix, name))
 
+elif command == "get_files_by_tag":
+    # subject, tag, postifx
+    subject, tags, postfix = util.parse_args(
+        config, ["subject", "tags", "postfix"], [True, True, True]
+    )
+    manager = Manager(subject)
+    manager.load()
+    identifiers = manager.get_identifiers_by_tags(tags)
+
+    for identifier in identifiers:
+        content = manager.get_content_by_identifier(identifier)
+        if not content or "name" not in content:
+            continue
+        filepath = files.get_study_file(subject, identifier, postfix, content["name"])
+        if os.path.isfile(filepath):
+            print(filepath)
+
+
 elif command == "get_name":
     # subject, identifier
     subject, identifier = util.parse_args(
@@ -226,7 +246,9 @@ elif command == "review":
     )
     manager = Manager(subject)
     manager.load()
-    identifiers = manager.suggest(constants.DEFAULT_NUMBER_OF_SUGGESTION[by], tags, by=by)
+    identifiers = manager.suggest(
+        constants.DEFAULT_NUMBER_OF_SUGGESTION[by], tags, by=by
+    )
 
     info_list = manager.get_item_by_identifiers(identifiers)
 
@@ -328,7 +350,6 @@ elif command == "list_state_by_tag":
     tag_count = manager.list_tags(states)
 
     for tag, count in tag_count:
-
         print(f"{tag:20s} : {count:>4d}", end="")
 
         state_count = manager.list_states([tag], states)
